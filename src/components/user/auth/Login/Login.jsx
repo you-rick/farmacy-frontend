@@ -5,6 +5,7 @@ import {Card, CardContent, Box, Container, Button, Grid, Link, Typography} from 
 import {NavLink} from "react-router-dom";
 import {connect} from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
+import {USER_FORGOT_PASS} from "../../../../routes/routes";
 
 const useStyles = makeStyles({
   root: {
@@ -52,7 +53,7 @@ const LoginForm = () => {
                             <Box m="1rem 0 0">
                                 <Grid container justify="center">
                                     <Grid item>
-                                        <Link component={NavLink} to="/user/forgot-password"
+                                        <Link component={NavLink} to={USER_FORGOT_PASS}
                                               variant="body2">{"Forgot my password"}</Link>
                                     </Grid>
                                 </Grid>

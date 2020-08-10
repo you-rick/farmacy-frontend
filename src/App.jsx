@@ -3,6 +3,7 @@ import './assets/styles/style.scss';
 import {Route, Switch, withRouter, Redirect} from 'react-router-dom';
 import {compose} from "redux";
 import {connect} from "react-redux";
+import {USER_LOGIN_ROUTE} from "./routes/routes";
 
 import Header from './components/shared/Header/Header';
 import Login from './components/user/auth/Login/Login';
@@ -14,7 +15,7 @@ const AppContainer = () => {
         <Header/>
         <Switch>
             <Route exact path="/" render={() => <Home/>}/>
-            <Route path="/user/login" render={() => <Login/>}/>
+            <Route path={USER_LOGIN_ROUTE} render={() => <Login/>}/>
         </Switch>
     </div>
   );
