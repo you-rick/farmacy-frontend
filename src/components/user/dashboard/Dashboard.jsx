@@ -7,7 +7,7 @@ import MyTickets from './MyTickets/MyTickets';
 
 
 const Dashboard = (props) => {
-    if (!props.isAuth) {
+    if (!props.isAuth || props.role !== 'user') {
         return <Redirect to='/'/>
     }
 
@@ -20,7 +20,8 @@ const Dashboard = (props) => {
 
 
 const mapStateToProps = (state) => ({
-    isAuth: state.user.isAuth
+    isAuth: state.user.isAuth,
+    role: state.user.role
 });
 export default compose(connect(mapStateToProps, {}), withRouter)(Dashboard);
 
