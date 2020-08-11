@@ -9,6 +9,7 @@ const initState = {
     success: false
 };
 
+// Reducer
 const notificationReducer = (state = initState, action) => {
     switch (action.type) {
         case SET_NOTE:

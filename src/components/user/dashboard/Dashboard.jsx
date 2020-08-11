@@ -1,10 +1,26 @@
 import React from 'react';
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
+import {compose} from 'redux';
+import {connect} from 'react-redux';
+import {USER_TICKETS_ROUTE} from '../../../routes/routes';
+import MyTickets from './MyTickets/MyTickets';
 
-const Dashboard = () => {
+
+const Dashboard = (props) => {
+    if (!props.isAuth) {
+        return <Redirect to='/'/>
+    }
+
     return (
-        <></>
+        <Switch>
+            <Route exact path={USER_TICKETS_ROUTE} render={() => <MyTickets/>}/>
+        </Switch>
     )
 };
 
 
-export default Dashboard;
+const mapStateToProps = (state) => ({
+    isAuth: state.user.isAuth
+});
+export default compose(connect(mapStateToProps, {}), withRouter)(Dashboard);
+

@@ -9,4 +9,4 @@ const MyTickets = () => {
 };
 
 
-export default MyTickets
+export default MyTickets;

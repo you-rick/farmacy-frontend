@@ -1,4 +1,5 @@
 import * as axios from 'axios';
+import {authHeaders} from "../utils/helpers/auth-headers";
 
 const axiosInstance = axios.create({
     baseURL: 'https://qws0yjnzh8.execute-api.us-east-2.amazonaws.com/dev/'
@@ -6,12 +7,9 @@ const axiosInstance = axios.create({
 
 
 export const userAPI = {
-    login(uname, pass) {
+    login(data) {
         return axiosInstance.post(`login`, {}, {
-            auth: {
-                username: uname,
-                password: pass
-            }
+            auth: authHeaders(data)
         });
     }
 };
