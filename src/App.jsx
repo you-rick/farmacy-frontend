@@ -11,7 +11,7 @@ import Home from './components/public/Home/Home';
 import NotFound from './components/public/NotFound/NotFound';
 import Preloader from './components/shared/Preloader/Preloader';
 import Notification from './components/shared/Notification/Notification';
-import Login from './components/user/auth/Login/Login';
+import LoginContainer from './components/user/auth/Login/LoginContainer';
 import Dashboard from './components/user/dashboard/Dashboard';
 
 const AppContainer = (props) => {
@@ -20,7 +20,7 @@ const AppContainer = (props) => {
             <Header/>
             <Switch>
                 <Route exact path="/" render={() => <Home/>}/>
-                <Route exact path={USER_LOGIN_ROUTE} render={() => <Login/>}/>
+                <Route exact path={USER_LOGIN_ROUTE} render={() => <LoginContainer/>}/>
                 <Route path={USER_BASE_ROUTE} render={() => <Dashboard/>}/>
                 <Route path={NOT_FOUND_ROUTE} render={() => <NotFound/>}/>
                 <Redirect to={NOT_FOUND_ROUTE}/>

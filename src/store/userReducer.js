@@ -1,4 +1,4 @@
-import {userAPI} from "../api/api";
+import {userAPI} from "../api";
 import {push} from "connected-react-router";
 import {reset} from "redux-form";
 import {toggleIsDataFetching} from "./appReducer";

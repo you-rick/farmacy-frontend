@@ -7,7 +7,7 @@ import LoginForm from "./LoginForm";
 
 const LoginReduxForm = reduxForm({form: 'user-login', validate})(LoginForm);
 
-const Login = (props) => {
+const LoginContainer = (props) => {
     const onSubmit = (data) => {
         props.login(data);
     };
@@ -15,4 +15,4 @@ const Login = (props) => {
 };
 
 
-export default connect(null, {login})(Login);
+export default connect(null, {login})(LoginContainer);
