@@ -36,9 +36,8 @@ export const initializeApp = () => {
         if (isLogged()) {
             dispatch(setAuthStatus(true));
             dispatch(setRoleStatus(getRole()));
-            dispatch(initializedSuccess());
         }
-
+        dispatch(initializedSuccess());
     };
 };
 
