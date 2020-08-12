@@ -1,11 +1,10 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
+import {Field} from "redux-form";
 import {renderTextField, renderCheckbox} from "../../../shared/FormControls/FormControls";
 import {Card, CardContent, Box, Container, Button, Grid, Link, Typography} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
-import {connect} from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
-import {USER_FORGOT_PASS} from "../../../../routes/routes";
+import {USER_FORGOT_PASS_ROUTE} from "../../../../routes/routes";
 
 const useStyles = makeStyles({
   root: {
@@ -13,7 +12,8 @@ const useStyles = makeStyles({
   }
 });
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+    const {handleSubmit} = props;
     const classes = useStyles();
 
     return (
@@ -26,7 +26,7 @@ const LoginForm = () => {
                                 Sign in to Office Aid
                             </Typography>
                         </Box>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <Field
                                 name="username"
                                 label="Email"
@@ -53,7 +53,7 @@ const LoginForm = () => {
                             <Box m="1rem 0 0">
                                 <Grid container justify="center">
                                     <Grid item>
-                                        <Link component={NavLink} to={USER_FORGOT_PASS}
+                                        <Link component={NavLink} to={USER_FORGOT_PASS_ROUTE}
                                               variant="body2">{"Forgot my password"}</Link>
                                     </Grid>
                                 </Grid>
@@ -67,11 +67,4 @@ const LoginForm = () => {
 };
 
 
-const LoginReduxForm = reduxForm({form: 'user-login'})(LoginForm);
-
-const Login = () => {
-    return <LoginReduxForm/>
-};
-
-
-export default connect(null, {})(Login);
+export default LoginForm;
