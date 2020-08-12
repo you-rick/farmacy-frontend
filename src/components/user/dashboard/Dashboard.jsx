@@ -3,6 +3,10 @@ import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {USER_TICKETS_ROUTE} from '../../../routes/routes';
+import style from './Dashboard.module.scss';
+
+import Topbar from '../../shared/Topbar/Topbar';
+import Leftbar from '../../shared/Leftbar/Leftbar';
 import MyTickets from './MyTickets/MyTickets';
 
 
@@ -12,9 +16,17 @@ const Dashboard = (props) => {
     }
 
     return (
-        <Switch>
-            <Route exact path={USER_TICKETS_ROUTE} render={() => <MyTickets/>}/>
-        </Switch>
+        <div className="dashboardWrap">
+            <Leftbar/>
+            <div>
+                <Topbar/>
+                <div className={style.contentWrap}>
+                    <Switch>
+                        <Route exact path={USER_TICKETS_ROUTE} render={() => <MyTickets/>}/>
+                    </Switch>
+                </div>
+            </div>
+        </div>
     )
 };
 

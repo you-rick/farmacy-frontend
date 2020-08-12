@@ -28,7 +28,7 @@ const AppContainer = (props) => {
 
     return (
         <div className="App">
-            <Header/>
+            {!props.isAuth && <Header/>}
             <Switch>
                 <Route exact path="/" render={() => <Home/>}/>
                 <Route exact path={USER_LOGIN_ROUTE} render={() => <LoginContainer/>}/>
@@ -45,7 +45,8 @@ const AppContainer = (props) => {
 const mapStateToProps = (state) => ({
     notification: state.notification,
     initialized: state.app.initialized,
-    isDataFetching: state.app.isDataFetching
+    isDataFetching: state.app.isDataFetching,
+    isAuth: state.user.isAuth
 });
 const App = compose(withRouter, connect(mapStateToProps, {hideNote, initializeApp}))(AppContainer);
 
