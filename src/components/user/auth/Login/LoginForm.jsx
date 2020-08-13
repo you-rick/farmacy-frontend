@@ -1,7 +1,14 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import {
-  Card, CardContent, Box, Container, Button, Grid, Link, Typography,
+  Card,
+  CardContent,
+  Box,
+  Container,
+  Button,
+  Grid,
+  Link,
+  Typography,
 } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,8 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-const LoginForm = (props) => {
-  const { handleSubmit } = props;
+const LoginForm = ({ handleSubmit }) => {
   const classes = useStyles();
 
   return (

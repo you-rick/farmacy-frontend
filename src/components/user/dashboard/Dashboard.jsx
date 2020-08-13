@@ -4,7 +4,12 @@ import {
 } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { Box } from '@material-ui/core';
 import { USER_TICKETS_ROUTE } from '../../../routes/routes';
+import style from './Dashboard.module.scss';
+
+import Topbar from '../../shared/Topbar/Topbar';
+import Leftbar from '../../shared/Leftbar/Leftbar';
 import MyTickets from './MyTickets/MyTickets';
 
 const Dashboard = ({ isAuth, role }) => {
@@ -13,9 +18,15 @@ const Dashboard = ({ isAuth, role }) => {
   }
 
   return (
-    <Switch>
-      <Route exact path={USER_TICKETS_ROUTE} render={() => <MyTickets />} />
-    </Switch>
+    <>
+      <Leftbar />
+      <Topbar />
+      <Box className={style.contentWrap}>
+        <Switch>
+          <Route exact path={USER_TICKETS_ROUTE} render={() => <MyTickets />} />
+        </Switch>
+      </Box>
+    </>
   );
 };
 

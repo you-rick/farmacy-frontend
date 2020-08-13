@@ -5,3 +5,5 @@ export const setToken = (data) => {
 export const removeToken = () => {
   localStorage.removeItem('token');
 };
+
+export const isLogged = () => !!localStorage.getItem('token');
