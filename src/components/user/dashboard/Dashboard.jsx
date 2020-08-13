@@ -3,18 +3,30 @@ import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {USER_TICKETS_ROUTE} from '../../../routes/routes';
+import {Box} from "@material-ui/core";
+import style from './Dashboard.module.scss';
+
+import Topbar from '../../shared/Topbar/Topbar';
+import Leftbar from '../../shared/Leftbar/Leftbar';
 import MyTickets from './MyTickets/MyTickets';
 
 
-const Dashboard = (props) => {
-    if (!props.isAuth || props.role !== 'user') {
+
+const Dashboard = ({isAuth, role}) => {
+    if (!isAuth || role !== 'user') {
         return <Redirect to='/'/>
     }
 
     return (
-        <Switch>
-            <Route exact path={USER_TICKETS_ROUTE} render={() => <MyTickets/>}/>
-        </Switch>
+        <>
+            <Leftbar/>
+            <Topbar/>
+            <Box className={style.contentWrap}>
+                <Switch>
+                    <Route exact path={USER_TICKETS_ROUTE} render={() => <MyTickets/>}/>
+                </Switch>
+            </Box>
+        </>
     )
 };
 

@@ -12,8 +12,7 @@ const useStyles = makeStyles({
   }
 });
 
-const LoginForm = (props) => {
-    const {handleSubmit} = props;
+const LoginForm = ({handleSubmit}) => {
     const classes = useStyles();
 
     return (
