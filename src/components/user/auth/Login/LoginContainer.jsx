@@ -8,12 +8,10 @@ import LoginForm from "./LoginForm";
 
 const LoginReduxForm = reduxForm({form: 'user-login', validate})(LoginForm);
 
-const LoginContainer = (props) => {
-    const onSubmit = (data) => {
-        props.login(data);
-    };
+const LoginContainer = ({login, isAuth}) => {
+    const onSubmit = (data) => login(data);
 
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to='/'/>
     }
 

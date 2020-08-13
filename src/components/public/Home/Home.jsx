@@ -4,7 +4,9 @@ import {USER_LOGIN_ROUTE, USER_TICKETS_ROUTE} from "../../../routes/routes";
 import {connect} from "react-redux";
 
 const Home = ({isAuth}) => {
-    return <Redirect to={isAuth ? USER_TICKETS_ROUTE : USER_LOGIN_ROUTE}/>
+    const redirectTo = (isAuth) => (isAuth ? USER_TICKETS_ROUTE : USER_LOGIN_ROUTE);
+
+    return <Redirect to={redirectTo(isAuth)}/>
 };
 
 const mapStateToProps = (state) => ({
