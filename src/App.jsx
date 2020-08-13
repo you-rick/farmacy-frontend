@@ -16,7 +16,7 @@ import Notification from './components/shared/Notification/Notification';
 import LoginContainer from './components/user/auth/Login/LoginContainer';
 import Dashboard from './components/user/dashboard/Dashboard';
 
-const AppContainer = (props) => (
+const AppContainer = ({ notification, isDataFetching, hideNote }) => (
   <div className="App">
     <Header />
     <Switch>
@@ -27,11 +27,11 @@ const AppContainer = (props) => (
       <Redirect to={NOT_FOUND_ROUTE} />
     </Switch>
     <Notification
-      type={props.notification.type}
-      msg={props.notification.msg}
-      hideNote={props.hideNote}
+      type={notification.type}
+      msg={notification.msg}
+      hideNote={hideNote}
     />
-    {props.isDataFetching && <Preloader />}
+    {isDataFetching && <Preloader />}
   </div>
 );
 
@@ -39,6 +39,7 @@ const mapStateToProps = (state) => ({
   notification: state.notification,
   isDataFetching: state.app.isDataFetching,
 });
+
 const App = compose(withRouter, connect(mapStateToProps, { hideNote }))(AppContainer);
 
 export default App;

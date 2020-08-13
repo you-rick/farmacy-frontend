@@ -16,6 +16,7 @@ const store = createStore(
     thunkMiddleware,
   )),
 );
+// eslint-disable-next-line no-underscore-dangle
 window.__store__ = store;
 
 export default store;

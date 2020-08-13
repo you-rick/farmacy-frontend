@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import { USER_TICKETS_ROUTE } from '../../../routes/routes';
 import MyTickets from './MyTickets/MyTickets';
 
-const Dashboard = (props) => {
-  if (!props.isAuth || props.role !== 'user') {
+const Dashboard = ({ isAuth, role }) => {
+  if (!isAuth || role !== 'user') {
     return <Redirect to="/" />;
   }
 

@@ -11,7 +11,7 @@ const Notification = ({ type, msg, hideNote }) => {
 
   useEffect(() => {
     setOpen(false);
-    msg && setOpen(true);
+    if (msg) setOpen(true);
   }, [msg]);
 
   const handleClose = (event, reason) => {
@@ -26,18 +26,16 @@ const Notification = ({ type, msg, hideNote }) => {
   return (
     <>
       {(msg && type)
-            && (
-            <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-              <Alert onClose={handleClose} severity={type}>
-                {msg}
-              </Alert>
-            </Snackbar>
-            )}
+      && (
+        <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity={type}>
+            {msg}
+          </Alert>
+        </Snackbar>
+      )}
     </>
 
   );
 };
 
-const mapStateToProps = (state) => ({});
-
-export default connect(mapStateToProps, { hideNote })(Notification);
+export default connect(null, { hideNote })(Notification);
