@@ -1,11 +1,9 @@
 export const setRole = (role) => {
-    localStorage.setItem('role', btoa(role));
+  localStorage.setItem('role', btoa(role));
 };
 
 export const removeRole = () => {
-    localStorage.removeItem('role');
+  localStorage.removeItem('role');
 };
 
-export const getRole = () => {
-    return atob(localStorage.getItem('role'));
-};
+export const getRole = () => atob(localStorage.getItem('role'));
