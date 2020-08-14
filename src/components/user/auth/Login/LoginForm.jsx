@@ -13,7 +13,7 @@ import {
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { renderTextField, renderCheckbox } from '../../../shared/FormControls/FormControls';
-import { USER_FORGOT_PASS_ROUTE } from '../../../../routes/routes';
+import { USER_FORGOT_PASS_ROUTE } from '../../../../routes';
 
 const useStyles = makeStyles({
   root: {

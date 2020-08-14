@@ -5,7 +5,7 @@ import {
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Box } from '@material-ui/core';
-import { USER_TICKETS_ROUTE } from '../../../routes/routes';
+import { USER_TICKETS_ROUTE } from '../../../routes';
 import style from './Dashboard.module.scss';
 
 import Topbar from '../../shared/Topbar/Topbar';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   TableContainer,
   Table,
@@ -12,6 +12,8 @@ import {
   Badge,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { getTickets } from '../../../../store/ticketsReducer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MyTickets = () => {
+const MyTickets = ({ getTickets }) => {
   const classes = useStyles();
   const statusList = ['open', 'progress', 'done'];
   const createData = (id, date, issue, status) => ({
@@ -37,6 +39,10 @@ const MyTickets = () => {
     issue,
     status,
   });
+
+  useEffect(() => {
+    getTickets();
+  }, [getTickets]);
 
   const handleClick = () => {
     console.log('clicked');
@@ -87,4 +93,4 @@ const MyTickets = () => {
   );
 };
 
-export default MyTickets;
+export default connect(null, { getTickets })(MyTickets);
