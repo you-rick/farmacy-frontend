@@ -8,16 +8,34 @@ const SET_TICKETS_DATA = 'SET_TICKETS_DATA';
 
 // Initial Data
 const initialState = {
-  id: null,
-  created_date: null,
-  ticket_number: null,
-  issue: null,
-  status: null,
+  userId: null,
+  tickets: [],
+  ticket: {
+    id: null,
+    created_date: null,
+    ticket_number: null,
+    issue: null,
+    status: null,
+  },
+  message_counts: {
+    all: 0,
+    unresolved: 0,
+    recently_updated: 0,
+    solved: 0,
+  },
 };
 
 // Reducer
 const ticketsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_TICKETS_DATA:
+      return {
+        ...state,
+        userId: action.data.userId,
+        tickets: [...action.data.tickets],
+        message_counts: { ...action.data.message_counts },
+
+      };
     default:
       return state;
   }
@@ -36,7 +54,8 @@ export const getTickets = () => (dispatch) => {
   ticketsAPI.getTickets()
     .then((response) => {
       dispatch(toggleIsDataFetching(false));
-      console.log(response);
+      const res = response.data;
+      dispatch(setTicketsData(res));
     })
     .catch((error) => {
       dispatch(toggleIsDataFetching(false));
