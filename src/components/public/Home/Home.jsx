@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { USER_LOGIN_ROUTE, USER_TICKETS_ROUTE } from '../../../routes/routes';
+import { USER_LOGIN_ROUTE, USER_TICKETS_ROUTE } from '../../../routes';
 
 const Home = ({ isAuth }) => {
   const redirectTo = (isAuth) => (isAuth ? USER_TICKETS_ROUTE : USER_LOGIN_ROUTE);

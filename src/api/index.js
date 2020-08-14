@@ -1,5 +1,7 @@
 import * as axios from 'axios';
 import { authHeaders } from '../utils/helpers/auth-headers';
+import { API_LOGIN_ROUTE, API_USER_GET_TICKETS_ROUTE } from '../routes';
+import { getTokenHeader } from '../utils/helpers/token-handler';
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
@@ -7,8 +9,18 @@ const axiosInstance = axios.create({
 
 export const userAPI = {
   login(data) {
-    return axiosInstance.post('login', {}, {
+    return axiosInstance.post(API_LOGIN_ROUTE, {}, {
       auth: authHeaders(data),
+    });
+  },
+};
+
+export const ticketsAPI = {
+  getTickets() {
+    return axiosInstance.get(API_USER_GET_TICKETS_ROUTE, {
+      headers: {
+        'Authorization': getTokenHeader(),
+      },
     });
   },
 };
