@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import {
@@ -16,18 +16,23 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './MyTickets.styles';
 import { getTickets } from '../../../../store/ticketsReducer';
+import TicketInfo from '../TicketInfo/TicketInfo';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
 const MyTickets = ({ tickets, getTickets }) => {
   const classes = useStyles();
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     getTickets();
   }, [getTickets]);
 
-  const handleClick = () => {
-    console.log('clicked');
+  const handleShowModal = () => {
+    setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -52,7 +57,7 @@ const MyTickets = ({ tickets, getTickets }) => {
                 hover
                 key={ticket.id}
                 className={classes.tableRow}
-                onClick={() => handleClick(ticket.ticket_number)}
+                onClick={() => handleShowModal(true)}
               >
                 <TableCell>
                   <Badge
@@ -73,6 +78,7 @@ const MyTickets = ({ tickets, getTickets }) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <TicketInfo open={modalOpen} onClose={handleCloseModal} />
     </>
   );
 };
