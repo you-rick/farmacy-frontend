@@ -5,7 +5,7 @@ import { toggleIsDataFetching } from './appReducer';
 import { setNote, hideNote } from './notificationReducer';
 import { setToken, removeToken } from '../utils/helpers/token-handler';
 import { setRole, removeRole } from '../utils/helpers/role-handler';
-import { USER_TICKETS_ROUTE, USER_LOGIN_ROUTE } from '../routes/routes';
+import { USER_TICKETS_ROUTE, USER_LOGIN_ROUTE } from '../routes';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 
 // Actions

@@ -5,7 +5,7 @@ import {
 } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { USER_LOGIN_ROUTE, NOT_FOUND_ROUTE, USER_BASE_ROUTE } from './routes/routes';
+import { USER_LOGIN_ROUTE, NOT_FOUND_ROUTE, USER_BASE_ROUTE } from './routes';
 import { hideNote } from './store/notificationReducer';
 import { initializeApp } from './store/appReducer';
 
