@@ -48,7 +48,12 @@ const MyTickets = ({ tickets, getTickets }) => {
           </TableHead>
           <TableBody>
             {tickets.map((ticket) => (
-              <TableRow hover key={ticket.id} onClick={() => handleClick(ticket.ticket_number)}>
+              <TableRow
+                hover
+                key={ticket.id}
+                className={classes.tableRow}
+                onClick={() => handleClick(ticket.ticket_number)}
+              >
                 <TableCell>
                   <Badge
                     variant="dot"
@@ -73,7 +78,7 @@ const MyTickets = ({ tickets, getTickets }) => {
 };
 
 const mapStateToProps = (state) => ({
-  tickets: state.tickets.tickets,
+  tickets: state.tickets.list,
 });
 
 export default connect(mapStateToProps, { getTickets })(MyTickets);

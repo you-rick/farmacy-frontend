@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { toggleIsDataFetching } from './appReducer';
 import { ticketsAPI } from '../api';
 import { hideNote, setNote } from './notificationReducer';
@@ -9,7 +10,7 @@ const SET_TICKETS_DATA = 'SET_TICKETS_DATA';
 // Initial Data
 const initialState = {
   userId: null,
-  tickets: [],
+  list: [],
   ticket: {
     id: null,
     created_date: null,
@@ -28,14 +29,15 @@ const initialState = {
 // Reducer
 const ticketsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_TICKETS_DATA:
+    case SET_TICKETS_DATA: {
+      const { data } = action;
       return {
         ...state,
-        userId: action.data.userId,
-        tickets: [...action.data.tickets],
-        message_counts: { ...action.data.message_counts },
-
+        userId: _.get(data, 'userId', initialState.userId),
+        list: _.get(data, 'tickets', initialState.list),
+        message_counts: _.get(data, 'message_counts', initialState.message_counts),
       };
+    }
     default:
       return state;
   }
@@ -54,8 +56,7 @@ export const getTickets = () => (dispatch) => {
   ticketsAPI.getTickets()
     .then((response) => {
       dispatch(toggleIsDataFetching(false));
-      const res = response.data;
-      dispatch(setTicketsData(res));
+      dispatch(setTicketsData(response.data));
     })
     .catch((error) => {
       dispatch(toggleIsDataFetching(false));

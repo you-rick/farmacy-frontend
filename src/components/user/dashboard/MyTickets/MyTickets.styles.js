@@ -11,6 +11,11 @@ const themeStyles = (theme) => ({
   done: {
     backgroundColor: theme.palette.success.light,
   },
+  tableRow: {
+    '&:hover': {
+      cursor: 'pointer',
+    },
+  },
 });
 
 export default themeStyles;
