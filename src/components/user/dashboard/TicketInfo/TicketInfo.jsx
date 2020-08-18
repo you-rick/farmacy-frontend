@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Divider,
-  IconButton,
-  Grid,
-} from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, Divider, IconButton, Grid } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './TicketInfo.styles';
@@ -15,7 +8,7 @@ import Messages from './Messages/Messages';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const TicketInfo = ({ open, onClose }) => {
+const TicketInfo = ({ ticket, open, onClose }) => {
   const classes = useStyles();
 
   const handleClose = () => {
@@ -41,7 +34,7 @@ const TicketInfo = ({ open, onClose }) => {
       <DialogContent dividers>
         <MessageForm />
         <Divider />
-        <Messages />
+        <Messages ticketId={ticket.ticketNumber} />
       </DialogContent>
     </Dialog>
   );

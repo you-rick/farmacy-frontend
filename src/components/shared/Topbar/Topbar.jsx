@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  AppBar, Grid, Toolbar, InputBase, IconButton,
-} from '@material-ui/core';
+import { AppBar, Grid, Toolbar, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';

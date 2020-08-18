@@ -1,14 +1,12 @@
 import React from 'react';
-import {
-  TextField, Typography, Grid, Button, Box,
-} from '@material-ui/core';
+import { TextField, Typography, Grid, Button, Box } from '@material-ui/core';
 import { LOCALE } from '../../../../../locale';
 
 const MessageForm = () => {
   const locale = LOCALE.user.dashboard.ticketInfo;
 
   return (
-    <Box m="0 0 1rem">
+    <Box m="0 0 1.5rem">
       <Typography variant="body1">{locale.messages}</Typography>
       <TextField
         label={locale.form.to}

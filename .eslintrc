@@ -8,6 +8,9 @@
     "react/jsx-props-no-spreading": 0,
     "react/prop-types": 0,
     "no-shadow": "off",
-    "quote-props": "off"
+    "quote-props": "off",
+    "object-curly-newline": ["error", {
+        "ExportDeclaration": { "multiline": true, "minProperties": 6 }
+    }]
   }
 }
