@@ -1,15 +1,16 @@
 import { EMAIL_VALIDATOR } from '../../../../utils/validators/validators';
+import { LOCALE } from '../../../../locale';
 
 const validate = (values) => {
   const errors = {};
   if (!values.username) {
-    errors.username = 'Required field';
+    errors.username = LOCALE.errors.validation.required;
   } else if (!EMAIL_VALIDATOR.test(values.username)) {
-    errors.username = 'Invalid email address';
+    errors.username = LOCALE.errors.validation.email;
   }
 
   if (!values.password) {
-    errors.password = 'Required field';
+    errors.password = LOCALE.errors.validation.required;
   }
 
   return errors;

@@ -1,9 +1,11 @@
+import { LOCALE } from '../../locale';
+
 export const serverErrorHelper = (error) => {
-  let errorMsg = 'Unknown Error. Please try later';
+  let errorMsg = LOCALE.errors.server.unknown;
   if (error.response) {
     errorMsg = error.response.data.message;
   } else if (error.request) {
-    errorMsg = 'Request Error';
+    errorMsg = LOCALE.errors.server.request;
   }
 
   return errorMsg;

@@ -2,21 +2,26 @@ import React from 'react';
 import {
   Container, Grid, Typography, Box,
 } from '@material-ui/core';
+import { LOCALE } from '../../../locale';
 
-const NotFound = () => (
-  <Container maxWidth="md">
-    <Box p="4rem 0 0">
-      <Grid container direction="column" justify="center" alignItems="center">
-        <Typography variant="h4" component="h1" gutterBottom>
-          Page not found :(
-        </Typography>
-        <Typography variant="body1" component="p" align="center">
-          Maybe the page you are looking for has been removed, or you typed in the wrong URL
-        </Typography>
-      </Grid>
-    </Box>
+const NotFound = () => {
+  const locale = LOCALE.public.notFound;
 
-  </Container>
-);
+  return (
+    <Container maxWidth="md">
+      <Box p="4rem 0 0">
+        <Grid container direction="column" justify="center" alignItems="center">
+          <Typography variant="h4" component="h1" gutterBottom>
+            {locale.headline}
+          </Typography>
+          <Typography variant="body1" component="p" align="center">
+            {locale.body}
+          </Typography>
+        </Grid>
+      </Box>
+
+    </Container>
+  );
+};
 
 export default NotFound;

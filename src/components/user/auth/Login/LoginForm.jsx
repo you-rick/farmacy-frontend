@@ -14,6 +14,7 @@ import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { renderTextField, renderCheckbox } from '../../../shared/FormControls/FormControls';
 import { USER_FORGOT_PASS_ROUTE } from '../../../../routes';
+import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles({
   root: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles({
 
 const LoginForm = ({ handleSubmit }) => {
   const classes = useStyles();
+  const locale = LOCALE.user.login;
 
   return (
     <Box p="4rem 0">
@@ -31,13 +33,13 @@ const LoginForm = ({ handleSubmit }) => {
           <CardContent>
             <Box m="0 0 1rem">
               <Typography variant="h5" component="h1" align="center" gutterBottom>
-                Sign in to Office Aid
+                {locale.headline}
               </Typography>
             </Box>
             <form onSubmit={handleSubmit}>
               <Field
                 name="username"
-                label="Email"
+                label={locale.username}
                 variant="outlined"
                 margin="normal"
                 fullWidth
@@ -45,17 +47,21 @@ const LoginForm = ({ handleSubmit }) => {
               />
               <Field
                 name="password"
-                label="Password"
+                label={locale.password}
                 type="password"
                 variant="outlined"
                 margin="normal"
                 fullWidth
                 component={renderTextField}
               />
-              <Field name="remember-me" component={renderCheckbox} label="Remember me" />
+              <Field
+                name="remember-me"
+                component={renderCheckbox}
+                label={locale.rememberMe}
+              />
               <Box m="1rem 0 0">
                 <Button type="submit" fullWidth variant="contained" color="primary">
-                  Sign In
+                  {locale.signIn}
                 </Button>
               </Box>
               <Box m="1rem 0 0">
@@ -66,7 +72,7 @@ const LoginForm = ({ handleSubmit }) => {
                       to={USER_FORGOT_PASS_ROUTE}
                       variant="body2"
                     >
-                      Forgot my password
+                      {locale.forgotPassword}
                     </Link>
                   </Grid>
                 </Grid>

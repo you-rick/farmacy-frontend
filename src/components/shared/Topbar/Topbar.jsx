@@ -8,11 +8,13 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './Topbar.styles';
+import { LOCALE } from '../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
 const Topbar = () => {
   const classes = useStyles();
+  const locale = LOCALE.user.dashboard.topbar;
 
   return (
     <AppBar position="static" color="default">
@@ -31,7 +33,7 @@ const Topbar = () => {
                   <SearchIcon />
                 </div>
                 <InputBase
-                  placeholder="Search…"
+                  placeholder={locale.searchPlaceholder}
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
