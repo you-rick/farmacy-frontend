@@ -17,11 +17,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './MyTickets.styles';
 import { getTickets } from '../../../../store/ticketsReducer';
 import TicketInfo from '../TicketInfo/TicketInfo';
+import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
 const MyTickets = ({ tickets, getTickets }) => {
   const classes = useStyles();
+  const locale = LOCALE.user.dashboard.myTickets;
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
@@ -39,16 +41,16 @@ const MyTickets = ({ tickets, getTickets }) => {
     <>
       <Box m="0 0 2rem">
         <Typography variant="h5" component="h1" align="center">
-          My Tickets
+          {locale.headline}
         </Typography>
       </Box>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Ticket Number</TableCell>
-              <TableCell>Date</TableCell>
-              <TableCell>Issue</TableCell>
+              <TableCell>{locale.tableHeaders.ticketNumber}</TableCell>
+              <TableCell>{locale.tableHeaders.date}</TableCell>
+              <TableCell>{locale.tableHeaders.issue}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -70,7 +72,7 @@ const MyTickets = ({ tickets, getTickets }) => {
                 <TableCell>
                   {ticket.created_date
                     ? <Moment format="DD/MM/YYYY">{ticket.created_date}</Moment>
-                    : <Typography variant="body2" color="textSecondary">No date</Typography>}
+                    : <Typography variant="body2" color="textSecondary">-</Typography>}
                 </TableCell>
                 <TableCell>{ticket.issue}</TableCell>
               </TableRow>

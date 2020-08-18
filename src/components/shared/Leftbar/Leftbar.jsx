@@ -9,11 +9,13 @@ import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './Leftbar.styles';
 import { logout } from '../../../store/userReducer';
+import { LOCALE } from '../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
 const Leftbar = ({ logout }) => {
   const classes = useStyles();
+  const locale = LOCALE.user.dashboard.leftbar;
 
   return (
     <Drawer variant="permanent" anchor="left" classes={{ paper: classes.drawer }}>
@@ -22,7 +24,7 @@ const Leftbar = ({ logout }) => {
           <ListItemIcon className={classes.listIcon}>
             <HomeIcon className={classes.icon} />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          <ListItemText primary={locale.home} />
         </ListItem>
       </List>
       <Divider className={classes.divider} />
@@ -31,33 +33,35 @@ const Leftbar = ({ logout }) => {
           <ListItemIcon className={classes.listIcon}>
             <CachedIcon className={classes.icon} />
           </ListItemIcon>
-          <ListItemText primary="Views" />
+          <ListItemText primary={locale.views} />
         </ListItem>
       </List>
       <Divider className={classes.divider} />
       <Box m="1rem 0 0">
         <List>
           <ListItem>
-            <Button variant="contained" fullWidth>Create New</Button>
+            <Button variant="contained" fullWidth>
+              {locale.createButton}
+            </Button>
           </ListItem>
           <ListItem button component={NavLink} to="/" className={classes.link}>
-            <ListItemText primary="All Tickets (5)" />
+            <ListItemText primary={`${locale.ticketsFilter.all} (5)`} />
           </ListItem>
           <ListItem button component={NavLink} to="/" className={classes.link}>
-            <ListItemText primary="Unresolved Tickets (2)" />
+            <ListItemText primary={`${locale.ticketsFilter.unresolved} (1)`} />
           </ListItem>
           <ListItem button component={NavLink} to="/" className={classes.link}>
-            <ListItemText primary="Recently updated (0)" />
+            <ListItemText primary={`${locale.ticketsFilter.recentlyUpdated} (2)`} />
           </ListItem>
           <ListItem button component={NavLink} to="/" className={classes.link}>
-            <ListItemText primary="Solved Tickets (5)" />
+            <ListItemText primary={`${locale.ticketsFilter.solved} (0)`} />
           </ListItem>
         </List>
       </Box>
       <Box m="3rem 0 0">
         <List>
           <ListItem button onClick={logout}>
-            <ListItemText primary="Logout" />
+            <ListItemText primary={locale.logout} />
           </ListItem>
         </List>
       </Box>
