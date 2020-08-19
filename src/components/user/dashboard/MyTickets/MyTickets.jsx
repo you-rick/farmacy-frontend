@@ -21,17 +21,19 @@ import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const MyTickets = ({ tickets, getTickets }) => {
+const MyTickets = ({ tickets, ticket, getTickets }) => {
   const classes = useStyles();
   const locale = LOCALE.user.dashboard.myTickets;
   const [modalOpen, setModalOpen] = useState(false);
+  const [activeTicket, setActiveTicket] = useState(ticket);
 
   useEffect(() => {
     getTickets();
   }, [getTickets]);
 
-  const handleShowModal = () => {
+  const handleShowModal = (ticket) => {
     setModalOpen(true);
+    setActiveTicket(ticket);
   };
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -59,7 +61,7 @@ const MyTickets = ({ tickets, getTickets }) => {
                 hover
                 key={ticket.id}
                 className={classes.tableRow}
-                onClick={() => handleShowModal(true)}
+                onClick={() => handleShowModal(ticket)}
               >
                 <TableCell>
                   <Badge
@@ -67,11 +69,11 @@ const MyTickets = ({ tickets, getTickets }) => {
                     className={classes.root}
                     classes={{ badge: classes[ticket.status] }}
                   />
-                  {ticket.ticket_number}
+                  {ticket.ticketNumber}
                 </TableCell>
                 <TableCell>
-                  {ticket.created_date
-                    ? <Moment format="DD/MM/YYYY">{ticket.created_date}</Moment>
+                  {ticket.createdDate
+                    ? <Moment format="DD/MM/YYYY">{ticket.createdDate}</Moment>
                     : <Typography variant="body2" color="textSecondary">-</Typography>}
                 </TableCell>
                 <TableCell>{ticket.issue}</TableCell>
@@ -80,13 +82,14 @@ const MyTickets = ({ tickets, getTickets }) => {
           </TableBody>
         </Table>
       </TableContainer>
-      <TicketInfo open={modalOpen} onClose={handleCloseModal} />
+      <TicketInfo open={modalOpen} onClose={handleCloseModal} ticket={activeTicket} />
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
   tickets: state.tickets.list,
+  ticket: state.tickets.ticket,
 });
 
 export default connect(mapStateToProps, { getTickets })(MyTickets);

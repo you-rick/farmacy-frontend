@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Redirect, Route, Switch, withRouter,
-} from 'react-router-dom';
+import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Box } from '@material-ui/core';

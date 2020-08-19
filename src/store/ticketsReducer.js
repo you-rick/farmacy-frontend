@@ -13,15 +13,15 @@ const initialState = {
   list: [],
   ticket: {
     id: null,
-    created_date: null,
-    ticket_number: null,
+    createdDate: null,
+    ticketNumber: null,
     issue: null,
     status: null,
   },
-  message_counts: {
+  messageCounts: {
     all: 0,
     unresolved: 0,
-    recently_updated: 0,
+    recentlyUpdated: 0,
     solved: 0,
   },
 };
@@ -35,7 +35,7 @@ const ticketsReducer = (state = initialState, action) => {
         ...state,
         userId: _.get(data, 'userId', initialState.userId),
         list: _.get(data, 'tickets', initialState.list),
-        message_counts: _.get(data, 'message_counts', initialState.message_counts),
+        messageCounts: _.get(data, 'messageCounts', initialState.messageCounts),
       };
     }
     default:
