@@ -15,6 +15,9 @@ const themeStyles = (theme) => ({
   },
   link: {
     color: theme.palette.common.white,
+    '&.active': {
+      backgroundColor: 'rgba(0,0,0,0.1)',
+    },
   },
 });
 
