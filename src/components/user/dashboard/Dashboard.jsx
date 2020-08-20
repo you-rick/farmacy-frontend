@@ -3,13 +3,14 @@ import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Box } from '@material-ui/core';
-import { USER_TICKETS_ROUTE, USER_NEW_TICKET_ROUTE } from '../../../routes';
+import { USER_TICKETS_ROUTE, USER_NEW_TICKET_ROUTE, USER_PROFILE_ROUTE } from '../../../routes';
 import style from './Dashboard.module.scss';
 
 import Topbar from '../../shared/Topbar/Topbar';
 import Leftbar from '../../shared/Leftbar/Leftbar';
 import MyTickets from './MyTickets/MyTickets';
 import NewTicket from './NewTicket/NewTicket';
+import Profile from './Profile/Profile';
 
 const Dashboard = ({ isAuth, role }) => {
   if (!isAuth || role !== 'user') {
@@ -24,6 +25,7 @@ const Dashboard = ({ isAuth, role }) => {
         <Switch>
           <Route exact path={`${USER_TICKETS_ROUTE}/:filter?`} render={() => <MyTickets />} />
           <Route path={USER_NEW_TICKET_ROUTE} render={() => <NewTicket />} />
+          <Route path={USER_PROFILE_ROUTE} render={() => <Profile />} />
         </Switch>
       </Box>
     </>
