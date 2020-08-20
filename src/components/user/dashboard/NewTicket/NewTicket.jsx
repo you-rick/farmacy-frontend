@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, Typography, Container } from '@material-ui/core';
-import { Editor } from '@tinymce/tinymce-react';
 import { LOCALE } from '../../../../locale';
+import RichTextarea from '../../../shared/RichTextarea/RichTextarea';
 
 const NewTicket = () => {
   const locale = LOCALE.user.dashboard.newTicket;
-  const handleEditorChange = (content) => {
-    console.log('Content was updated:', content);
+  const handleTextareaChange = (body) => {
+    console.log(body);
   };
 
   return (
@@ -16,18 +16,7 @@ const NewTicket = () => {
           {locale.headline}
         </Typography>
       </Box>
-      <Editor
-        apiKey={process.env.REACT_APP_TINYMCE_KEY}
-        initialValue="<p>This is the initial content of the editor</p>"
-        init={{
-          height: 500,
-          menubar: false,
-          plugins: [],
-          toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter'
-            + ' alignright alignjustify | bullist numlist | removeformat',
-        }}
-        onEditorChange={handleEditorChange}
-      />
+      <RichTextarea body="New Ticket body" onChange={handleTextareaChange} />
     </Container>
   );
 };
