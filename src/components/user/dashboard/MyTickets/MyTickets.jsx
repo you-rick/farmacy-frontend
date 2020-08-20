@@ -13,23 +13,45 @@ import {
   Box,
   Badge,
 } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './MyTickets.styles';
 import { getTickets } from '../../../../store/ticketsReducer';
 import TicketInfo from '../TicketInfo/TicketInfo';
 import { LOCALE } from '../../../../locale';
+import {
+  USER_TICKETS_SOLVED_PARAM,
+  USER_TICKETS_UNRESOLVED_PARAM,
+  USER_TICKETS_UPDATED_PARAM,
+} from '../../../../routes';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
+const aliases = {
+  [USER_TICKETS_UNRESOLVED_PARAM]: 'unresolved',
+  [USER_TICKETS_UPDATED_PARAM]: 'in_progress',
+  [USER_TICKETS_SOLVED_PARAM]: 'done',
+};
+
 const MyTickets = ({ tickets, ticket, getTickets }) => {
   const classes = useStyles();
+  const { filter } = useParams();
   const locale = LOCALE.user.dashboard.myTickets;
   const [modalOpen, setModalOpen] = useState(false);
   const [activeTicket, setActiveTicket] = useState(ticket);
+  const [ticketsList, setTicketsList] = useState(tickets);
 
   useEffect(() => {
     getTickets();
   }, [getTickets]);
+
+  useEffect(() => {
+    setTicketsList(
+      !!filter && !!aliases[filter]
+        ? tickets.filter((item) => item.status === aliases[filter])
+        : tickets,
+    );
+  }, [filter, tickets]);
 
   const handleShowModal = (ticket) => {
     setModalOpen(true);
@@ -56,27 +78,27 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tickets.map((ticket) => (
+            {ticketsList.map((item) => (
               <TableRow
                 hover
-                key={ticket.id}
+                key={item.id}
                 className={classes.tableRow}
-                onClick={() => handleShowModal(ticket)}
+                onClick={() => handleShowModal(item)}
               >
                 <TableCell>
                   <Badge
                     variant="dot"
                     className={classes.root}
-                    classes={{ badge: classes[ticket.status] }}
+                    classes={{ badge: classes[item.status] }}
                   />
-                  {ticket.ticketNumber}
+                  {item.ticketNumber}
                 </TableCell>
                 <TableCell>
-                  {ticket.createdDate
-                    ? <Moment format="DD/MM/YYYY">{ticket.createdDate}</Moment>
+                  {item.createdDate
+                    ? <Moment format="DD/MM/YYYY">{item.createdDate}</Moment>
                     : <Typography variant="body2" color="textSecondary">-</Typography>}
                 </TableCell>
-                <TableCell>{ticket.issue}</TableCell>
+                <TableCell>{item.issue}</TableCell>
               </TableRow>
             ))}
           </TableBody>
