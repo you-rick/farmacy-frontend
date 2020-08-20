@@ -1,9 +1,13 @@
 import React from 'react';
 import { TextField, Typography, Grid, Button, Box } from '@material-ui/core';
+import RichTextarea from '../../../../shared/RichTextarea/RichTextarea';
 import { LOCALE } from '../../../../../locale';
 
 const MessageForm = () => {
   const locale = LOCALE.user.dashboard.ticketInfo;
+  const handleTextareaChange = (body) => {
+    console.log(body);
+  };
 
   return (
     <Box m="0 0 1.5rem">
@@ -19,13 +23,9 @@ const MessageForm = () => {
         }}
         margin="normal"
       />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        multiline
-        rows={15}
-      />
+      <Box m="0 0 1rem">
+        <RichTextarea body="Message Form body" onChange={handleTextareaChange} />
+      </Box>
       <Grid container justify="flex-end">
         <Button color="primary" variant="contained">
           {locale.form.submitButton}
