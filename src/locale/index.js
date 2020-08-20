@@ -37,6 +37,11 @@ export const LOCALE = {
       },
       newTicket: {
         headline: 'New Ticket',
+        form: {
+          title: 'Subject',
+          to: 'To',
+          submitButton: 'Post',
+        },
       },
       ticketInfo: {
         messages: 'Messages',
