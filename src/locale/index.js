@@ -24,6 +24,9 @@ export const LOCALE = {
         },
         logout: 'Logout',
       },
+      profile: {
+        headline: 'My Profile',
+      },
       myTickets: {
         headline: 'My Tickets',
         tableHeaders: {
@@ -31,6 +34,9 @@ export const LOCALE = {
           date: 'Date',
           issue: 'Issue',
         },
+      },
+      newTicket: {
+        headline: 'New Ticket',
       },
       ticketInfo: {
         messages: 'Messages',
