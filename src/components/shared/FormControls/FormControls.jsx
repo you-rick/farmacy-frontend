@@ -2,9 +2,7 @@ import React from 'react';
 import './FormControls.scss';
 import { TextField, FormControlLabel, Checkbox } from '@material-ui/core';
 
-export const renderTextField = ({
-  label, input, meta: { touched, invalid, error }, ...custom
-}) => (
+export const renderTextField = ({ label, input, meta: { touched, invalid, error }, ...custom }) => (
   <TextField
     label={label}
     placeholder={label}

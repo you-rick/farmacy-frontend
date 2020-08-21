@@ -2,7 +2,7 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import style from './RichTextarea.scss';
 
-const RichTextarea = ({ body, onChange }) => {
+const RichTextarea = ({ body, height, onChange }) => {
   const handleEditorChange = (content) => {
     onChange(content);
   };
@@ -12,7 +12,7 @@ const RichTextarea = ({ body, onChange }) => {
       apiKey={process.env.REACT_APP_TINYMCE_KEY}
       initialValue={body}
       init={{
-        height: 500,
+        height: height || 500,
         content_css: style,
         menubar: false,
         plugins: [],

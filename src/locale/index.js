@@ -38,6 +38,12 @@ export const LOCALE = {
       newTicket: {
         headline: 'New Ticket',
         form: {
+          requester: 'Requester',
+          department: 'Department',
+          component: 'Component',
+          tags: 'Tags',
+          type: 'Type',
+          priority: 'Priority',
           title: 'Subject',
           to: 'To',
           submitButton: 'Post',

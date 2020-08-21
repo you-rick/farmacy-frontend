@@ -24,7 +24,7 @@ const MessageForm = () => {
         margin="normal"
       />
       <Box m="0 0 1rem">
-        <RichTextarea body="Message Form body" onChange={handleTextareaChange} />
+        <RichTextarea body="Message Form body" height={200} onChange={handleTextareaChange} />
       </Box>
       <Grid container justify="flex-end">
         <Button color="primary" variant="contained">

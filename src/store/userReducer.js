@@ -47,6 +47,7 @@ export const login = (data) => (dispatch) => {
     .then((response) => {
       const res = response.data;
       setToken(data);
+      console.log(res);
       setRole(res.role);
       dispatch(setProfileData(res));
       dispatch(setAuthStatus(true));
