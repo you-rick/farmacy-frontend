@@ -16,9 +16,7 @@ import LoginContainer from './components/user/auth/Login/LoginContainer';
 import Dashboard from './components/user/dashboard/Dashboard';
 
 const AppContainer = (props) => {
-  const {
-    isDataFetching, initialized, isAuth, notification, hideNote, initializeApp,
-  } = props;
+  const { isDataFetching, initialized, isAuth, notification, hideNote, initializeApp } = props;
 
   useEffect(() => {
     initializeApp();

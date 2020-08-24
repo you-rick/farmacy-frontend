@@ -1,6 +1,7 @@
 import { isLogged } from '../utils/helpers/token-handler';
-import { setAuthStatus, setRoleStatus } from './userReducer';
-import { getRole } from '../utils/helpers/role-handler';
+import { getProfile } from './userReducer';
+import { setNote } from './notificationReducer';
+import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 
 // Actions
 const TOGGLE_IS_DATA_FETCHING = 'TOGGLE_IS_DATA_FETCHING';
@@ -39,12 +40,25 @@ export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS });
 
 // Thunks
 export const initializeApp = () => (dispatch) => {
-  dispatch(toggleIsDataFetching(false));
-  if (isLogged()) {
-    dispatch(setAuthStatus(true));
-    dispatch(setRoleStatus(getRole()));
-  }
-  dispatch(initializedSuccess());
+  const promiseArray = [];
+  if (isLogged()) promiseArray.push(dispatch(getProfile()));
+
+  dispatch(toggleIsDataFetching(true));
+
+  Promise.all(promiseArray)
+    .then(() => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(initializedSuccess());
+    })
+    .catch((error) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setNote({
+        msg: serverErrorHelper(error),
+        type: 'error',
+        error: true,
+        success: false,
+      }));
+    });
 };
 
 export default appReducer;

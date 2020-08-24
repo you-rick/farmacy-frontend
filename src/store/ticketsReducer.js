@@ -34,7 +34,8 @@ const ticketsReducer = (state = initialState, action) => {
       return {
         ...state,
         userId: _.get(data, 'userId', initialState.userId),
-        list: _.get(data, 'tickets', initialState.list).filter((item) => item.createdDate),
+        list: _.get(data, 'tickets', initialState.list)
+          .filter((item) => item.createdDate),
         messageCounts: _.get(data, 'messageCounts', initialState.messageCounts),
       };
     }
@@ -68,4 +69,23 @@ export const getTickets = () => (dispatch) => {
       }));
     });
 };
+
+export const addTicket = (data) => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  ticketsAPI.addTicket(data)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setNote({
+        msg: serverErrorHelper(error),
+        type: 'error',
+        error: true,
+        success: false,
+      }));
+    });
+};
+
 export default ticketsReducer;
