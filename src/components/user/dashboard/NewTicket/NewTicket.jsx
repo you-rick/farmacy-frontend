@@ -1,59 +1,52 @@
-import React from 'react';
-import { Box, Typography, Container, TextField, Button, Grid } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import { reduxForm, change } from 'redux-form';
+import { Box, Typography, Container, Grid, Button } from '@material-ui/core';
+import * as uuid from 'uuid';
 import { LOCALE } from '../../../../locale';
-import RichTextarea from '../../../shared/RichTextarea/RichTextarea';
-import Sidebar from './Sidebar/Sidebar';
+import NewTicketForm from './NewTicketForm/NewTicketForm';
+import NewTicketConfig from './NewTicketConfig/NewTicketConfig';
+import validate from './validate';
 
-const NewTicket = () => {
+const NewTicket = ({ dispatch, handleSubmit }) => {
   const locale = LOCALE.user.dashboard.newTicket;
-  const handleTextareaChange = (body) => {
-    console.log(body);
+
+  const onEditorChange = (data) => {
+    dispatch(change('new-ticket', 'issue', data.length ? data : null));
   };
+  const onTagsChange = (values) => {
+    dispatch(change('new-ticket', 'tags', values.length ? values : []));
+  };
+
+  useEffect(() => {
+    dispatch(change('new-ticket', 'requester', 'John Doe'));
+  }, [dispatch]);
 
   return (
     <Container maxWidth="lg">
       <Typography variant="h5" component="h1" align="center">
         {locale.headline}
       </Typography>
-      <Box display="flex" flexWrap="nowrap" m="1rem 0 0">
-        <Sidebar />
-        <Box flexGrow={1}>
-          <Box m="0 0 1.5rem">
-            <TextField
-              label={locale.form.title}
-              type="text"
-              variant="outlined"
-              size="small"
-              fullWidth
-              InputLabelProps={{
-                shrink: true,
-              }}
-              margin="normal"
-            />
-            <TextField
-              label={locale.form.to}
-              type="email"
-              variant="outlined"
-              size="small"
-              fullWidth
-              InputLabelProps={{
-                shrink: true,
-              }}
-              margin="normal"
-            />
+      <form onSubmit={handleSubmit}>
+        <Box display="flex" flexWrap="nowrap" m="1rem 0 0">
+          <NewTicketConfig onTagsChange={onTagsChange} />
+          <Box flexGrow={1}>
+            <NewTicketForm onEditorChange={onEditorChange} />
+            <Grid container justify="flex-end">
+              <Button color="primary" type="submit" variant="contained">
+                {locale.form.submitButton}
+              </Button>
+            </Grid>
           </Box>
-          <Box m="0 0 1rem">
-            <RichTextarea body="New Ticket body" onChange={handleTextareaChange} />
-          </Box>
-          <Grid container justify="flex-end">
-            <Button color="primary" variant="contained">
-              {locale.form.submitButton}
-            </Button>
-          </Grid>
         </Box>
-      </Box>
+      </form>
     </Container>
   );
 };
 
-export default NewTicket;
+export default reduxForm({
+  form: 'new-ticket',
+  validate,
+  initialValues: {
+    ticketId: uuid.v4(),
+  },
+})(NewTicket);

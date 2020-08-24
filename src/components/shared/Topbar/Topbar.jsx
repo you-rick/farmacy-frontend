@@ -17,7 +17,7 @@ const Topbar = () => {
   const locale = LOCALE.user.dashboard.topbar;
 
   return (
-    <AppBar position="static" color="default">
+    <AppBar position="fixed" color="default">
       <Toolbar>
         <Grid container justify="flex-end" alignItems="center">
           <Grid item>
