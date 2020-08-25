@@ -3,7 +3,7 @@ import { authHeaders } from '../utils/helpers/auth-headers';
 import {
   API_USER_DASHBOARD_ROUTE,
   API_USER_GET_MESSAGES_ROUTE,
-  API_USET_POST_TICKET_ROUTE,
+  API_USER_POST_TICKET_ROUTE,
   API_PROFILE_ROUTE,
 } from '../routes';
 import { getTokenHeader } from '../utils/helpers/token-handler';
@@ -35,8 +35,8 @@ export const ticketsAPI = {
       },
     });
   },
-  addTicket(data, userId) {
-    return axiosInstance.post(API_USET_POST_TICKET_ROUTE(userId), data, {
+  createTicket(data, userId) {
+    return axiosInstance.post(API_USER_POST_TICKET_ROUTE(userId), data, {
       headers: {
         'Authorization': getTokenHeader(),
       },

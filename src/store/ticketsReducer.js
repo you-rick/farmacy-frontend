@@ -74,10 +74,10 @@ export const getTickets = () => (dispatch) => {
     });
 };
 
-export const addTicket = (data, userId) => (dispatch) => {
+export const createTicket = (data, userId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  ticketsAPI.addTicket(data, userId)
+  ticketsAPI.createTicket(data, userId)
     .then((response) => {
       const res = response.data;
 

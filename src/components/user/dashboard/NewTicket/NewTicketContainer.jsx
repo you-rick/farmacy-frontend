@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NewTicket from './NewTicket';
-import { addTicket } from '../../../../store/ticketsReducer';
+import { createTicket } from '../../../../store/ticketsReducer';
 
-const NewTicketContainer = ({ user, addTicket }) => {
+const NewTicketContainer = ({ user, createTicket }) => {
   const onSubmit = (data) => {
-    addTicket(data, user.userId);
+    createTicket(data, user.userId);
   };
 
   return <NewTicket onSubmit={onSubmit} user={user} />;
@@ -15,4 +15,4 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 
-export default connect(mapStateToProps, { addTicket })(NewTicketContainer);
+export default connect(mapStateToProps, { createTicket })(NewTicketContainer);
