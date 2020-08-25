@@ -16,6 +16,13 @@ const themeStyles = (theme) => ({
       cursor: 'pointer',
     },
   },
+  table: {
+    whiteSpace: 'nowrap',
+  },
+  issueCol: {
+    whiteSpace: 'normal',
+    minWidth: '10rem',
+  },
 });
 
 export default themeStyles;

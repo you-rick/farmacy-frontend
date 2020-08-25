@@ -21,7 +21,7 @@ const TicketInfo = ({ ticket, open, onClose }) => {
       onClose={handleClose}
       fullWidth
       maxWidth="md"
-      classes={{ scrollPaper: classes.scrollPaper }}
+      classes={{ scrollPaper: classes.scrollPaper, paper: classes.paper }}
     >
       <DialogTitle>
         <Grid container justify="space-between">

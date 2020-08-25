@@ -18,7 +18,7 @@ const Topbar = () => {
 
   return (
     <AppBar position="fixed" color="default">
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <Grid container justify="flex-end" alignItems="center">
           <Grid item>
             <Grid container alignItems="center" className={classes.rightPanel}>
