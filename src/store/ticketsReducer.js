@@ -79,6 +79,8 @@ export const createTicket = (data, userId) => (dispatch) => {
   dispatch(hideNote());
   ticketsAPI.createTicket(data, userId)
     .then((response) => {
+      const res = response.data;
+
       dispatch(toggleIsDataFetching(false));
       dispatch(push(USER_TICKETS_ROUTE));
       dispatch(setNote({
@@ -87,6 +89,7 @@ export const createTicket = (data, userId) => (dispatch) => {
         error: false,
         success: true,
       }));
+      console.log(res);
     })
     .catch((error) => {
       dispatch(toggleIsDataFetching(false));
