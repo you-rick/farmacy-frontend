@@ -1,14 +1,17 @@
+import { EMAIL_VALIDATOR } from '../../../../utils/validators/validators';
 import { LOCALE } from '../../../../locale';
 
 const validate = (values) => {
   const errors = {};
-  const { required } = LOCALE.errors.validation;
+  const { required, email } = LOCALE.errors.validation;
 
   if (!values.subject) {
     errors.subject = required;
   }
   if (!values.to) {
     errors.to = required;
+  } else if (!EMAIL_VALIDATOR.test(values.to)) {
+    errors.to = email;
   }
   if (!values.requester) {
     errors.requester = required;
