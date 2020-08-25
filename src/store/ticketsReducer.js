@@ -1,11 +1,15 @@
 import _ from 'lodash';
+import { push } from 'connected-react-router';
 import { toggleIsDataFetching } from './appReducer';
 import { ticketsAPI } from '../api';
 import { hideNote, setNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
+import { LOCALE } from '../locale';
+import { USER_TICKETS_ROUTE } from '../routes';
 
 // Action
 const SET_TICKETS_DATA = 'SET_TICKETS_DATA';
+const successMsg = LOCALE.success.tickets;
 
 // Initial Data
 const initialState = {
@@ -34,7 +38,8 @@ const ticketsReducer = (state = initialState, action) => {
       return {
         ...state,
         userId: _.get(data, 'userId', initialState.userId),
-        list: _.get(data, 'tickets', initialState.list).filter((item) => item.createdDate),
+        list: _.get(data, 'tickets', initialState.list)
+          .filter((item) => item.createdDate),
         messageCounts: _.get(data, 'messageCounts', initialState.messageCounts),
       };
     }
@@ -68,4 +73,33 @@ export const getTickets = () => (dispatch) => {
       }));
     });
 };
+
+export const createTicket = (data, userId) => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  ticketsAPI.createTicket(data, userId)
+    .then((response) => {
+      const res = response.data;
+
+      dispatch(toggleIsDataFetching(false));
+      dispatch(push(USER_TICKETS_ROUTE));
+      dispatch(setNote({
+        msg: successMsg.ticketCreated,
+        type: 'success',
+        error: false,
+        success: true,
+      }));
+      console.log(res);
+    })
+    .catch((error) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setNote({
+        msg: serverErrorHelper(error),
+        type: 'error',
+        error: true,
+        success: false,
+      }));
+    });
+};
+
 export default ticketsReducer;

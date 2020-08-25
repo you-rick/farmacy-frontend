@@ -1,7 +1,9 @@
 // API routes
-export const API_LOGIN_ROUTE = 'login';
+export const API_USER_DASHBOARD_ROUTE = 'user/dashboard';
+export const API_PROFILE_ROUTE = 'profile';
 export const API_USER_GET_TICKETS_ROUTE = 'user/tickets';
 export const API_USER_GET_MESSAGES_ROUTE = (userId, ticketId) => `/user/${userId}/ticket/${ticketId}/messages`;
+export const API_USER_POST_TICKET_ROUTE = (userId) => `/user/${userId}/create-ticket`;
 
 // User routes
 export const USER_BASE_ROUTE = '/user';

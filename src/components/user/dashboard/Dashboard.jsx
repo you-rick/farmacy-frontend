@@ -9,7 +9,7 @@ import style from './Dashboard.module.scss';
 import Topbar from '../../shared/Topbar/Topbar';
 import Leftbar from '../../shared/Leftbar/Leftbar';
 import MyTickets from './MyTickets/MyTickets';
-import NewTicket from './NewTicket/NewTicket';
+import NewTicketContainer from './NewTicket/NewTicketContainer';
 import Profile from './Profile/Profile';
 
 const Dashboard = ({ isAuth, role }) => {
@@ -24,7 +24,7 @@ const Dashboard = ({ isAuth, role }) => {
       <Box className={style.contentWrap}>
         <Switch>
           <Route exact path={`${USER_TICKETS_ROUTE}/:filter?`} render={() => <MyTickets />} />
-          <Route path={USER_NEW_TICKET_ROUTE} render={() => <NewTicket />} />
+          <Route path={USER_NEW_TICKET_ROUTE} render={() => <NewTicketContainer />} />
           <Route path={USER_PROFILE_ROUTE} render={() => <Profile />} />
         </Switch>
       </Box>

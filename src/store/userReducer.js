@@ -4,7 +4,7 @@ import { userAPI } from '../api';
 import { toggleIsDataFetching } from './appReducer';
 import { setNote, hideNote } from './notificationReducer';
 import { setToken, removeToken } from '../utils/helpers/token-handler';
-import { setRole, removeRole } from '../utils/helpers/role-handler';
+import { setTicketsData } from './ticketsReducer';
 import { USER_TICKETS_ROUTE, USER_LOGIN_ROUTE } from '../routes';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 
@@ -15,8 +15,11 @@ const SET_ROLE_STATUS = 'SET_ROLE_STATUS';
 
 // Initial Data
 const initialState = {
-  id: null,
+  userId: null,
   role: null,
+  email: null,
+  firstName: null,
+  lastName: null,
   isAuth: false,
 };
 
@@ -26,20 +29,58 @@ const userReducer = (state = initialState, action) => {
     case SET_PROFILE_DATA:
       return { ...state, ...action.data };
     case SET_AUTH_STATUS:
-      return { ...state, isAuth: action.isAuth };
+      return {
+        ...state,
+        isAuth: action.isAuth,
+      };
     case SET_ROLE_STATUS:
-      return { ...state, role: action.role };
+      return {
+        ...state,
+        role: action.role,
+      };
     default:
       return state;
   }
 };
 
 // Action Creators
-export const setProfileData = (data) => ({ type: SET_PROFILE_DATA, data });
-export const setAuthStatus = (isAuth) => ({ type: SET_AUTH_STATUS, isAuth });
-export const setRoleStatus = (role) => ({ type: SET_ROLE_STATUS, role });
+export const setProfileData = (data) => ({
+  type: SET_PROFILE_DATA,
+  data,
+});
+export const setAuthStatus = (isAuth) => ({
+  type: SET_AUTH_STATUS,
+  isAuth,
+});
+export const setRoleStatus = (role) => ({
+  type: SET_ROLE_STATUS,
+  role,
+});
 
 // Thunks
+
+export const getProfile = () => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  return userAPI.profile()
+    .then((response) => {
+      const res = response.data;
+
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setProfileData(res));
+      dispatch(setAuthStatus(true));
+    })
+    .catch((error) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setNote({
+        msg: serverErrorHelper(error),
+        type: 'error',
+        error: true,
+        success: false,
+      }));
+    });
+};
+
 export const login = (data) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
@@ -47,24 +88,28 @@ export const login = (data) => (dispatch) => {
     .then((response) => {
       const res = response.data;
       setToken(data);
-      console.log(res);
-      setRole(res.role);
-      dispatch(setProfileData(res));
-      dispatch(setAuthStatus(true));
       dispatch(toggleIsDataFetching(false));
-      dispatch(reset('user-login'));
-      dispatch(push(USER_TICKETS_ROUTE));
-    }).catch((error) => {
+      dispatch(setTicketsData(res));
+
+      dispatch(getProfile())
+        .then(() => {
+          dispatch(reset('user-login'));
+          dispatch(push(USER_TICKETS_ROUTE));
+        });
+    })
+    .catch((error) => {
       dispatch(toggleIsDataFetching(false));
       dispatch(setNote({
-        msg: serverErrorHelper(error), type: 'error', error: true, success: false,
+        msg: serverErrorHelper(error),
+        type: 'error',
+        error: true,
+        success: false,
       }));
     });
 };
 
 export const logout = () => (dispatch) => {
   removeToken();
-  removeRole();
   dispatch(setProfileData(initialState));
   dispatch(push(USER_LOGIN_ROUTE));
 };

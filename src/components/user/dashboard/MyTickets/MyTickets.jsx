@@ -14,6 +14,7 @@ import {
   Badge,
 } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
+import { useLastLocation } from 'react-router-last-location';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './MyTickets.styles';
 import { getTickets } from '../../../../store/ticketsReducer';
@@ -36,13 +37,20 @@ const aliases = {
 const MyTickets = ({ tickets, ticket, getTickets }) => {
   const classes = useStyles();
   const { filter } = useParams();
+  const lastLocation = useLastLocation();
   const locale = LOCALE.user.dashboard.myTickets;
   const [modalOpen, setModalOpen] = useState(false);
   const [activeTicket, setActiveTicket] = useState(ticket);
   const [ticketsList, setTicketsList] = useState(tickets);
 
   useEffect(() => {
-    getTickets();
+    if (lastLocation) {
+      if (lastLocation.pathname !== '/') {
+        getTickets();
+      }
+    } else {
+      getTickets();
+    }
   }, [getTickets]);
 
   useEffect(() => {

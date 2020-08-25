@@ -75,4 +75,9 @@ export const LOCALE = {
       email: 'Invalid email address',
     },
   },
+  success: {
+    tickets: {
+      ticketCreated: 'Ticket successfully created',
+    },
+  },
 };

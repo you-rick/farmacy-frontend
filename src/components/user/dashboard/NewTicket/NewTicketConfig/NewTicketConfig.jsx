@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Field } from 'redux-form';
 import {
   Box,
   Paper,
@@ -12,7 +13,8 @@ import {
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
-import themeStyles from './Sidebar.styles';
+import { renderSelectField, renderTextField } from '../../../../shared/FormControls/FormControls';
+import themeStyles from './NewTicketConfig.styles';
 import { LOCALE } from '../../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
@@ -21,7 +23,7 @@ const typeList = ['type 1', 'type 2', 'type 3'];
 const priorityList = ['normal', 'high', 'low'];
 const departmentList = ['Information Technology'];
 
-const Sidebar = () => {
+const NewTicketConfig = ({ onTagsChange }) => {
   const classes = useStyles();
   const locale = LOCALE.user.dashboard.newTicket.form;
   const [type, setType] = useState(typeList[0]);
@@ -37,12 +39,16 @@ const Sidebar = () => {
   const departmentChange = (event) => {
     setDepartment(event.target.value);
   };
+  const tagsChange = (event, values) => {
+    onTagsChange(values);
+  };
 
   return (
     <Box m="1rem 3rem 0 0">
       <Paper className={classes.paper}>
-        <TextField
+        <Field
           label={locale.requester}
+          name="requester"
           variant="outlined"
           size="small"
           value="John Doe"
@@ -57,10 +63,12 @@ const Sidebar = () => {
               </InputAdornment>
             ),
           }}
+          component={renderTextField}
         />
         <Box m="1rem 0">
-          <TextField
+          <Field
             select
+            name="department"
             label={locale.department}
             variant="outlined"
             size="small"
@@ -68,16 +76,18 @@ const Sidebar = () => {
             margin="normal"
             value={department}
             onChange={departmentChange}
+            component={renderSelectField}
           >
             {departmentList.map((option) => (
               <MenuItem key={option} value={option}>
                 {option}
               </MenuItem>
             ))}
-          </TextField>
+          </Field>
         </Box>
-        <TextField
+        <Field
           label={locale.component}
+          name="component"
           type="text"
           variant="outlined"
           size="small"
@@ -85,6 +95,7 @@ const Sidebar = () => {
           InputLabelProps={{
             shrink: true,
           }}
+          component={renderTextField}
         />
         <Box m="2rem 0">
           <Divider />
@@ -94,6 +105,7 @@ const Sidebar = () => {
             multiple
             options={[]}
             freeSolo
+            onChange={tagsChange}
             renderTags={(value, getTagProps) => value.map((option, index) => (
               <Chip
                 variant="default"
@@ -118,38 +130,42 @@ const Sidebar = () => {
         </Box>
         <Grid container spacing={2}>
           <Box flexGrow={1} p={1}>
-            <TextField
+            <Field
               select
+              name="type"
               label={locale.type}
               variant="outlined"
               size="small"
               fullWidth
               value={type}
               onChange={typeChange}
+              component={renderSelectField}
             >
               {typeList.map((option) => (
                 <MenuItem key={option} value={option}>
                   {option}
                 </MenuItem>
               ))}
-            </TextField>
+            </Field>
           </Box>
           <Box flexGrow={1} p={1}>
-            <TextField
+            <Field
               select
+              name="priority"
               label={locale.priority}
               variant="outlined"
               size="small"
               fullWidth
               value={priority}
               onChange={priorityChange}
+              component={renderSelectField}
             >
               {priorityList.map((option) => (
                 <MenuItem key={option} value={option}>
                   {option}
                 </MenuItem>
               ))}
-            </TextField>
+            </Field>
           </Box>
         </Grid>
       </Paper>
@@ -157,4 +173,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default NewTicketConfig;

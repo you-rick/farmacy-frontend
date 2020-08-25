@@ -24,11 +24,13 @@
     "react-moment": "^0.9.7",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
+    "react-router-last-location": "^2.0.1",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-form": "^8.3.6",
     "redux-thunk": "^2.3.0",
-    "tinymce": "^5.4.2"
+    "tinymce": "^5.4.2",
+    "uuid": "^8.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
