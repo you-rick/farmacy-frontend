@@ -5,7 +5,7 @@ import { addTicket } from '../../../../store/ticketsReducer';
 
 const NewTicketContainer = ({ user, addTicket }) => {
   const onSubmit = (data) => {
-    addTicket(data);
+    addTicket(data, user.userId);
   };
 
   return <NewTicket onSubmit={onSubmit} user={user} />;
