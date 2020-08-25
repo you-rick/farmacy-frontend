@@ -7,7 +7,7 @@ import NewTicketForm from './NewTicketForm/NewTicketForm';
 import NewTicketConfig from './NewTicketConfig/NewTicketConfig';
 import validate from './validate';
 
-const NewTicket = ({ dispatch, handleSubmit }) => {
+const NewTicket = ({ dispatch, handleSubmit, initialize, user }) => {
   const locale = LOCALE.user.dashboard.newTicket;
 
   const onEditorChange = (data) => {
@@ -20,6 +20,13 @@ const NewTicket = ({ dispatch, handleSubmit }) => {
   useEffect(() => {
     dispatch(change('new-ticket', 'requester', 'John Doe'));
   }, [dispatch]);
+
+  useEffect(() => {
+    initialize({
+      requester: `${user.firstName} ${user.lastName}`,
+      ticketId: uuid.v4(),
+    });
+  }, [initialize, user]);
 
   return (
     <Container maxWidth="lg">
@@ -43,10 +50,4 @@ const NewTicket = ({ dispatch, handleSubmit }) => {
   );
 };
 
-export default reduxForm({
-  form: 'new-ticket',
-  validate,
-  initialValues: {
-    ticketId: uuid.v4(),
-  },
-})(NewTicket);
+export default reduxForm({ form: 'new-ticket', validate })(NewTicket);

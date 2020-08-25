@@ -32,7 +32,7 @@ const Leftbar = ({ logout, getTickets }) => {
   return (
     <Drawer variant="permanent" anchor="left" classes={{ paper: classes.drawer }}>
       <List>
-        <ListItem button component={NavLink} to="/">
+        <ListItem button component={NavLink} to={USER_TICKETS_ROUTE}>
           <ListItemIcon className={classes.listIcon}>
             <HomeIcon className={classes.icon} />
           </ListItemIcon>

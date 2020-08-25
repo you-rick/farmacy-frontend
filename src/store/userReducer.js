@@ -65,7 +65,7 @@ export const getProfile = () => (dispatch) => {
   return userAPI.profile()
     .then((response) => {
       const res = response.data;
-      console.log(res);
+
       dispatch(toggleIsDataFetching(false));
       dispatch(setProfileData(res));
       dispatch(setAuthStatus(true));
@@ -90,9 +90,12 @@ export const login = (data) => (dispatch) => {
       setToken(data);
       dispatch(toggleIsDataFetching(false));
       dispatch(setTicketsData(res));
-      dispatch(reset('user-login'));
-      dispatch(push(USER_TICKETS_ROUTE));
-      dispatch(getProfile());
+
+      dispatch(getProfile())
+        .then(() => {
+          dispatch(reset('user-login'));
+          dispatch(push(USER_TICKETS_ROUTE));
+        });
     })
     .catch((error) => {
       dispatch(toggleIsDataFetching(false));

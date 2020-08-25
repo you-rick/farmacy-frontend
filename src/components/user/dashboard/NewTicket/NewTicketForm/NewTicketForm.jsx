@@ -18,7 +18,6 @@ const NewTicketForm = ({ onEditorChange }) => {
 
   const handleTextareaChange = (body) => {
     onEditorChange(body);
-    console.log(body);
   };
 
   return (

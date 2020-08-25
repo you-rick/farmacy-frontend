@@ -1,11 +1,15 @@
 import _ from 'lodash';
+import { push } from 'connected-react-router';
 import { toggleIsDataFetching } from './appReducer';
 import { ticketsAPI } from '../api';
 import { hideNote, setNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
+import { LOCALE } from '../locale';
+import { USER_TICKETS_ROUTE } from '../routes';
 
 // Action
 const SET_TICKETS_DATA = 'SET_TICKETS_DATA';
+const successMsg = LOCALE.success.tickets;
 
 // Initial Data
 const initialState = {
@@ -75,7 +79,17 @@ export const addTicket = (data) => (dispatch) => {
   dispatch(hideNote());
   ticketsAPI.addTicket(data)
     .then((response) => {
-      console.log(response);
+      const res = response.data;
+
+      dispatch(toggleIsDataFetching(false));
+      dispatch(push(USER_TICKETS_ROUTE));
+      dispatch(setNote({
+        msg: successMsg.ticketCreated,
+        type: 'success',
+        error: false,
+        success: true,
+      }));
+      console.log(res);
     })
     .catch((error) => {
       dispatch(toggleIsDataFetching(false));
