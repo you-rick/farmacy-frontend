@@ -32,8 +32,16 @@ const themeStyles = (theme) => ({
     paddingLeft: '2.5rem',
     transition: theme.transitions.create('width'),
   },
+  icon: {
+    [theme.breakpoints.down('sm')]: {
+      padding: '0.5rem',
+    },
+  },
   helpBtn: {
     color: fade(theme.palette.common.black, 0.5),
+    [theme.breakpoints.down('sm')]: {
+      padding: '0.75rem',
+    },
   },
 });
 

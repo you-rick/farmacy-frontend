@@ -15,7 +15,11 @@ const RichTextarea = ({ body, height, onChange }) => {
         height: height || 500,
         content_css: style,
         menubar: false,
-        plugins: [],
+        mobile: {
+          menubar: true,
+          toolbar_drawer: 'floating',
+        },
+        plugins: ['autoresize'],
         toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter'
           + ' alignright alignjustify | bullist numlist | removeformat',
       }}

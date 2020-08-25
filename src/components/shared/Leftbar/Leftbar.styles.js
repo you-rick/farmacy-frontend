@@ -14,7 +14,7 @@ const themeStyles = (theme) => ({
   },
   toggleBtn: {
     zIndex: '1102',
-    margin: '0.5rem',
+    margin: '0.45rem',
     position: 'fixed',
     top: '0',
     left: '0',

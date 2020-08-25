@@ -25,6 +25,7 @@ const Topbar = () => {
               <IconButton
                 aria-label="account of current user"
                 color="inherit"
+                className={classes.icon}
                 component={NavLink}
                 to={USER_PROFILE_ROUTE}
               >
@@ -46,6 +47,7 @@ const Topbar = () => {
               <IconButton
                 aria-label="notifications"
                 color="primary"
+                className={classes.icon}
               >
                 <NotificationsIcon />
               </IconButton>
