@@ -13,7 +13,7 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
-export const userAPI = {
+export const authAPI = {
   login(data, role) {
     const url = role === 'admin' ? API_ADMIN_DASHBOARD_ROUTE : API_USER_DASHBOARD_ROUTE;
     return axiosInstance.post(url, {}, {

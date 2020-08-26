@@ -10,6 +10,6 @@ const Home = ({ isAuth }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: state.user.isAuth,
+  isAuth: state.auth.isAuth,
 });
 export default connect(mapStateToProps, {})(Home);

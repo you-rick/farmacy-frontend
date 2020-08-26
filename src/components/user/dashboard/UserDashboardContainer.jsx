@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Box } from '@material-ui/core';
 import { USER_TICKETS_ROUTE, USER_NEW_TICKET_ROUTE, USER_PROFILE_ROUTE } from '../../../routes';
-import style from './Dashboard.module.scss';
 
 import Topbar from '../../shared/Topbar/Topbar';
 import Leftbar from '../../shared/Leftbar/Leftbar';
@@ -12,7 +11,7 @@ import MyTickets from './MyTickets/MyTickets';
 import NewTicketContainer from './NewTicket/NewTicketContainer';
 import Profile from './Profile/Profile';
 
-const UserDashboard = ({ isAuth, role }) => {
+const UserDashboardContainer = ({ isAuth, role }) => {
   if (!isAuth || role !== 'user') {
     return <Redirect to="/" />;
   }
@@ -21,7 +20,7 @@ const UserDashboard = ({ isAuth, role }) => {
     <>
       <Leftbar />
       <Topbar />
-      <Box className={style.contentWrap}>
+      <Box className="dashboardContentWrap">
         <Switch>
           <Route exact path={`${USER_TICKETS_ROUTE}/:filter?`} render={() => <MyTickets />} />
           <Route path={USER_NEW_TICKET_ROUTE} render={() => <NewTicketContainer />} />
@@ -33,7 +32,7 @@ const UserDashboard = ({ isAuth, role }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: state.user.isAuth,
-  role: state.user.role,
+  isAuth: state.auth.isAuth,
+  role: state.auth.role,
 });
-export default compose(connect(mapStateToProps, {}), withRouter)(UserDashboard);
+export default compose(connect(mapStateToProps, {}), withRouter)(UserDashboardContainer);

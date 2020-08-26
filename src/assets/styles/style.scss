@@ -2,3 +2,12 @@
 @import "mixins";
 @import "responsive";
 
+.dashboardContentWrap {
+  margin-left: 15rem;
+  width: calc(100% - 15rem);
+  padding: 7rem 2rem 5rem;
+  @include till-md-screen {
+    margin-left: 0;
+    width: 100%;
+  }
+}

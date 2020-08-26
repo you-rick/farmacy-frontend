@@ -11,7 +11,7 @@ import CachedIcon from '@material-ui/icons/Cached';
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './Leftbar.styles';
-import { logout } from '../../../store/userReducer';
+import { logout } from '../../../store/authReducer';
 import { getTickets } from '../../../store/ticketsReducer';
 import { LOCALE } from '../../../locale';
 import { layoutBreakpoint } from '../../../utils/helpers/layout-breakpoints';

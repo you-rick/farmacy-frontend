@@ -19,9 +19,9 @@ import NotFound from './components/public/NotFound/NotFound';
 import Preloader from './components/shared/Preloader/Preloader';
 import Notification from './components/shared/Notification/Notification';
 import UserLoginContainer from './components/user/auth/Login/UserLoginContainer';
-import UserDashboard from './components/user/dashboard/UserDashboard';
+import UserDashboardContainer from './components/user/dashboard/UserDashboardContainer';
 import AdminLoginContainer from './components/admin/auth/Login/AdminLoginContainer';
-import AdminDashboard from './components/admin/auth/dashboard/AdminDashboard';
+import AdminDashboardContainer from './components/admin/dashboard/AdminDashboardContainer';
 
 const AppContainer = (props) => {
   const { isDataFetching, initialized, isAuth, notification, hideNote, initializeApp } = props;
@@ -40,9 +40,9 @@ const AppContainer = (props) => {
       <Switch>
         <Route exact path="/" render={() => <Home />} />
         <Route exact path={USER_LOGIN_ROUTE} render={() => <UserLoginContainer />} />
-        <Route path={USER_BASE_ROUTE} render={() => <UserDashboard />} />
-        <Route path={ADMIN_LOGIN_ROUTE} render={() => <AdminLoginContainer />} />
-        <Route path={ADMIN_BASE_ROUTE} render={() => <AdminDashboard />} />
+        <Route path={USER_BASE_ROUTE} render={() => <UserDashboardContainer />} />
+        <Route exact path={ADMIN_LOGIN_ROUTE} render={() => <AdminLoginContainer />} />
+        <Route path={ADMIN_BASE_ROUTE} render={() => <AdminDashboardContainer />} />
         <Route path={NOT_FOUND_ROUTE} render={() => <NotFound />} />
         <Redirect to={NOT_FOUND_ROUTE} />
       </Switch>
@@ -56,7 +56,7 @@ const mapStateToProps = (state) => ({
   notification: state.notification,
   initialized: state.app.initialized,
   isDataFetching: state.app.isDataFetching,
-  isAuth: state.user.isAuth,
+  isAuth: state.auth.isAuth,
 });
 const App = compose(withRouter, connect(mapStateToProps, {
   hideNote,

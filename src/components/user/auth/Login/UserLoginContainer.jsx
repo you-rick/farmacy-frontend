@@ -2,7 +2,7 @@ import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import React from 'react';
-import { login } from '../../../../store/userReducer';
+import { login } from '../../../../store/authReducer';
 import validate from './validate';
 import LoginForm from '../../../shared/auth/LoginForm/LoginForm';
 
@@ -19,7 +19,7 @@ const UserLoginContainer = ({ login, isAuth }) => {
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: state.user.isAuth,
+  isAuth: state.auth.isAuth,
 });
 
 export default connect(mapStateToProps, { login })(UserLoginContainer);

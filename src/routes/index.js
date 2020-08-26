@@ -22,6 +22,7 @@ export const USER_NEW_TICKET_ROUTE = '/user/create-tickets';
 export const ADMIN_BASE_ROUTE = '/admin';
 export const ADMIN_LOGIN_ROUTE = '/admin/login';
 export const ADMIN_FORGOT_PASS_ROUTE = '/admin/forgot-password';
+export const ADMIN_DASHBOARD_ROUTE = '/admin/dashboard';
 
 // User route params
 export const USER_TICKETS_UNRESOLVED_PARAM = 'unresolved';
