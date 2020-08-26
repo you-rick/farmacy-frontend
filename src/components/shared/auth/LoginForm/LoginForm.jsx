@@ -10,6 +10,7 @@ import {
   Link,
   Typography,
 } from '@material-ui/core';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { renderTextField, renderCheckbox } from '../../FormControls/FormControls';
@@ -39,10 +40,14 @@ const LoginForm = ({ handleSubmit, userType }) => {
       <Container maxWidth="xs">
         <Card className={classes.root}>
           <CardContent>
-            <Box m="0 0 1rem">
+            <Box m="0 0 0.5rem" display="flex" justifyContent="center" alignItems="center">
               <Typography variant="h5" component="h1" align="center" gutterBottom>
                 {locale.headline}
               </Typography>
+              {
+                userType === 'admin'
+                && <Box m="0 0 0 0.5rem"><SupervisorAccountIcon color="primary" /></Box>
+              }
             </Box>
             <form onSubmit={handleSubmit}>
               <Field
