@@ -10,12 +10,17 @@ export const LOCALE = {
       userLogin: 'Sign in as employee',
       adminLogin: 'Sign in as admin',
     },
+    logout: 'logout',
   },
-  user: {
+  common: {
     dashboard: {
       topbar: {
         searchPlaceholder: 'Search...',
       },
+    },
+  },
+  user: {
+    dashboard: {
       leftbar: {
         home: 'Home',
         views: 'Views',
@@ -29,7 +34,7 @@ export const LOCALE = {
         logout: 'Logout',
       },
       profile: {
-        headline: 'My Profile',
+        headline: 'User Profile',
       },
       myTickets: {
         headline: 'My Tickets',
@@ -64,7 +69,14 @@ export const LOCALE = {
     },
   },
   admin: {
-
+    dashboard: {
+      leftbar: {
+        home: 'Home',
+      },
+      profile: {
+        headline: 'Admin Profile',
+      },
+    },
   },
   public: {
     companyName: 'Offteck',

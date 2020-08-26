@@ -6,7 +6,7 @@ import { Box } from '@material-ui/core';
 import { USER_TICKETS_ROUTE, USER_NEW_TICKET_ROUTE, USER_PROFILE_ROUTE } from '../../../routes';
 
 import Topbar from '../../shared/Topbar/Topbar';
-import Leftbar from '../../shared/Leftbar/Leftbar';
+import LeftbarContainer from '../../shared/LeftbarContainer/LeftbarContainer';
 import MyTickets from './MyTickets/MyTickets';
 import NewTicketContainer from './NewTicket/NewTicketContainer';
 import Profile from './Profile/Profile';
@@ -18,7 +18,7 @@ const UserDashboardContainer = ({ isAuth, role }) => {
 
   return (
     <>
-      <Leftbar />
+      <LeftbarContainer />
       <Topbar />
       <Box className="dashboardContentWrap">
         <Switch>
