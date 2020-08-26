@@ -1,5 +1,5 @@
 export const LOCALE = {
-  user: {
+  auth: {
     login: {
       headline: 'Sign in to Office Aid',
       username: 'Email',
@@ -7,7 +7,11 @@ export const LOCALE = {
       rememberMe: 'Remember me',
       signIn: 'Sign In',
       forgotPassword: 'Forgot my password',
+      userLogin: 'Sign in as employee',
+      adminLogin: 'Sign in as admin',
     },
+  },
+  user: {
     dashboard: {
       topbar: {
         searchPlaceholder: 'Search...',
@@ -58,6 +62,9 @@ export const LOCALE = {
         },
       },
     },
+  },
+  admin: {
+
   },
   public: {
     companyName: 'Offteck',

@@ -12,7 +12,7 @@ import MyTickets from './MyTickets/MyTickets';
 import NewTicketContainer from './NewTicket/NewTicketContainer';
 import Profile from './Profile/Profile';
 
-const Dashboard = ({ isAuth, role }) => {
+const UserDashboard = ({ isAuth, role }) => {
   if (!isAuth || role !== 'user') {
     return <Redirect to="/" />;
   }
@@ -36,4 +36,4 @@ const mapStateToProps = (state) => ({
   isAuth: state.user.isAuth,
   role: state.user.role,
 });
-export default compose(connect(mapStateToProps, {}), withRouter)(Dashboard);
+export default compose(connect(mapStateToProps, {}), withRouter)(UserDashboard);

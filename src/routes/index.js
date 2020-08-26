@@ -1,9 +1,14 @@
-// API routes
-export const API_USER_DASHBOARD_ROUTE = 'user/dashboard';
+// API shared routes
 export const API_PROFILE_ROUTE = 'profile';
+
+// API USER routes
+export const API_USER_DASHBOARD_ROUTE = 'user/dashboard';
 export const API_USER_GET_TICKETS_ROUTE = 'user/tickets';
 export const API_USER_GET_MESSAGES_ROUTE = (userId, ticketId) => `/user/${userId}/ticket/${ticketId}/messages`;
 export const API_USER_POST_TICKET_ROUTE = (userId) => `/user/${userId}/create-ticket`;
+
+// API ADMIN routes
+export const API_ADMIN_DASHBOARD_ROUTE = 'admin/dashboard';
 
 // User routes
 export const USER_BASE_ROUTE = '/user';
@@ -12,6 +17,11 @@ export const USER_FORGOT_PASS_ROUTE = '/user/forgot-password';
 export const USER_PROFILE_ROUTE = '/user/profile';
 export const USER_TICKETS_ROUTE = '/user/my-tickets';
 export const USER_NEW_TICKET_ROUTE = '/user/create-tickets';
+
+// Admin routes
+export const ADMIN_BASE_ROUTE = '/admin';
+export const ADMIN_LOGIN_ROUTE = '/admin/login';
+export const ADMIN_FORGOT_PASS_ROUTE = '/admin/forgot-password';
 
 // User route params
 export const USER_TICKETS_UNRESOLVED_PARAM = 'unresolved';

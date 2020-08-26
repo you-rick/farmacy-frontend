@@ -81,10 +81,10 @@ export const getProfile = () => (dispatch) => {
     });
 };
 
-export const login = (data) => (dispatch) => {
+export const login = (data, role) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  userAPI.login(data)
+  userAPI.login(data, role)
     .then((response) => {
       const res = response.data;
       setToken(data);
