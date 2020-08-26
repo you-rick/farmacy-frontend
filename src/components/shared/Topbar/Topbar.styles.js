@@ -1,6 +1,9 @@
 import { fade } from '@material-ui/core';
 
 const themeStyles = (theme) => ({
+  toolbar: {
+    minHeight: '4rem',
+  },
   rightPanel: {
     flexWrap: 'nowrap',
   },
@@ -28,12 +31,17 @@ const themeStyles = (theme) => ({
     width: '8rem',
     paddingLeft: '2.5rem',
     transition: theme.transitions.create('width'),
-    '&:focus': {
-      width: '10rem',
+  },
+  icon: {
+    [theme.breakpoints.down('sm')]: {
+      padding: '0.5rem',
     },
   },
   helpBtn: {
     color: fade(theme.palette.common.black, 0.5),
+    [theme.breakpoints.down('sm')]: {
+      padding: '0.75rem',
+    },
   },
 });
 

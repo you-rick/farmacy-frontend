@@ -52,13 +52,13 @@ $experimental: true !default; // set True for support Old Browsers
 }
 
 @mixin from-md-screen {
-  @media only screen and (min-width: 1025px) {
+  @media only screen and (min-width: 961px) {
     @content;
   }
 }
 
 @mixin till-md-screen {
-  @media only screen and (max-width: 1024px) {
+  @media only screen and (max-width: 960px) {
     @content;
   }
 }

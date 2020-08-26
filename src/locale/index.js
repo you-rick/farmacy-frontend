@@ -60,6 +60,7 @@ export const LOCALE = {
     },
   },
   public: {
+    companyName: 'Offteck',
     notFound: {
       headline: 'Page not found',
       body: 'Maybe the page you are looking for has been removed, or you typed in the wrong URL',

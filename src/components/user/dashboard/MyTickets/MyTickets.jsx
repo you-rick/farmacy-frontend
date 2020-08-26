@@ -24,6 +24,7 @@ import {
   USER_TICKETS_SOLVED_PARAM,
   USER_TICKETS_UNRESOLVED_PARAM,
   USER_TICKETS_UPDATED_PARAM,
+  USER_TICKETS_ROUTE,
 } from '../../../../routes';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
@@ -45,13 +46,13 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
 
   useEffect(() => {
     if (lastLocation) {
-      if (lastLocation.pathname !== '/') {
+      if (lastLocation.pathname !== '/' && lastLocation.pathname.indexOf(USER_TICKETS_ROUTE) === -1) {
         getTickets();
       }
     } else {
       getTickets();
     }
-  }, [getTickets]);
+  }, [getTickets, lastLocation, filter]);
 
   useEffect(() => {
     setTicketsList(
@@ -77,12 +78,12 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
         </Typography>
       </Box>
       <TableContainer component={Paper}>
-        <Table>
+        <Table className={classes.table}>
           <TableHead>
             <TableRow>
               <TableCell>{locale.tableHeaders.ticketNumber}</TableCell>
               <TableCell>{locale.tableHeaders.date}</TableCell>
-              <TableCell>{locale.tableHeaders.issue}</TableCell>
+              <TableCell className={classes.issueCol}>{locale.tableHeaders.issue}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -106,7 +107,7 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
                     ? <Moment format="DD/MM/YYYY">{item.createdDate}</Moment>
                     : <Typography variant="body2" color="textSecondary">-</Typography>}
                 </TableCell>
-                <TableCell>{item.issue}</TableCell>
+                <TableCell className={classes.issueCol}>{item.issue}</TableCell>
               </TableRow>
             ))}
           </TableBody>

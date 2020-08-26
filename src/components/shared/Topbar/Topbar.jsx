@@ -18,13 +18,14 @@ const Topbar = () => {
 
   return (
     <AppBar position="fixed" color="default">
-      <Toolbar>
+      <Toolbar className={classes.toolbar}>
         <Grid container justify="flex-end" alignItems="center">
           <Grid item>
             <Grid container alignItems="center" className={classes.rightPanel}>
               <IconButton
                 aria-label="account of current user"
                 color="inherit"
+                className={classes.icon}
                 component={NavLink}
                 to={USER_PROFILE_ROUTE}
               >
@@ -46,6 +47,7 @@ const Topbar = () => {
               <IconButton
                 aria-label="notifications"
                 color="primary"
+                className={classes.icon}
               >
                 <NotificationsIcon />
               </IconButton>

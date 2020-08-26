@@ -44,7 +44,7 @@ const NewTicketConfig = ({ onTagsChange }) => {
   };
 
   return (
-    <Box m="1rem 3rem 0 0">
+    <Box className={classes.paperBox}>
       <Paper className={classes.paper}>
         <Field
           label={locale.requester}
