@@ -49,6 +49,9 @@ const AdminLeftbar = () => {
         <AccordionDetails className={classes.accordionDetails}>
           <Box flexGrow={1}>
             <List>
+              <ListItem button component={NavLink} to={ADMIN_DASHBOARD_ROUTE}>
+                <ListItemText primary={locale.links.dashboard.overview} />
+              </ListItem>
               <ListItem button component={NavLink} to={ADMIN_TICKETS_ROUTE}>
                 <ListItemText primary={locale.links.dashboard.tickets} />
               </ListItem>
@@ -60,19 +63,45 @@ const AdminLeftbar = () => {
         </AccordionDetails>
       </Accordion>
       <Accordion square className={classes.accordion}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon className={classes.icon} />}>
+        <AccordionSummary
+          classes={{
+            root: classes.accordionSummary,
+            content: classes.accordionSummaryContent,
+          }}
+          expandIcon={<ExpandMoreIcon className={classes.icon} />}
+        >
           <Typography>{locale.links.teams.title}</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
-          <Typography>Teams menu</Typography>
+          <List>
+            <ListItem button>
+              <ListItemText primary="Team link 1" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Team link 2" />
+            </ListItem>
+          </List>
         </AccordionDetails>
       </Accordion>
       <Accordion square className={classes.accordion}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon className={classes.icon} />}>
+        <AccordionSummary
+          classes={{
+            root: classes.accordionSummary,
+            content: classes.accordionSummaryContent,
+          }}
+          expandIcon={<ExpandMoreIcon className={classes.icon} />}
+        >
           <Typography>{locale.links.settings.title}</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
-          <Typography>Ticket Settings menu</Typography>
+          <List>
+            <ListItem button>
+              <ListItemText primary="Settings link 1" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Settings link 2" />
+            </ListItem>
+          </List>
         </AccordionDetails>
       </Accordion>
     </>

@@ -78,6 +78,7 @@ export const LOCALE = {
         links: {
           dashboard: {
             title: 'Dashboard',
+            overview: 'Overview',
             users: 'Users',
             tickets: 'Tickets',
           },
