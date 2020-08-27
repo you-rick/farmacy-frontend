@@ -89,6 +89,9 @@ export const LOCALE = {
       profile: {
         headline: 'Admin Profile',
       },
+      newTickets: {
+        headline: 'New Tickets',
+      },
     },
   },
   public: {

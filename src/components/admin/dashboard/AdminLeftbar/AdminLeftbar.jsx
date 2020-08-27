@@ -16,7 +16,7 @@ import { NavLink } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from '../../../shared/LeftbarContainer/LeftbarContainer.styles';
-import { ADMIN_DASHBOARD_ROUTE } from '../../../../routes';
+import { ADMIN_DASHBOARD_ROUTE, ADMIN_TICKETS_ROUTE, ADMIN_USERS_ROUTE } from '../../../../routes';
 import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
@@ -37,16 +37,22 @@ const AdminLeftbar = () => {
       </List>
       <Divider className={classes.divider} />
       <Accordion square className={classes.accordion}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon className={classes.icon} />}>
+        <AccordionSummary
+          classes={{
+            root: classes.accordionSummary,
+            content: classes.accordionSummaryContent,
+          }}
+          expandIcon={<ExpandMoreIcon className={classes.icon} />}
+        >
           <Typography>{locale.links.dashboard.title}</Typography>
         </AccordionSummary>
         <AccordionDetails className={classes.accordionDetails}>
           <Box flexGrow={1}>
             <List>
-              <ListItem button component={NavLink} to="/">
+              <ListItem button component={NavLink} to={ADMIN_TICKETS_ROUTE}>
                 <ListItemText primary={locale.links.dashboard.tickets} />
               </ListItem>
-              <ListItem button component={NavLink} to="/">
+              <ListItem button component={NavLink} to={ADMIN_USERS_ROUTE}>
                 <ListItemText primary={locale.links.dashboard.users} />
               </ListItem>
             </List>
