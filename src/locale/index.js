@@ -1,5 +1,5 @@
 export const LOCALE = {
-  user: {
+  auth: {
     login: {
       headline: 'Sign in to Office Aid',
       username: 'Email',
@@ -7,11 +7,20 @@ export const LOCALE = {
       rememberMe: 'Remember me',
       signIn: 'Sign In',
       forgotPassword: 'Forgot my password',
+      userLogin: 'Sign in as employee',
+      adminLogin: 'Sign in as admin',
     },
+    logout: 'logout',
+  },
+  common: {
     dashboard: {
       topbar: {
         searchPlaceholder: 'Search...',
       },
+    },
+  },
+  user: {
+    dashboard: {
       leftbar: {
         home: 'Home',
         views: 'Views',
@@ -25,7 +34,7 @@ export const LOCALE = {
         logout: 'Logout',
       },
       profile: {
-        headline: 'My Profile',
+        headline: 'User Profile',
       },
       myTickets: {
         headline: 'My Tickets',
@@ -56,6 +65,16 @@ export const LOCALE = {
           to: 'To',
           submitButton: 'Post',
         },
+      },
+    },
+  },
+  admin: {
+    dashboard: {
+      leftbar: {
+        home: 'Home',
+      },
+      profile: {
+        headline: 'Admin Profile',
       },
     },
   },

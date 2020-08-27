@@ -1,5 +1,5 @@
 import { isLogged } from '../utils/helpers/token-handler';
-import { getProfile } from './userReducer';
+import { getProfile } from './authReducer';
 import { setNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 

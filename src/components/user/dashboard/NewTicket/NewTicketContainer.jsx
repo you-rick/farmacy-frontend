@@ -12,7 +12,7 @@ const NewTicketContainer = ({ user, createTicket }) => {
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user,
+  user: state.auth,
 });
 
 export default connect(mapStateToProps, { createTicket })(NewTicketContainer);

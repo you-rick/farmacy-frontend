@@ -1,11 +1,11 @@
 import { push } from 'connected-react-router';
 import { reset } from 'redux-form';
-import { userAPI } from '../api';
+import { authAPI } from '../api';
 import { toggleIsDataFetching } from './appReducer';
 import { setNote, hideNote } from './notificationReducer';
 import { setToken, removeToken } from '../utils/helpers/token-handler';
 import { setTicketsData } from './ticketsReducer';
-import { USER_TICKETS_ROUTE, USER_LOGIN_ROUTE } from '../routes';
+import { USER_TICKETS_ROUTE, USER_LOGIN_ROUTE, ADMIN_DASHBOARD_ROUTE } from '../routes';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 
 // Actions
@@ -24,7 +24,7 @@ const initialState = {
 };
 
 // Reducer
-const userReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PROFILE_DATA:
       return { ...state, ...action.data };
@@ -62,7 +62,7 @@ export const setRoleStatus = (role) => ({
 export const getProfile = () => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  return userAPI.profile()
+  return authAPI.profile()
     .then((response) => {
       const res = response.data;
 
@@ -81,20 +81,29 @@ export const getProfile = () => (dispatch) => {
     });
 };
 
-export const login = (data) => (dispatch) => {
+export const login = (data, role) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  userAPI.login(data)
+  authAPI.login(data, role)
     .then((response) => {
-      const res = response.data;
       setToken(data);
       dispatch(toggleIsDataFetching(false));
-      dispatch(setTicketsData(res));
+
+      if (role === 'user') {
+        dispatch(setTicketsData(response.data));
+      } else {
+        console.log(response.data);
+      }
 
       dispatch(getProfile())
         .then(() => {
-          dispatch(reset('user-login'));
-          dispatch(push(USER_TICKETS_ROUTE));
+          if (role === 'user') {
+            dispatch(reset('user-login'));
+            dispatch(push(USER_TICKETS_ROUTE));
+          } else {
+            dispatch(reset('admin-login'));
+            dispatch(push(ADMIN_DASHBOARD_ROUTE));
+          }
         });
     })
     .catch((error) => {
@@ -114,4 +123,4 @@ export const logout = () => (dispatch) => {
   dispatch(push(USER_LOGIN_ROUTE));
 };
 
-export default userReducer;
+export default authReducer;

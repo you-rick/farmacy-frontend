@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { AppBar, Grid, Toolbar, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -8,13 +9,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 import themeStyles from './Topbar.styles';
 import { LOCALE } from '../../../locale';
-import { USER_PROFILE_ROUTE } from '../../../routes';
+import { USER_PROFILE_ROUTE, ADMIN_PROFILE_ROUTE } from '../../../routes';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const Topbar = () => {
+const Topbar = ({ role }) => {
   const classes = useStyles();
-  const locale = LOCALE.user.dashboard.topbar;
+  const locale = LOCALE.common.dashboard.topbar;
+  const profilePath = role === 'user' ? USER_PROFILE_ROUTE : ADMIN_PROFILE_ROUTE;
 
   return (
     <AppBar position="fixed" color="default">
@@ -27,7 +29,7 @@ const Topbar = () => {
                 color="inherit"
                 className={classes.icon}
                 component={NavLink}
-                to={USER_PROFILE_ROUTE}
+                to={profilePath}
               >
                 <AccountCircle />
               </IconButton>
@@ -65,4 +67,8 @@ const Topbar = () => {
   );
 };
 
-export default Topbar;
+const mapStateToProps = (state) => ({
+  role: state.auth.role,
+});
+
+export default connect(mapStateToProps, {})(Topbar);

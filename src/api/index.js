@@ -4,6 +4,7 @@ import {
   API_USER_DASHBOARD_ROUTE,
   API_USER_GET_MESSAGES_ROUTE,
   API_USER_POST_TICKET_ROUTE,
+  API_ADMIN_DASHBOARD_ROUTE,
   API_PROFILE_ROUTE,
 } from '../routes';
 import { getTokenHeader } from '../utils/helpers/token-handler';
@@ -12,9 +13,10 @@ const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
-export const userAPI = {
-  login(data) {
-    return axiosInstance.post(API_USER_DASHBOARD_ROUTE, {}, {
+export const authAPI = {
+  login(data, role) {
+    const url = role === 'admin' ? API_ADMIN_DASHBOARD_ROUTE : API_USER_DASHBOARD_ROUTE;
+    return axiosInstance.post(url, {}, {
       auth: authHeaders(data),
     });
   },

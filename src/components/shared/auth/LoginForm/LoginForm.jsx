@@ -10,10 +10,16 @@ import {
   Link,
   Typography,
 } from '@material-ui/core';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { renderTextField, renderCheckbox } from '../../../shared/FormControls/FormControls';
-import { USER_FORGOT_PASS_ROUTE } from '../../../../routes';
+import { renderTextField, renderCheckbox } from '../../FormControls/FormControls';
+import {
+  USER_FORGOT_PASS_ROUTE,
+  USER_LOGIN_ROUTE,
+  ADMIN_FORGOT_PASS_ROUTE,
+  ADMIN_LOGIN_ROUTE,
+} from '../../../../routes';
 import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles({
@@ -22,19 +28,26 @@ const useStyles = makeStyles({
   },
 });
 
-const LoginForm = ({ handleSubmit }) => {
+const LoginForm = ({ handleSubmit, userType }) => {
   const classes = useStyles();
-  const locale = LOCALE.user.login;
+  const locale = LOCALE.auth.login;
+  const forgotPassPath = userType === 'user' ? USER_FORGOT_PASS_ROUTE : ADMIN_FORGOT_PASS_ROUTE;
+  const loginPath = userType === 'user' ? ADMIN_LOGIN_ROUTE : USER_LOGIN_ROUTE;
+  const loginLabel = userType === 'user' ? locale.adminLogin : locale.userLogin;
 
   return (
     <Box p="4rem 0">
       <Container maxWidth="xs">
         <Card className={classes.root}>
           <CardContent>
-            <Box m="0 0 1rem">
+            <Box m="0 0 0.5rem" display="flex" justifyContent="center" alignItems="center">
               <Typography variant="h5" component="h1" align="center" gutterBottom>
                 {locale.headline}
               </Typography>
+              {
+                userType === 'admin'
+                && <Box m="0 0 0 0.5rem"><SupervisorAccountIcon color="primary" /></Box>
+              }
             </Box>
             <form onSubmit={handleSubmit}>
               <Field
@@ -64,12 +77,25 @@ const LoginForm = ({ handleSubmit }) => {
                   {locale.signIn}
                 </Button>
               </Box>
-              <Box m="1rem 0 0">
+              <Box m="1.5rem 0 0">
                 <Grid container justify="center">
                   <Grid item>
                     <Link
                       component={NavLink}
-                      to={USER_FORGOT_PASS_ROUTE}
+                      to={loginPath}
+                      variant="body2"
+                    >
+                      {loginLabel}
+                    </Link>
+                  </Grid>
+                </Grid>
+              </Box>
+              <Box m="0.5rem 0 0">
+                <Grid container justify="center">
+                  <Grid item>
+                    <Link
+                      component={NavLink}
+                      to={forgotPassPath}
                       variant="body2"
                     >
                       {locale.forgotPassword}
