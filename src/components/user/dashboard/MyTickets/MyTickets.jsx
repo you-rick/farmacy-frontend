@@ -39,20 +39,21 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
   const classes = useStyles();
   const { filter } = useParams();
   const lastLocation = useLastLocation();
-  const locale = LOCALE.user.dashboard.myTickets;
+  const locale = LOCALE.common.dashboard.tickets;
   const [modalOpen, setModalOpen] = useState(false);
   const [activeTicket, setActiveTicket] = useState(ticket);
   const [ticketsList, setTicketsList] = useState(tickets);
+  const isTicketsLastRoute = lastLocation.pathname.indexOf(USER_TICKETS_ROUTE) === -1;
 
   useEffect(() => {
     if (lastLocation) {
-      if (lastLocation.pathname !== '/' && lastLocation.pathname.indexOf(USER_TICKETS_ROUTE) === -1) {
+      if (lastLocation.pathname !== '/' && isTicketsLastRoute) {
         getTickets();
       }
     } else {
       getTickets();
     }
-  }, [getTickets, lastLocation, filter]);
+  }, [getTickets, lastLocation, filter, isTicketsLastRoute]);
 
   useEffect(() => {
     setTicketsList(
@@ -74,7 +75,7 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
     <>
       <Box m="0 0 2rem">
         <Typography variant="h5" component="h1" align="center">
-          {locale.headline}
+          {LOCALE.user.dashboard.myTickets.headline}
         </Typography>
       </Box>
       <TableContainer component={Paper}>
@@ -103,9 +104,7 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
                   {item.ticketNumber}
                 </TableCell>
                 <TableCell>
-                  {item.createdDate
-                    ? <Moment format="DD/MM/YYYY">{item.createdDate}</Moment>
-                    : <Typography variant="body2" color="textSecondary">-</Typography>}
+                  <Moment format="DD/MM/YYYY">{item.createdDate}</Moment>
                 </TableCell>
                 <TableCell className={classes.issueCol}>{item.issue}</TableCell>
               </TableRow>

@@ -29,6 +29,16 @@ export const authAPI = {
   },
 };
 
+export const adminAPI = {
+  getData() {
+    return axiosInstance.post(API_ADMIN_DASHBOARD_ROUTE, {}, {
+      headers: {
+        'Authorization': getTokenHeader(),
+      },
+    });
+  },
+};
+
 export const ticketsAPI = {
   getTickets() {
     return axiosInstance.post(API_USER_DASHBOARD_ROUTE, {}, {

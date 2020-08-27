@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Container, Grid, Toolbar, Typography, } from '@material-ui/core';
+import { AppBar, Container, Grid, Toolbar, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { LOCALE } from '../../../locale';
 import styles from './Header.module.scss';

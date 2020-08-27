@@ -5,7 +5,8 @@ import { toggleIsDataFetching } from './appReducer';
 import { setNote, hideNote } from './notificationReducer';
 import { setToken, removeToken } from '../utils/helpers/token-handler';
 import { setTicketsData } from './ticketsReducer';
-import { USER_TICKETS_ROUTE, USER_LOGIN_ROUTE, ADMIN_DASHBOARD_ROUTE } from '../routes';
+import { setAdminData } from './adminReducer';
+import { USER_LOGIN_ROUTE, ADMIN_LOGIN_ROUTE } from '../routes';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 
 // Actions
@@ -92,18 +93,12 @@ export const login = (data, role) => (dispatch) => {
       if (role === 'user') {
         dispatch(setTicketsData(response.data));
       } else {
-        console.log(response.data);
+        dispatch(setAdminData(response.data));
       }
 
       dispatch(getProfile())
         .then(() => {
-          if (role === 'user') {
-            dispatch(reset('user-login'));
-            dispatch(push(USER_TICKETS_ROUTE));
-          } else {
-            dispatch(reset('admin-login'));
-            dispatch(push(ADMIN_DASHBOARD_ROUTE));
-          }
+          dispatch(reset(role === 'user' ? 'user-login' : 'admin-login'));
         });
     })
     .catch((error) => {
@@ -117,10 +112,10 @@ export const login = (data, role) => (dispatch) => {
     });
 };
 
-export const logout = () => (dispatch) => {
+export const logout = (role) => (dispatch) => {
   removeToken();
   dispatch(setProfileData(initialState));
-  dispatch(push(USER_LOGIN_ROUTE));
+  dispatch(push(role === 'user' ? USER_LOGIN_ROUTE : ADMIN_LOGIN_ROUTE));
 };
 
 export default authReducer;
