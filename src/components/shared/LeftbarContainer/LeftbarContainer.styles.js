@@ -8,6 +8,18 @@ const themeStyles = (theme) => ({
     paddingTop: '0.25rem',
     paddingBottom: '0.25rem',
   },
+  accordion: {
+    backgroundColor: 'transparent',
+    color: '#fff',
+    boxShadow: 'none',
+    borderBottom: '1px solid rgba(255,255,255,0.5)',
+    '&.Mui-expanded': {
+      margin: '0',
+    },
+  },
+  accordionDetails: {
+    paddingTop: '0',
+  },
   company: {
     fontWeight: 'bold',
     fontSize: '1.25rem',

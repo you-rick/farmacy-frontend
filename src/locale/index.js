@@ -72,6 +72,19 @@ export const LOCALE = {
     dashboard: {
       leftbar: {
         home: 'Home',
+        links: {
+          dashboard: {
+            title: 'Dashboard',
+            users: 'Users',
+            tickets: 'Tickets',
+          },
+          teams: {
+            title: 'Teams',
+          },
+          settings: {
+            title: 'Ticket Settings',
+          },
+        },
       },
       profile: {
         headline: 'Admin Profile',
