@@ -43,17 +43,17 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [activeTicket, setActiveTicket] = useState(ticket);
   const [ticketsList, setTicketsList] = useState(tickets);
-  const isTicketsLastRoute = lastLocation.pathname.indexOf(USER_TICKETS_ROUTE) === -1;
 
   useEffect(() => {
     if (lastLocation) {
+      const isTicketsLastRoute = lastLocation.pathname.indexOf(USER_TICKETS_ROUTE) === -1;
       if (lastLocation.pathname !== '/' && isTicketsLastRoute) {
         getTickets();
       }
     } else {
       getTickets();
     }
-  }, [getTickets, lastLocation, filter, isTicketsLastRoute]);
+  }, [getTickets, lastLocation, filter]);
 
   useEffect(() => {
     setTicketsList(

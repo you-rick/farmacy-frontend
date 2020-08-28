@@ -96,6 +96,19 @@ export const LOCALE = {
       newTickets: {
         headline: 'New Tickets',
       },
+      stats: {
+        OpenTickets: {
+          title: 'Open Tickets',
+          new: 'New',
+          overdue: 'Overdue',
+        },
+        TicketsDue: {
+          title: 'Tickets Coming Due',
+          dueNextWeek: 'Due Next Week',
+          dueToday: 'Due Today',
+          dueTomorrow: 'Due Tomorrow',
+        },
+      },
     },
   },
   public: {
