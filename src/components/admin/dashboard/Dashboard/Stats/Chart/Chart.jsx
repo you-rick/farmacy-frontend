@@ -39,6 +39,7 @@ const Chart = ({ type, data }) => {
           <Grid item xs className={classes.chartWrap}>
             <PieChart
               data={stats}
+              animate
               radius={PieChart.defaultProps.radius - chartShiftSize}
               segmentsShift={chartShiftSize}
               label={({ dataEntry }) => dataEntry.value}
