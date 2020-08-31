@@ -29,6 +29,10 @@ const LeftbarContainer = ({ logout, role, leftbarShown }) => {
     setLeftbarOpen(!leftbarOpen);
   };
 
+  const handleLogout = () => {
+    logout(role);
+  };
+
   useEffect(() => {
     setLeftbarType(leftbarState);
   }, [windowWidth, leftbarState]);
@@ -81,7 +85,7 @@ const LeftbarContainer = ({ logout, role, leftbarShown }) => {
 
         <Box m="3rem 0 0">
           <List>
-            <ListItem button onClick={logout}>
+            <ListItem button onClick={handleLogout}>
               <ListItemText primary={LOCALE.auth.logout} />
             </ListItem>
           </List>

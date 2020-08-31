@@ -4,6 +4,7 @@ import RichTextarea from '../../../../shared/RichTextarea/RichTextarea';
 import { LOCALE } from '../../../../../locale';
 
 const MessageForm = () => {
+  const editorHeight = 200;
   const locale = LOCALE.user.dashboard.ticketInfo;
   const handleTextareaChange = (body) => {
     console.log(body);
@@ -24,7 +25,7 @@ const MessageForm = () => {
         margin="normal"
       />
       <Box m="0 0 1rem">
-        <RichTextarea body="Message Form body" height={200} onChange={handleTextareaChange} />
+        <RichTextarea body="Message body" height={editorHeight} onChange={handleTextareaChange} />
       </Box>
       <Grid container justify="flex-end">
         <Button color="primary" variant="contained">

@@ -7,6 +7,7 @@ import { layoutBreakpoint } from '../../../utils/helpers/layout-breakpoints';
 const RichTextarea = ({ body, height, onChange }) => {
   const windowWidth = useWindowWidth();
   const [initHeight, setInitHeight] = useState(500);
+  const bodyHeight = windowWidth < layoutBreakpoint.md ? 250 : height;
 
   useEffect(() => {
     setInitHeight(windowWidth < layoutBreakpoint.md ? 250 : 500);
@@ -21,7 +22,7 @@ const RichTextarea = ({ body, height, onChange }) => {
       apiKey={process.env.REACT_APP_TINYMCE_KEY}
       initialValue={body}
       init={{
-        height: height || initHeight,
+        height: bodyHeight || initHeight,
         content_css: style,
         menubar: false,
         mobile: {

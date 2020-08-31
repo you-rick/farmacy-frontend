@@ -18,7 +18,17 @@ const themeStyles = (theme) => ({
     },
   },
   accordionDetails: {
-    paddingTop: '0',
+    padding: '0 0 0.5rem',
+  },
+  accordionSummary: {
+    '&.Mui-expanded': {
+      minHeight: '48px',
+    },
+  },
+  accordionSummaryContent: {
+    '&.Mui-expanded': {
+      margin: '12px 0',
+    },
   },
   company: {
     fontWeight: 'bold',

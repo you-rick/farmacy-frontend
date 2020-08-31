@@ -6,10 +6,12 @@ import authReducer from './authReducer';
 import ticketsReducer from './ticketsReducer';
 import notificationReducer from './notificationReducer';
 import messagesReducer from './messagesReducer';
+import adminReducer from './adminReducer';
 
 const reducersGroup = (history) => combineReducers({
   app: appReducer,
   auth: authReducer,
+  admin: adminReducer,
   tickets: ticketsReducer,
   messages: messagesReducer,
   notification: notificationReducer,

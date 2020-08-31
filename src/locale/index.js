@@ -17,6 +17,14 @@ export const LOCALE = {
       topbar: {
         searchPlaceholder: 'Search...',
       },
+      tickets: {
+        tableHeaders: {
+          ticketNumber: 'Ticket Number',
+          date: 'Date',
+          issue: 'Issue',
+          priority: 'Priority',
+        },
+      },
     },
   },
   user: {
@@ -38,11 +46,6 @@ export const LOCALE = {
       },
       myTickets: {
         headline: 'My Tickets',
-        tableHeaders: {
-          ticketNumber: 'Ticket Number',
-          date: 'Date',
-          issue: 'Issue',
-        },
       },
       newTicket: {
         headline: 'New Ticket',
@@ -75,6 +78,7 @@ export const LOCALE = {
         links: {
           dashboard: {
             title: 'Dashboard',
+            overview: 'Overview',
             users: 'Users',
             tickets: 'Tickets',
           },
@@ -88,6 +92,22 @@ export const LOCALE = {
       },
       profile: {
         headline: 'Admin Profile',
+      },
+      newTickets: {
+        headline: 'New Tickets',
+      },
+      stats: {
+        OpenTickets: {
+          title: 'Open Tickets',
+          new: 'New',
+          overdue: 'Overdue',
+        },
+        TicketsDue: {
+          title: 'Tickets Coming Due',
+          dueNextWeek: 'Due Next Week',
+          dueToday: 'Due Today',
+          dueTomorrow: 'Due Tomorrow',
+        },
       },
     },
   },
