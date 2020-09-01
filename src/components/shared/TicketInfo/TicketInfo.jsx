@@ -21,11 +21,14 @@ const TicketInfo = ({ ticket, open, onClose }) => {
       onClose={handleClose}
       fullWidth
       maxWidth="md"
-      classes={{ scrollPaper: classes.scrollPaper, paper: classes.paper }}
+      classes={{
+        scrollPaper: classes.scrollPaper,
+        paper: classes.paper,
+      }}
     >
       <DialogTitle>
         <Grid container justify="space-between">
-          Ticket Title Placeholder
+          {ticket.subject}
           <IconButton aria-label="close" size="small" onClick={handleClose}>
             <CloseIcon fontSize="small" />
           </IconButton>

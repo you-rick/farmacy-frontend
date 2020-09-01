@@ -18,7 +18,7 @@ import { useLastLocation } from 'react-router-last-location';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './MyTickets.styles';
 import { getTickets } from '../../../../store/ticketsReducer';
-import TicketInfo from '../TicketInfo/TicketInfo';
+import TicketInfo from '../../../shared/TicketInfo/TicketInfo';
 import { LOCALE } from '../../../../locale';
 import {
   USER_TICKETS_SOLVED_PARAM,
@@ -84,7 +84,7 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
             <TableRow>
               <TableCell>{locale.tableHeaders.ticketNumber}</TableCell>
               <TableCell>{locale.tableHeaders.date}</TableCell>
-              <TableCell className={classes.issueCol}>{locale.tableHeaders.issue}</TableCell>
+              <TableCell className={classes.subjectCol}>{locale.tableHeaders.subject}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -106,7 +106,7 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
                 <TableCell>
                   <Moment format="DD/MM/YYYY">{item.createdDate}</Moment>
                 </TableCell>
-                <TableCell className={classes.issueCol}>{item.issue}</TableCell>
+                <TableCell className={classes.subjectCol}>{item.subject}</TableCell>
               </TableRow>
             ))}
           </TableBody>

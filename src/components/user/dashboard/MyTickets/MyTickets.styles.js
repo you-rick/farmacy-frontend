@@ -19,7 +19,7 @@ const themeStyles = (theme) => ({
   table: {
     whiteSpace: 'nowrap',
   },
-  issueCol: {
+  subjectCol: {
     whiteSpace: 'normal',
     minWidth: '10rem',
   },

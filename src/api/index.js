@@ -6,6 +6,7 @@ import {
   API_USER_POST_TICKET_ROUTE,
   API_ADMIN_DASHBOARD_ROUTE,
   API_PROFILE_ROUTE,
+  API_ADMIN_NEW_TICKET_UPDATE_ROUTE,
 } from '../routes';
 import { getTokenHeader } from '../utils/helpers/token-handler';
 
@@ -32,6 +33,13 @@ export const authAPI = {
 export const adminAPI = {
   getData() {
     return axiosInstance.post(API_ADMIN_DASHBOARD_ROUTE, {}, {
+      headers: {
+        'Authorization': getTokenHeader(),
+      },
+    });
+  },
+  updateTicketStatus(data, ticketId) {
+    return axiosInstance.post(API_ADMIN_NEW_TICKET_UPDATE_ROUTE(ticketId), data, {
       headers: {
         'Authorization': getTokenHeader(),
       },

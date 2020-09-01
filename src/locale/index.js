@@ -21,7 +21,7 @@ export const LOCALE = {
         tableHeaders: {
           ticketNumber: 'Ticket Number',
           date: 'Date',
-          issue: 'Issue',
+          subject: 'Subject',
           priority: 'Priority',
         },
       },

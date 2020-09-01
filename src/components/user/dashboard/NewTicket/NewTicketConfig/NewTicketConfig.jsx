@@ -132,7 +132,7 @@ const NewTicketConfig = ({ onTagsChange }) => {
           <Box flexGrow={1} p={1}>
             <Field
               select
-              name="type"
+              name="ticketType"
               label={locale.type}
               variant="outlined"
               size="small"
