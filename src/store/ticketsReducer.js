@@ -19,7 +19,7 @@ const initialState = {
     id: null,
     createdDate: null,
     ticketNumber: null,
-    issue: null,
+    subject: null,
     status: null,
   },
   messageCounts: {

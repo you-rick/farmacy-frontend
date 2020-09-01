@@ -9,6 +9,8 @@ export const API_USER_POST_TICKET_ROUTE = (userId) => `/user/${userId}/create-ti
 
 // API ADMIN routes
 export const API_ADMIN_DASHBOARD_ROUTE = 'admin/dashboard';
+export const API_ADMIN_NEW_TICKET_UPDATE_ROUTE = (ticketId) => `/admin/${ticketId}/update`;
+export const API_ADMIN_GET_MESSAGES_ROUTE = (userId, ticketId) => `/admin/${userId}/ticket/${ticketId}/messages`;
 
 // User routes
 export const USER_BASE_ROUTE = '/user';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextField, Typography, Grid, Button, Box } from '@material-ui/core';
-import RichTextarea from '../../../../shared/RichTextarea/RichTextarea';
-import { LOCALE } from '../../../../../locale';
+import RichTextarea from '../../RichTextarea/RichTextarea';
+import { LOCALE } from '../../../../locale';
 
 const MessageForm = () => {
   const editorHeight = 200;
