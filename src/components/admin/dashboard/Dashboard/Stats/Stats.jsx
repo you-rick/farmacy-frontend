@@ -13,10 +13,10 @@ const Stats = ({ stats }) => {
   return (
     <Box m="0 0 3rem">
       <Grid container spacing={2} className={classes.chartContainer}>
-        <Grid item sm>
+        <Grid item xs={12} sm>
           <Chart type="OpenTickets" data={OpenTickets} />
         </Grid>
-        <Grid item sm>
+        <Grid item xs={12} sm>
           <Chart type="TicketsDue" data={TicketsDue} />
         </Grid>
       </Grid>

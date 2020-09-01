@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Box, Typography } from '@material-ui/core';
 import Message from '../Message/Message';
+import SmallPreloader from '../../SmallPreloader/SmallPreloader';
 import { LOCALE } from '../../../../locale';
 import { getMessages } from '../../../../store/messagesReducer';
 
@@ -11,6 +12,8 @@ const Messages = ({ role, ticketId, userId, messages, getMessages }) => {
   useEffect(() => {
     if (role === 'user') getMessages(userId, ticketId);
   }, [ticketId, userId, getMessages, role]);
+
+  if (!messages.length) return <SmallPreloader />;
 
   return (
     <Box m="1rem 0 0">

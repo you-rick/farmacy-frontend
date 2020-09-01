@@ -1,0 +1,30 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/functions";
+
+.loader {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+}
+.loader:after {
+  content: " ";
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.5rem;
+  border-radius: 50%;
+  border: 2px solid map-deep-get($materialUiPalette, 'primary', 'main');
+  border-left-color: transparent;
+  border-right-color: transparent;
+  animation: loader 1.2s linear infinite;
+}
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+

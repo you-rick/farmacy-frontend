@@ -23,10 +23,6 @@ const NewTicket = ({ dispatch, handleSubmit, initialize, user }) => {
   };
 
   useEffect(() => {
-    dispatch(change('new-ticket', 'requester', 'John Doe'));
-  }, [dispatch]);
-
-  useEffect(() => {
     initialize({
       requester: `${user.firstName} ${user.lastName}`,
       ticketId: uuid.v4(),

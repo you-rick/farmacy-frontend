@@ -17,6 +17,9 @@ const themeStyles = (theme) => ({
     [theme.breakpoints.down('md')]: {
       height: '100%',
     },
+    [theme.breakpoints.down(600)]: {
+      width: '100%',
+    },
   },
   dataBox: {
     marginLeft: '1rem',
@@ -34,6 +37,16 @@ const themeStyles = (theme) => ({
       flexBasis: '35%',
       flexGrow: '0',
     },
+  },
+  chartInnerWrap: {
+    position: 'relative',
+    height: '0',
+    paddingBottom: '100%',
+  },
+  chart: {
+    position: 'absolute',
+    top: '0',
+    left: '0',
   },
 });
 
