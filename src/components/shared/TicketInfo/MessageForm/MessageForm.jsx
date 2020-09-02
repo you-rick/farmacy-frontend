@@ -3,11 +3,14 @@ import { TextField, Typography, Grid, Button, Box } from '@material-ui/core';
 import RichTextarea from '../../RichTextarea/RichTextarea';
 import { LOCALE } from '../../../../locale';
 
-const MessageForm = () => {
+const MessageForm = ({ onFormInit }) => {
   const editorHeight = 200;
   const locale = LOCALE.user.dashboard.ticketInfo;
   const handleTextareaChange = (body) => {
     console.log(body);
+  };
+  const handleTextareaInit = (status) => {
+    onFormInit(status);
   };
 
   return (
@@ -25,7 +28,12 @@ const MessageForm = () => {
         margin="normal"
       />
       <Box m="0 0 1rem">
-        <RichTextarea body="Message body" height={editorHeight} onChange={handleTextareaChange} />
+        <RichTextarea
+          body="Message body"
+          height={editorHeight}
+          onChange={handleTextareaChange}
+          onInit={handleTextareaInit}
+        />
       </Box>
       <Grid container justify="flex-end">
         <Button color="primary" variant="contained">
