@@ -1,7 +1,4 @@
 const themeStyles = (theme) => ({
-  root: {
-    marginRight: '1rem',
-  },
   low: {
     color: theme.palette.info.main,
   },

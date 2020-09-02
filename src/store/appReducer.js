@@ -1,6 +1,5 @@
 import { isLogged } from '../utils/helpers/token-handler';
 import { getProfile } from './authReducer';
-import { setNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 
 // Actions
@@ -50,15 +49,7 @@ export const initializeApp = () => (dispatch) => {
       dispatch(toggleIsDataFetching(false));
       dispatch(initializedSuccess());
     })
-    .catch((error) => {
-      dispatch(toggleIsDataFetching(false));
-      dispatch(setNote({
-        msg: serverErrorHelper(error),
-        type: 'error',
-        error: true,
-        success: false,
-      }));
-    });
+    .catch((error) => serverErrorHelper(dispatch, error));
 };
 
 export default appReducer;

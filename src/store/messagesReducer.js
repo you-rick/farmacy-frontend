@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { messagesAPI } from '../api';
 import { toggleIsDataFetching } from './appReducer';
-import { hideNote, setNote } from './notificationReducer';
+import { hideNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 
 // Actions
@@ -61,24 +61,16 @@ export const setMessagesData = (data) => ({
 export const resetMessagesData = () => ({ type: RESET_MESSAGES_DATA });
 
 // Thunks
-export const getMessages = (userId, ticketId) => (dispatch) => {
+export const getMessages = (userId, ticketId, role) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
   dispatch(resetMessagesData());
-  messagesAPI.getMessages(userId, ticketId)
+  messagesAPI.getMessages(userId, ticketId, role)
     .then((response) => {
       dispatch(toggleIsDataFetching(false));
       dispatch(setMessagesData(response.data));
     })
-    .catch((error) => {
-      dispatch(toggleIsDataFetching(false));
-      dispatch(setNote({
-        msg: serverErrorHelper(error),
-        type: 'error',
-        error: true,
-        success: false,
-      }));
-    });
+    .catch((error) => serverErrorHelper(dispatch, error));
 };
 
 export default messagesReducer;

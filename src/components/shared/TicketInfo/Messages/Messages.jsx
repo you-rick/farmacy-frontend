@@ -10,7 +10,7 @@ const Messages = ({ role, ticketId, userId, messages, getMessages }) => {
   const locale = LOCALE.user.dashboard.ticketInfo;
 
   useEffect(() => {
-    if (role === 'user') getMessages(userId, ticketId);
+    getMessages(userId, ticketId, role);
   }, [ticketId, userId, getMessages, role]);
 
   if (!messages.length) return <SmallPreloader />;

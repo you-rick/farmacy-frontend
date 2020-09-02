@@ -18,6 +18,7 @@ export const LOCALE = {
         searchPlaceholder: 'Search...',
       },
       tickets: {
+        headline: 'Tickets',
         tableHeaders: {
           ticketNumber: 'Ticket Number',
           date: 'Date',

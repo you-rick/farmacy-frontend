@@ -16,16 +16,16 @@ import {
   USER_TICKETS_UPDATED_PARAM,
 } from '../../../../routes';
 import { LOCALE } from '../../../../locale';
-import { getTickets } from '../../../../store/ticketsReducer';
+import { getUserTickets } from '../../../../store/ticketsReducer';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const UserLeftbar = ({ getTickets }) => {
+const UserLeftbar = ({ getUserTickets }) => {
   const classes = useStyles();
   const location = useLocation();
   const locale = LOCALE.user.dashboard.leftbar;
   const isTicketsPage = location.pathname.indexOf(USER_TICKETS_ROUTE) > -1;
-  const updateTickets = () => getTickets();
+  const updateTickets = () => getUserTickets();
 
   return (
     <>
@@ -105,4 +105,4 @@ const UserLeftbar = ({ getTickets }) => {
   );
 };
 
-export default connect(null, { getTickets })(UserLeftbar);
+export default connect(null, { getUserTickets })(UserLeftbar);

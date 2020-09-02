@@ -17,7 +17,7 @@ import { useParams } from 'react-router-dom';
 import { useLastLocation } from 'react-router-last-location';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './MyTickets.styles';
-import { getTickets } from '../../../../store/ticketsReducer';
+import { getUserTickets } from '../../../../store/ticketsReducer';
 import TicketInfo from '../../../shared/TicketInfo/TicketInfo';
 import { LOCALE } from '../../../../locale';
 import {
@@ -35,7 +35,7 @@ const aliases = {
   [USER_TICKETS_SOLVED_PARAM]: 'done',
 };
 
-const MyTickets = ({ tickets, ticket, getTickets }) => {
+const MyTickets = ({ tickets, ticket, getUserTickets }) => {
   const classes = useStyles();
   const { filter } = useParams();
   const lastLocation = useLastLocation();
@@ -48,12 +48,12 @@ const MyTickets = ({ tickets, ticket, getTickets }) => {
     if (lastLocation) {
       const isTicketsLastRoute = lastLocation.pathname.indexOf(USER_TICKETS_ROUTE) === -1;
       if (lastLocation.pathname !== '/' && isTicketsLastRoute) {
-        getTickets();
+        getUserTickets();
       }
     } else {
-      getTickets();
+      getUserTickets();
     }
-  }, [getTickets, lastLocation, filter]);
+  }, [getUserTickets, lastLocation, filter]);
 
   useEffect(() => {
     setTicketsList(
@@ -122,4 +122,4 @@ const mapStateToProps = (state) => ({
   ticket: state.tickets.ticket,
 });
 
-export default connect(mapStateToProps, { getTickets })(MyTickets);
+export default connect(mapStateToProps, { getUserTickets })(MyTickets);

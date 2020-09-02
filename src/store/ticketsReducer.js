@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { push } from 'connected-react-router';
 import { toggleIsDataFetching } from './appReducer';
-import { ticketsAPI } from '../api';
+import { ticketsAPI, adminAPI } from '../api';
 import { hideNote, setNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
@@ -21,6 +21,7 @@ const initialState = {
     ticketNumber: null,
     subject: null,
     status: null,
+    priority: null,
   },
   messageCounts: {
     all: 0,
@@ -55,25 +56,6 @@ export const setTicketsData = (data) => ({
 });
 
 // Thunks
-export const getTickets = () => (dispatch) => {
-  dispatch(toggleIsDataFetching(true));
-  dispatch(hideNote());
-  ticketsAPI.getTickets()
-    .then((response) => {
-      dispatch(toggleIsDataFetching(false));
-      dispatch(setTicketsData(response.data));
-    })
-    .catch((error) => {
-      dispatch(toggleIsDataFetching(false));
-      dispatch(setNote({
-        msg: serverErrorHelper(error),
-        type: 'error',
-        error: true,
-        success: false,
-      }));
-    });
-};
-
 export const createTicket = (data, userId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
@@ -91,15 +73,25 @@ export const createTicket = (data, userId) => (dispatch) => {
       }));
       console.log(res);
     })
-    .catch((error) => {
+    .catch((error) => serverErrorHelper(dispatch, error));
+};
+
+const handleGetTickets = (dispatch, apiMethod) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  apiMethod()
+    .then((response) => {
       dispatch(toggleIsDataFetching(false));
-      dispatch(setNote({
-        msg: serverErrorHelper(error),
-        type: 'error',
-        error: true,
-        success: false,
-      }));
-    });
+      dispatch(setTicketsData(response.data));
+    })
+    .catch((error) => serverErrorHelper(dispatch, error));
+};
+
+export const getUserTickets = () => (dispatch) => {
+  handleGetTickets(dispatch, ticketsAPI.getTickets.bind(ticketsAPI));
+};
+export const getAdminTickets = () => (dispatch) => {
+  handleGetTickets(dispatch, adminAPI.getTickets.bind(adminAPI));
 };
 
 export default ticketsReducer;

@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import { toggleIsDataFetching } from './appReducer';
-import { setMessagesData, resetMessagesData } from './messagesReducer';
 import { adminAPI } from '../api';
-import { hideNote, setNote } from './notificationReducer';
+import { hideNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 
 // Actions
@@ -74,41 +73,21 @@ export const getData = () => (dispatch) => {
   dispatch(hideNote());
   adminAPI.getData()
     .then((response) => {
-      console.log(response.data);
       dispatch(toggleIsDataFetching(false));
       dispatch(setAdminData(response.data));
     })
-    .catch((error) => {
-      dispatch(toggleIsDataFetching(false));
-      dispatch(setNote({
-        msg: serverErrorHelper(error),
-        type: 'error',
-        error: true,
-        success: false,
-      }));
-    });
+    .catch((error) => serverErrorHelper(dispatch, error));
 };
 
 export const updateTicketStatus = (data, ticketId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  dispatch(resetMessagesData());
-  console.log(data);
   adminAPI.updateTicketStatus(data, ticketId)
-    .then((response) => {
+    .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(updateNewTickets(ticketId));
-      dispatch(setMessagesData(response.data));
     })
-    .catch((error) => {
-      dispatch(toggleIsDataFetching(false));
-      dispatch(setNote({
-        msg: serverErrorHelper(error),
-        type: 'error',
-        error: true,
-        success: false,
-      }));
-    });
+    .catch((error) => serverErrorHelper(dispatch, error));
 };
 
 export default adminReducer;

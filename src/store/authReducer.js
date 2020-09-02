@@ -2,7 +2,7 @@ import { push } from 'connected-react-router';
 import { reset } from 'redux-form';
 import { authAPI } from '../api';
 import { toggleIsDataFetching } from './appReducer';
-import { setNote, hideNote } from './notificationReducer';
+import { hideNote } from './notificationReducer';
 import { setToken, removeToken } from '../utils/helpers/token-handler';
 import { setTicketsData } from './ticketsReducer';
 import { setAdminData } from './adminReducer';
@@ -71,15 +71,7 @@ export const getProfile = () => (dispatch) => {
       dispatch(setProfileData(res));
       dispatch(setAuthStatus(true));
     })
-    .catch((error) => {
-      dispatch(toggleIsDataFetching(false));
-      dispatch(setNote({
-        msg: serverErrorHelper(error),
-        type: 'error',
-        error: true,
-        success: false,
-      }));
-    });
+    .catch((error) => serverErrorHelper(dispatch, error));
 };
 
 export const login = (data, role) => (dispatch) => {
@@ -101,15 +93,7 @@ export const login = (data, role) => (dispatch) => {
           dispatch(reset(role === 'user' ? 'user-login' : 'admin-login'));
         });
     })
-    .catch((error) => {
-      dispatch(toggleIsDataFetching(false));
-      dispatch(setNote({
-        msg: serverErrorHelper(error),
-        type: 'error',
-        error: true,
-        success: false,
-      }));
-    });
+    .catch((error) => serverErrorHelper(dispatch, error));
 };
 
 export const logout = (role) => (dispatch) => {

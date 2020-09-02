@@ -7,6 +7,8 @@ import {
   API_ADMIN_DASHBOARD_ROUTE,
   API_PROFILE_ROUTE,
   API_ADMIN_NEW_TICKET_UPDATE_ROUTE,
+  API_ADMIN_GET_MESSAGES_ROUTE,
+  API_ADMIN_TICKETS_ROUTE,
 } from '../routes';
 import { getTokenHeader } from '../utils/helpers/token-handler';
 
@@ -45,6 +47,13 @@ export const adminAPI = {
       },
     });
   },
+  getTickets() {
+    return axiosInstance.get(API_ADMIN_TICKETS_ROUTE, {
+      headers: {
+        'Authorization': getTokenHeader(),
+      },
+    });
+  },
 };
 
 export const ticketsAPI = {
@@ -65,8 +74,9 @@ export const ticketsAPI = {
 };
 
 export const messagesAPI = {
-  getMessages(userId, ticketId) {
-    return axiosInstance.get(API_USER_GET_MESSAGES_ROUTE(userId, ticketId), {
+  getMessages(userId, ticketId, role) {
+    const url = role === 'admin' ? API_ADMIN_GET_MESSAGES_ROUTE : API_USER_GET_MESSAGES_ROUTE;
+    return axiosInstance.get(url(userId, ticketId), {
       headers: {
         'Authorization': getTokenHeader(),
       },
