@@ -1,5 +1,6 @@
 import React from 'react';
 import { PieChart } from 'react-minimal-pie-chart';
+import { connect } from 'react-redux';
 import {
   Box,
   Card,
@@ -18,7 +19,7 @@ import { LOCALE } from '../../../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const Chart = ({ type, data }) => {
+const Chart = ({ type, data, isDataFetching }) => {
   const chartShiftSize = 2;
   const classes = useStyles();
   const theme = useTheme();
@@ -37,18 +38,25 @@ const Chart = ({ type, data }) => {
       <CardContent>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs className={classes.chartWrap}>
-            <PieChart
-              data={stats}
-              animate
-              radius={PieChart.defaultProps.radius - chartShiftSize}
-              segmentsShift={chartShiftSize}
-              label={({ dataEntry }) => dataEntry.value}
-              labelStyle={() => ({
-                fontSize: '10px',
-                fontFamily: 'sans-serif',
-                fill: '#fff',
-              })}
-            />
+            <Box className={classes.chartInnerWrap}>
+              <Box className={classes.chart}>
+                {!isDataFetching && (
+                  <PieChart
+                    data={stats}
+                    animate
+                    radius={PieChart.defaultProps.radius - chartShiftSize}
+                    segmentsShift={chartShiftSize}
+                    label={({ dataEntry }) => dataEntry.value}
+                    labelStyle={() => ({
+                      fontSize: '10px',
+                      fontFamily: 'sans-serif',
+                      fill: '#fff',
+                    })}
+                  />
+                )}
+              </Box>
+            </Box>
+
           </Grid>
           <Grid item xs>
             <Box className={classes.dataBox}>
@@ -58,7 +66,7 @@ const Chart = ({ type, data }) => {
                     <ListItemIcon className={classes.listIcon}>
                       <AdjustIcon fontSize="small" style={{ color: chartPalette[item.title] }} />
                     </ListItemIcon>
-                    <ListItemText primary={`${locale[item.title]} (${item.value})`} />
+                    <ListItemText primary={`${locale[item.title]} (${item.value || 0})`} />
                   </ListItem>
                 ))}
               </List>
@@ -70,4 +78,8 @@ const Chart = ({ type, data }) => {
   );
 };
 
-export default Chart;
+const mapStateToProps = (state) => ({
+  isDataFetching: state.app.isDataFetching,
+});
+
+export default connect(mapStateToProps, {})(Chart);
