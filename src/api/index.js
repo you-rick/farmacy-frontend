@@ -9,6 +9,7 @@ import {
   API_ADMIN_NEW_TICKET_UPDATE_ROUTE,
   API_ADMIN_GET_MESSAGES_ROUTE,
   API_ADMIN_TICKETS_ROUTE,
+  API_ADMIN_GET_USERS_ROUTE,
 } from '../routes';
 import { getTokenHeader } from '../utils/helpers/token-handler';
 
@@ -49,6 +50,13 @@ export const adminAPI = {
   },
   getTickets() {
     return axiosInstance.get(API_ADMIN_TICKETS_ROUTE, {
+      headers: {
+        'Authorization': getTokenHeader(),
+      },
+    });
+  },
+  getUsers() {
+    return axiosInstance.get(API_ADMIN_GET_USERS_ROUTE, {
       headers: {
         'Authorization': getTokenHeader(),
       },

@@ -26,6 +26,17 @@ export const LOCALE = {
           priority: 'Priority',
         },
       },
+      users: {
+        headline: 'Users',
+        tableHeaders: {
+          name: 'Name',
+          email: 'Email',
+          department: 'Department',
+          role: 'Role',
+          createdAt: 'Created At',
+          action: 'Action',
+        },
+      },
     },
   },
   user: {
