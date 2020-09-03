@@ -26,6 +26,27 @@ export const LOCALE = {
           priority: 'Priority',
         },
       },
+      users: {
+        headline: 'Users',
+        tableHeaders: {
+          name: 'Name',
+          email: 'Email',
+          department: 'Department',
+          role: 'Role',
+          createdAt: 'Created At',
+          action: 'Action',
+        },
+      },
+    },
+    confirmModal: {
+      deleteUser: {
+        headline: 'Delete User',
+        body: 'Are you sure you want to delete this user?',
+      },
+      actions: {
+        submit: 'Yes',
+        cancel: 'No',
+      },
     },
   },
   user: {
@@ -132,6 +153,9 @@ export const LOCALE = {
   success: {
     tickets: {
       ticketCreated: 'Ticket successfully created',
+    },
+    users: {
+      userRemoved: 'User successfully removed',
     },
   },
 };

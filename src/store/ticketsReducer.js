@@ -7,9 +7,10 @@ import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
 import { USER_TICKETS_ROUTE } from '../routes';
 
+const successMsg = LOCALE.success.tickets;
+
 // Action
 const SET_TICKETS_DATA = 'SET_TICKETS_DATA';
-const successMsg = LOCALE.success.tickets;
 
 // Initial Data
 const initialState = {

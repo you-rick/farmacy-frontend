@@ -7,6 +7,7 @@ import ticketsReducer from './ticketsReducer';
 import notificationReducer from './notificationReducer';
 import messagesReducer from './messagesReducer';
 import adminReducer from './adminReducer';
+import usersReducer from './usersReducer';
 
 const reducersGroup = (history) => combineReducers({
   app: appReducer,
@@ -15,6 +16,7 @@ const reducersGroup = (history) => combineReducers({
   tickets: ticketsReducer,
   messages: messagesReducer,
   notification: notificationReducer,
+  users: usersReducer,
   router: connectRouter(history),
   form: formReducer,
 });
