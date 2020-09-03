@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Moment from 'react-moment';
 import {
@@ -18,18 +18,38 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './Users.styles';
-import { getUsers } from '../../../../store/usersReducer';
+import ConfirmModal from '../../../shared/ConfirmModal/ConfirmModal';
+import { getUsers, deleteUser } from '../../../../store/usersReducer';
 import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const Users = ({ users, getUsers }) => {
+const Users = ({ users, getUsers, deleteUser }) => {
   const classes = useStyles();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [activeUserId, setActiveUserId] = useState(null);
   const locale = LOCALE.common.dashboard.users;
+  const confirmLocale = LOCALE.common.confirmModal.deleteUser;
 
   useEffect(() => {
     getUsers();
   }, [getUsers]);
+
+  const handleShowModal = (id) => {
+    setActiveUserId(id);
+    setModalOpen(true);
+  };
+  const handleCloseModal = () => {
+    setActiveUserId(null);
+    setModalOpen(false);
+  };
+  const handleDeleteUser = () => {
+    if (activeUserId) {
+      deleteUser(activeUserId);
+    }
+    setModalOpen(false);
+    setActiveUserId(null);
+  };
 
   return (
     <>
@@ -51,17 +71,21 @@ const Users = ({ users, getUsers }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((item) => (
-              <TableRow hover key={item.userId} className={classes.tableRow}>
-                <TableCell>{`${item.firstName} ${item.lastName}`}</TableCell>
-                <TableCell>{item.email}</TableCell>
-                <TableCell>{item.department}</TableCell>
-                <TableCell>{item.role}</TableCell>
+            {users.map((user) => (
+              <TableRow hover key={user.userId} className={classes.tableRow}>
+                <TableCell>{`${user.firstName} ${user.lastName}`}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.department}</TableCell>
+                <TableCell>{user.role}</TableCell>
                 <TableCell>
-                  <Moment format="DD/MM/YYYY">{item.employedSince}</Moment>
+                  <Moment format="DD/MM/YYYY">{user.employedSince}</Moment>
                 </TableCell>
                 <TableCell>
-                  <IconButton aria-label="delete" className={classes.removeBtn}>
+                  <IconButton
+                    aria-label="delete"
+                    className={classes.removeBtn}
+                    onClick={() => handleShowModal(user.userId)}
+                  >
                     <DeleteIcon fontSize="small" />
                   </IconButton>
                 </TableCell>
@@ -70,6 +94,13 @@ const Users = ({ users, getUsers }) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <ConfirmModal
+        headline={confirmLocale.headline}
+        body={confirmLocale.body}
+        open={modalOpen}
+        onClose={handleCloseModal}
+        onSubmit={handleDeleteUser}
+      />
       <Box m="2rem 0 0">
         <Grid container justify="flex-end">
           <Button variant="contained" color="primary">Create User</Button>
@@ -82,4 +113,7 @@ const Users = ({ users, getUsers }) => {
 const mapStateToProps = (state) => ({
   users: state.users.list,
 });
-export default connect(mapStateToProps, { getUsers })(Users);
+export default connect(mapStateToProps, {
+  getUsers,
+  deleteUser
+})(Users);

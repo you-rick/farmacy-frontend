@@ -38,6 +38,16 @@ export const LOCALE = {
         },
       },
     },
+    confirmModal: {
+      deleteUser: {
+        headline: 'Delete User',
+        body: 'Are you sure you want to delete this user?',
+      },
+      actions: {
+        submit: 'Yes',
+        cancel: 'No',
+      },
+    },
   },
   user: {
     dashboard: {
@@ -143,6 +153,9 @@ export const LOCALE = {
   success: {
     tickets: {
       ticketCreated: 'Ticket successfully created',
+    },
+    users: {
+      userRemoved: 'User successfully removed',
     },
   },
 };
