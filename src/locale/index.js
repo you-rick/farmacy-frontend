@@ -37,6 +37,18 @@ export const LOCALE = {
           action: 'Action',
         },
       },
+      profile: {
+        headline: 'My Account Profile',
+        form: {
+          firstName: 'First Name',
+          lastName: 'Last Name',
+          email: 'Email address',
+          phoneNumber: 'Phone Number',
+          extension: 'Ext.',
+          mobileNumber: 'Mobile Number',
+          submit: 'Save Changes',
+        },
+      },
     },
     confirmModal: {
       deleteUser: {
@@ -169,6 +181,9 @@ export const LOCALE = {
     users: {
       userCreated: 'User successfully created',
       userRemoved: 'User successfully removed',
+    },
+    profile: {
+      profileUpdated: 'Profile successfully updated',
     },
   },
 };

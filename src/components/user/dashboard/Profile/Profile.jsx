@@ -1,16 +1,18 @@
 import React from 'react';
-import { Box, Typography } from '@material-ui/core';
-import { LOCALE } from '../../../../locale';
+import { connect } from 'react-redux';
+import ProfileForm from '../../../shared/ProfileForm/ProfileForm';
+import { updateProfile } from '../../../../store/authReducer';
 
-const Profile = () => {
-  const locale = LOCALE.user.dashboard.profile;
-  return (
-    <Box>
-      <Typography variant="h5" component="h1" align="center">
-        {locale.headline}
-      </Typography>
-    </Box>
-  );
+const Profile = ({ updateProfile, user }) => {
+  const onSubmit = (data) => {
+    console.log(data);
+    updateProfile(data);
+  };
+
+  return <ProfileForm onSubmit={onSubmit} user={user} />;
 };
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  user: state.auth,
+});
+export default connect(mapStateToProps, { updateProfile })(Profile);

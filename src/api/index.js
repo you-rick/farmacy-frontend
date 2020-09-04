@@ -26,8 +26,15 @@ export const authAPI = {
       auth: authHeaders(data),
     });
   },
-  profile() {
+  getProfile() {
     return axiosInstance.get(API_PROFILE_ROUTE, {
+      headers: {
+        'Authorization': getTokenHeader(),
+      },
+    });
+  },
+  updateProfile(data) {
+    return axiosInstance.post(API_PROFILE_ROUTE, data, {
       headers: {
         'Authorization': getTokenHeader(),
       },
