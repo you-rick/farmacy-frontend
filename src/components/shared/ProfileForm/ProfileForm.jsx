@@ -5,13 +5,14 @@ import { Box, Button, Card, CardContent, Container, Grid, Typography } from '@ma
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './ProfileForm.styles';
 import { renderTextField } from '../FormControls/FormControls';
+import { PHONE_NUMBER_PATTERN } from '../../../utils/validators/validators';
 import { LOCALE } from '../../../locale';
 import validate from './validate';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
 const phoneMask = createTextMask({
-  pattern: '(999) 999-9999',
+  pattern: PHONE_NUMBER_PATTERN,
 });
 
 const ProfileForm = ({ handleSubmit, initialize, user }) => {
