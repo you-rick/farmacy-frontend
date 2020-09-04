@@ -11,6 +11,7 @@ import {
   API_ADMIN_TICKETS_ROUTE,
   API_ADMIN_GET_USERS_ROUTE,
   API_ADMIN_DELETE_USER_ROUTE,
+  API_ADMIN_CREATE_USER_ROUTE,
 } from '../routes';
 import { getTokenHeader } from '../utils/helpers/token-handler';
 
@@ -61,6 +62,13 @@ export const adminAPI = {
 export const usersAPI = {
   getUsers() {
     return axiosInstance.get(API_ADMIN_GET_USERS_ROUTE, {
+      headers: {
+        'Authorization': getTokenHeader(),
+      },
+    });
+  },
+  createUser(data) {
+    return axiosInstance.post(API_ADMIN_CREATE_USER_ROUTE, data, {
       headers: {
         'Authorization': getTokenHeader(),
       },

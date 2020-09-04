@@ -16,10 +16,12 @@ import {
   Button,
 } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './Users.styles';
 import ConfirmModal from '../../../shared/ConfirmModal/ConfirmModal';
 import { getUsers, deleteUser } from '../../../../store/usersReducer';
+import { ADMIN_CREATE_USER_ROUTE } from '../../../../routes';
 import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
@@ -103,7 +105,14 @@ const Users = ({ users, getUsers, deleteUser }) => {
       />
       <Box m="2rem 0 0">
         <Grid container justify="flex-end">
-          <Button variant="contained" color="primary">Create User</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            component={NavLink}
+            to={ADMIN_CREATE_USER_ROUTE}
+          >
+            Create User
+          </Button>
         </Grid>
       </Box>
     </>
@@ -115,5 +124,5 @@ const mapStateToProps = (state) => ({
 });
 export default connect(mapStateToProps, {
   getUsers,
-  deleteUser
+  deleteUser,
 })(Users);

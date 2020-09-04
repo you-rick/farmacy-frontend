@@ -8,6 +8,7 @@ import {
   ADMIN_PROFILE_ROUTE,
   ADMIN_TICKETS_ROUTE,
   ADMIN_USERS_ROUTE,
+  ADMIN_CREATE_USER_ROUTE,
 } from '../../../routes';
 
 import Dashboard from './Dashboard/Dashboard';
@@ -16,6 +17,7 @@ import Topbar from '../../shared/Topbar/Topbar';
 import Profile from './Profile/Profile';
 import Tickets from './Tickets/Tickets';
 import Users from './Users/Users';
+import NewUserContainer from './NewUser/NewUserContainer';
 
 const AdminDashboardContainer = ({ isAuth, role }) => {
   if (!isAuth || role !== 'admin') {
@@ -32,6 +34,7 @@ const AdminDashboardContainer = ({ isAuth, role }) => {
           <Route path={ADMIN_PROFILE_ROUTE} render={() => <Profile />} />
           <Route path={ADMIN_TICKETS_ROUTE} render={() => <Tickets />} />
           <Route path={ADMIN_USERS_ROUTE} render={() => <Users />} />
+          <Route path={ADMIN_CREATE_USER_ROUTE} render={() => <NewUserContainer />} />
         </Switch>
       </Box>
     </>

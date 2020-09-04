@@ -131,6 +131,18 @@ export const LOCALE = {
           dueTomorrow: 'Due Tomorrow',
         },
       },
+      createUser: {
+        headline: 'New User',
+        form: {
+          firstName: 'First Name',
+          lastName: 'Last Name',
+          email: 'Email address',
+          department: 'Department',
+          role: 'Role',
+          employedSince: 'Employed Since',
+          submit: 'Create',
+        },
+      },
     },
   },
   public: {
@@ -155,6 +167,7 @@ export const LOCALE = {
       ticketCreated: 'Ticket successfully created',
     },
     users: {
+      userCreated: 'User successfully created',
       userRemoved: 'User successfully removed',
     },
   },

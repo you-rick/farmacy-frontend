@@ -14,6 +14,7 @@ export const API_ADMIN_GET_MESSAGES_ROUTE = (userId, ticketId) => `/admin/${user
 export const API_ADMIN_TICKETS_ROUTE = 'admin/tickets';
 export const API_ADMIN_GET_USERS_ROUTE = 'admin/getAllUsers';
 export const API_ADMIN_DELETE_USER_ROUTE = (userId) => `admin/deleteUser/${userId}`;
+export const API_ADMIN_CREATE_USER_ROUTE = 'admin/create-user';
 
 // User routes
 export const USER_BASE_ROUTE = '/user';
@@ -31,6 +32,7 @@ export const ADMIN_DASHBOARD_ROUTE = '/admin/dashboard';
 export const ADMIN_PROFILE_ROUTE = '/admin/profile';
 export const ADMIN_TICKETS_ROUTE = '/admin/tickets';
 export const ADMIN_USERS_ROUTE = '/admin/users';
+export const ADMIN_CREATE_USER_ROUTE = '/admin/create-users';
 
 // User route params
 export const USER_TICKETS_UNRESOLVED_PARAM = 'unresolved';
