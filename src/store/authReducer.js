@@ -6,7 +6,7 @@ import { hideNote, setNote } from './notificationReducer';
 import { setToken, removeToken } from '../utils/helpers/token-handler';
 import { setTicketsData } from './ticketsReducer';
 import { setAdminData } from './adminReducer';
-import { USER_LOGIN_ROUTE, ADMIN_LOGIN_ROUTE, ADMIN_USERS_ROUTE } from '../routes';
+import { USER_LOGIN_ROUTE, ADMIN_LOGIN_ROUTE } from '../routes';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
 
