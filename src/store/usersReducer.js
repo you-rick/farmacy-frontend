@@ -1,9 +1,11 @@
 import _ from 'lodash';
+import { push } from 'connected-react-router';
 import { toggleIsDataFetching } from './appReducer';
 import { hideNote, setNote } from './notificationReducer';
 import { usersAPI } from '../api';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
+import { ADMIN_USERS_ROUTE } from '../routes';
 
 const successMsg = LOCALE.success.users;
 
@@ -66,6 +68,24 @@ export const getUsers = () => (dispatch) => {
     .then((response) => {
       dispatch(toggleIsDataFetching(false));
       dispatch(setUsersData(response.data));
+    })
+    .catch((error) => serverErrorHelper(dispatch, error));
+};
+
+export const createUser = (data) => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  usersAPI.createUser(data)
+    .then((response) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(push(ADMIN_USERS_ROUTE));
+      dispatch(setNote({
+        msg: successMsg.userCreated,
+        type: 'success',
+        error: false,
+        success: true,
+      }));
+      console.log(response);
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };

@@ -2,12 +2,15 @@ import { push } from 'connected-react-router';
 import { reset } from 'redux-form';
 import { authAPI } from '../api';
 import { toggleIsDataFetching } from './appReducer';
-import { hideNote } from './notificationReducer';
+import { hideNote, setNote } from './notificationReducer';
 import { setToken, removeToken } from '../utils/helpers/token-handler';
 import { setTicketsData } from './ticketsReducer';
 import { setAdminData } from './adminReducer';
 import { USER_LOGIN_ROUTE, ADMIN_LOGIN_ROUTE } from '../routes';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
+import { LOCALE } from '../locale';
+
+const successMsg = LOCALE.success.profile;
 
 // Actions
 const SET_PROFILE_DATA = 'SET_PROFILE_DATA';
@@ -59,17 +62,33 @@ export const setRoleStatus = (role) => ({
 });
 
 // Thunks
-
 export const getProfile = () => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  return authAPI.profile()
+  return authAPI.getProfile()
     .then((response) => {
       const res = response.data;
 
       dispatch(toggleIsDataFetching(false));
       dispatch(setProfileData(res));
       dispatch(setAuthStatus(true));
+    })
+    .catch((error) => serverErrorHelper(dispatch, error));
+};
+
+export const updateProfile = (data) => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  authAPI.updateProfile(data)
+    .then((response) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setNote({
+        msg: successMsg.profileUpdated,
+        type: 'success',
+        error: false,
+        success: true,
+      }));
+      console.log(response.data);
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
