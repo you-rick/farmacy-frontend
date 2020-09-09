@@ -18,7 +18,7 @@ const Message = ({ message }) => {
           <Typography variant="subtitle2">
             {`${user.firstName} ${user.lastName}`}
           </Typography>
-          <Box m="0 0 0 0.5rem">{user.userType === 'admin' && <AdminBadge />}</Box>
+          <Box m="0 0 0 0.5rem">{user.role === 'ROLE_ADMIN' && <AdminBadge />}</Box>
         </Grid>
 
         <Typography variant="body2" gutterBottom>{detailMessage}</Typography>

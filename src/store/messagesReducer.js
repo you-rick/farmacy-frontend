@@ -24,7 +24,7 @@ const initialState = {
       firstName: null,
       lastName: null,
       email: null,
-      userType: null,
+      role: null,
     },
   },
   priority: null,
