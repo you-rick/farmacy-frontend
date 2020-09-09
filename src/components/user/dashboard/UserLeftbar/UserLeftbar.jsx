@@ -20,7 +20,7 @@ import { getUserTickets } from '../../../../store/ticketsReducer';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const UserLeftbar = ({ getUserTickets }) => {
+const UserLeftbar = ({ getUserTickets, messageCounts }) => {
   const classes = useStyles();
   const location = useLocation();
   const locale = LOCALE.user.dashboard.leftbar;
@@ -69,7 +69,7 @@ const UserLeftbar = ({ getUserTickets }) => {
                   to={USER_TICKETS_ROUTE}
                   className={classes.link}
                 >
-                  <ListItemText primary={`${locale.ticketsFilter.all} (5)`} />
+                  <ListItemText primary={`${locale.ticketsFilter.all} (${messageCounts.all})`} />
                 </ListItem>
                 <ListItem
                   button
@@ -77,7 +77,9 @@ const UserLeftbar = ({ getUserTickets }) => {
                   to={`${USER_TICKETS_ROUTE}/${USER_TICKETS_UNRESOLVED_PARAM}`}
                   className={classes.link}
                 >
-                  <ListItemText primary={`${locale.ticketsFilter.unresolved} (1)`} />
+                  <ListItemText
+                    primary={`${locale.ticketsFilter.unresolved} (${messageCounts.unresolved})`}
+                  />
                 </ListItem>
                 <ListItem
                   button
@@ -85,7 +87,9 @@ const UserLeftbar = ({ getUserTickets }) => {
                   to={`${USER_TICKETS_ROUTE}/${USER_TICKETS_UPDATED_PARAM}`}
                   className={classes.link}
                 >
-                  <ListItemText primary={`${locale.ticketsFilter.recentlyUpdated} (2)`} />
+                  <ListItemText
+                    primary={`${locale.ticketsFilter.recentlyUpdated} (${messageCounts.recentlyUpdated})`}
+                  />
                 </ListItem>
                 <ListItem
                   button
@@ -93,7 +97,9 @@ const UserLeftbar = ({ getUserTickets }) => {
                   to={`${USER_TICKETS_ROUTE}/${USER_TICKETS_SOLVED_PARAM}`}
                   className={classes.link}
                 >
-                  <ListItemText primary={`${locale.ticketsFilter.solved} (0)`} />
+                  <ListItemText
+                    primary={`${locale.ticketsFilter.solved} (${messageCounts.solved})`}
+                  />
                 </ListItem>
               </List>
             </Box>
@@ -105,4 +111,8 @@ const UserLeftbar = ({ getUserTickets }) => {
   );
 };
 
-export default connect(null, { getUserTickets })(UserLeftbar);
+const mapStateToProps = (state) => ({
+  messageCounts: state.tickets.messageCounts,
+});
+
+export default connect(mapStateToProps, { getUserTickets })(UserLeftbar);
