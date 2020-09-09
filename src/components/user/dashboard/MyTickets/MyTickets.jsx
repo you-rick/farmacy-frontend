@@ -18,7 +18,7 @@ import { useLastLocation } from 'react-router-last-location';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './MyTickets.styles';
 import { getUserTickets } from '../../../../store/ticketsReducer';
-import TicketInfo from '../../../shared/TicketInfo/TicketInfo';
+import TicketInfo from '../../../shared/dashboard/TicketInfo/TicketInfo';
 import { LOCALE } from '../../../../locale';
 import {
   USER_TICKETS_SOLVED_PARAM,
@@ -26,6 +26,7 @@ import {
   USER_TICKETS_UPDATED_PARAM,
   USER_TICKETS_ROUTE,
 } from '../../../../routes';
+import { DATE_FORMAT } from '../../../../utils/validators';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
@@ -102,7 +103,7 @@ const MyTickets = ({ tickets, ticket, getUserTickets }) => {
                   {item.ticketNumber}
                 </TableCell>
                 <TableCell>
-                  <Moment parse="DD/MM/YYYY" format="DD/MM/YYYY">{item.createdDate}</Moment>
+                  <Moment parse="DD/MM/YYYY" format={DATE_FORMAT}>{item.createdDate}</Moment>
                 </TableCell>
                 <TableCell className={classes.subjectCol}>{item.subject}</TableCell>
               </TableRow>

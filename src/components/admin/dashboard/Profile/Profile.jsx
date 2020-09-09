@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ProfileForm from '../../../shared/ProfileForm/ProfileForm';
+import ProfileForm from '../../../shared/dashboard/ProfileForm/ProfileForm';
 import { updateProfile } from '../../../../store/authReducer';
 
 const Profile = ({ updateProfile, user }) => {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Box, Typography } from '@material-ui/core';
 import * as uuid from 'uuid';
 import TicketsTable from '../../shared/TicketsTable/TicketsTable';
-import TicketInfo from '../../../../shared/TicketInfo/TicketInfo';
+import TicketInfo from '../../../../shared/dashboard/TicketInfo/TicketInfo';
 import { updateTicketStatus } from '../../../../../store/adminReducer';
 import { ticketTypes } from '../../../../../core/ticketTypes';
 import { LOCALE } from '../../../../../locale';

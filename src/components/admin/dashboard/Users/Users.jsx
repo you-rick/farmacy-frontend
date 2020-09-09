@@ -19,9 +19,10 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './Users.styles';
-import ConfirmModal from '../../../shared/ConfirmModal/ConfirmModal';
+import ConfirmModal from '../../../shared/common/ConfirmModal/ConfirmModal';
 import { getUsers, deleteUser } from '../../../../store/usersReducer';
 import { ADMIN_CREATE_USER_ROUTE } from '../../../../routes';
+import { DATE_FORMAT } from '../../../../utils/validators';
 import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
@@ -80,7 +81,7 @@ const Users = ({ users, getUsers, deleteUser }) => {
                 <TableCell>{user.department}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
-                  <Moment parse="DD/MM/YYYY" format="DD/MM/YYYY">{user.employedSince}</Moment>
+                  <Moment parse="DD/MM/YYYY" format={DATE_FORMAT}>{user.employedSince}</Moment>
                 </TableCell>
                 <TableCell>
                   <IconButton

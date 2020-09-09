@@ -13,7 +13,7 @@ import {
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
-import { renderSelectField, renderTextField } from '../../../../shared/FormControls/FormControls';
+import { renderSelectField, renderTextField } from '../../../../shared/common/FormControls/FormControls';
 import themeStyles from './NewTicketConfig.styles';
 import { LOCALE } from '../../../../../locale';
 

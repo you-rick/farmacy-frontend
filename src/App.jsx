@@ -13,11 +13,11 @@ import {
 import { hideNote } from './store/notificationReducer';
 import { initializeApp } from './store/appReducer';
 
-import Header from './components/shared/Header/Header';
+import Header from './components/shared/common/Header/Header';
 import Home from './components/public/Home/Home';
 import NotFound from './components/public/NotFound/NotFound';
-import Preloader from './components/shared/Preloader/Preloader';
-import Notification from './components/shared/Notification/Notification';
+import Preloader from './components/shared/common/Preloader/Preloader';
+import Notification from './components/shared/common/Notification/Notification';
 import UserLoginContainer from './components/user/auth/Login/UserLoginContainer';
 import UserDashboardContainer from './components/user/dashboard/UserDashboardContainer';
 import AdminLoginContainer from './components/admin/auth/Login/AdminLoginContainer';

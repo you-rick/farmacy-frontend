@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home';
 import CachedIcon from '@material-ui/icons/Cached';
 import { makeStyles } from '@material-ui/core/styles';
-import themeStyles from '../../../shared/LeftbarContainer/LeftbarContainer.styles';
+import themeStyles from '../../../shared/dashboard/LeftbarContainer/LeftbarContainer.styles';
 import {
   USER_NEW_TICKET_ROUTE,
   USER_TICKETS_ROUTE,

@@ -13,7 +13,8 @@ import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 import { reduxForm, Field, change } from 'redux-form';
-import { renderSelectField, renderTextField } from '../../../shared/FormControls/FormControls';
+import { renderSelectField, renderTextField } from '../../../shared/common/FormControls/FormControls';
+import { DATE_FORMAT } from '../../../../utils/validators';
 import { LOCALE } from '../../../../locale';
 import validate from './validate';
 
@@ -31,7 +32,7 @@ const NewUser = ({ handleSubmit, dispatch }) => {
   const [selectedDate, setSelectedDate] = React.useState(null);
 
   const handleDateChange = (date) => {
-    const formattedDate = moment(date, 'DD/MM/YYYY').format('MM/DD/YYYY');
+    const formattedDate = moment(date, 'DD/MM/YYYY').format(DATE_FORMAT);
     setSelectedDate(date);
     dispatch(change('new-user', 'employedSince', formattedDate));
   };
@@ -106,8 +107,8 @@ const NewUser = ({ handleSubmit, dispatch }) => {
                   disableToolbar
                   autoOk
                   variant="inline"
-                  format="MM/dd/yyyy"
-                  placeholder="MM/DD/YYYY"
+                  format="dd/MM/yyyy"
+                  placeholder={DATE_FORMAT}
                   margin="normal"
                   inputVariant="outlined"
                   fullWidth

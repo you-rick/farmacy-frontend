@@ -97,6 +97,22 @@ export const updateProfile = (data) => (dispatch) => {
     .catch((error) => serverErrorHelper(dispatch, error));
 };
 
+export const resetPassword = (data) => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  authAPI.resetPassword(data)
+    .then((response) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setNote({
+        msg: response.data.message || successMsg.passwordUpdated,
+        type: 'success',
+        error: false,
+        success: true,
+      }));
+    })
+    .catch((error) => serverErrorHelper(dispatch, error));
+};
+
 export const login = (data, role) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());

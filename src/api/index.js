@@ -12,6 +12,7 @@ import {
   API_ADMIN_GET_USERS_ROUTE,
   API_ADMIN_DELETE_USER_ROUTE,
   API_ADMIN_CREATE_USER_ROUTE,
+  API_RESET_PASSWORD_ROUTE,
 } from '../routes';
 import { getTokenHeader, getEmail } from '../utils/helpers/token-handler';
 
@@ -38,6 +39,9 @@ export const authAPI = {
   },
   updateProfile(data) {
     return axiosInstance.post(API_PROFILE_ROUTE, data, tokenHeader());
+  },
+  resetPassword(data) {
+    return axiosInstance.post(API_RESET_PASSWORD_ROUTE, data, tokenHeader());
   },
 };
 

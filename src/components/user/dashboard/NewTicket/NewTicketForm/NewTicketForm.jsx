@@ -1,8 +1,8 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import { Box } from '@material-ui/core';
-import { renderTextField } from '../../../../shared/FormControls/FormControls';
-import RichTextarea from '../../../../shared/RichTextarea/RichTextarea';
+import { renderTextField } from '../../../../shared/common/FormControls/FormControls';
+import RichTextarea from '../../../../shared/dashboard/RichTextarea/RichTextarea';
 import { LOCALE } from '../../../../../locale';
 import './NewTicketForm.scss';
 

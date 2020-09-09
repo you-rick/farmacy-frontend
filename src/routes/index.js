@@ -1,5 +1,6 @@
 // API shared routes
 export const API_PROFILE_ROUTE = 'profile';
+export const API_RESET_PASSWORD_ROUTE = 'resetPassword';
 
 // API USER routes
 export const API_USER_DASHBOARD_ROUTE = 'user/dashboard';
@@ -23,6 +24,7 @@ export const USER_FORGOT_PASS_ROUTE = '/user/forgot-password';
 export const USER_PROFILE_ROUTE = '/user/profile';
 export const USER_TICKETS_ROUTE = '/user/my-tickets';
 export const USER_NEW_TICKET_ROUTE = '/user/create-tickets';
+export const USER_RESET_PASSWORD_ROUTE = '/user/reset-password';
 
 // Admin routes
 export const ADMIN_BASE_ROUTE = '/admin';
@@ -33,6 +35,7 @@ export const ADMIN_PROFILE_ROUTE = '/admin/profile';
 export const ADMIN_TICKETS_ROUTE = '/admin/tickets';
 export const ADMIN_USERS_ROUTE = '/admin/users';
 export const ADMIN_CREATE_USER_ROUTE = '/admin/create-users';
+export const ADMIN_RESET_PASSWORD_ROUTE = '/admin/reset-password';
 
 // User route params
 export const USER_TICKETS_UNRESOLVED_PARAM = 'unresolved';

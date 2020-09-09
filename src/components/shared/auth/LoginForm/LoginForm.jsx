@@ -13,7 +13,7 @@ import {
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import { renderTextField, renderCheckbox } from '../../FormControls/FormControls';
+import { renderTextField, renderCheckbox } from '../../common/FormControls/FormControls';
 import {
   USER_FORGOT_PASS_ROUTE,
   USER_LOGIN_ROUTE,

@@ -39,6 +39,7 @@ export const LOCALE = {
       },
       profile: {
         headline: 'My Account Profile',
+        resetPassword: 'Reset Password',
         form: {
           firstName: 'First Name',
           lastName: 'Last Name',
@@ -47,6 +48,15 @@ export const LOCALE = {
           extension: 'Ext.',
           mobileNumber: 'Mobile Number',
           submit: 'Save Changes',
+        },
+      },
+      resetPassword: {
+        headline: 'Reset your password',
+        form: {
+          oldPassword: 'Old Password',
+          newPassword: 'New Password',
+          confirmPassword: 'Confirm Password',
+          submit: 'Submit',
         },
       },
     },
@@ -172,6 +182,7 @@ export const LOCALE = {
     validation: {
       required: 'Required field',
       email: 'Invalid email address',
+      confirmPassword: 'Passwords should match',
     },
   },
   success: {
@@ -184,6 +195,7 @@ export const LOCALE = {
     },
     profile: {
       profileUpdated: 'Profile successfully updated',
+      passwordUpdated: 'Password successfully updated',
     },
   },
 };

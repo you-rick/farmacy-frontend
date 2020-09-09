@@ -12,6 +12,7 @@ import Moment from 'react-moment';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './TicketsTable.styles';
 import { LOCALE } from '../../../../../locale';
+import { DATE_FORMAT } from '../../../../../utils/validators';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
@@ -46,7 +47,7 @@ const TicketsTable = ({ tickets, onShowModal }) => {
                 {item.ticketNumber}
               </TableCell>
               <TableCell>
-                <Moment parse="DD/MM/YYYY" format="DD/MM/YYYY">{item.createdDate}</Moment>
+                <Moment parse="DD/MM/YYYY" format={DATE_FORMAT}>{item.createdDate}</Moment>
               </TableCell>
               <TableCell className={classes[item.priority]}>
                 {item.priority}

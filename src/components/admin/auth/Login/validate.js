@@ -1,5 +1,5 @@
 import { LOCALE } from '../../../../locale';
-import { EMAIL_VALIDATOR } from '../../../../utils/validators/validators';
+import { EMAIL_VALIDATOR } from '../../../../utils/validators';
 
 const validate = (values) => {
   const errors = {};

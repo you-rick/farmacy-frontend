@@ -15,7 +15,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { NavLink } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
-import themeStyles from '../../../shared/LeftbarContainer/LeftbarContainer.styles';
+import themeStyles from '../../../shared/dashboard/LeftbarContainer/LeftbarContainer.styles';
 import { ADMIN_DASHBOARD_ROUTE, ADMIN_TICKETS_ROUTE, ADMIN_USERS_ROUTE } from '../../../../routes';
 import { LOCALE } from '../../../../locale';
 
