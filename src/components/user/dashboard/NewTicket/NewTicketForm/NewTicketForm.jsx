@@ -37,22 +37,9 @@ const NewTicketForm = ({ onEditorChange }) => {
           margin="normal"
           component={renderTextField}
         />
-        <Field
-          label={locale.form.to}
-          name="to"
-          type="email"
-          variant="outlined"
-          size="small"
-          fullWidth
-          InputLabelProps={{
-            shrink: true,
-          }}
-          margin="normal"
-          component={renderTextField}
-        />
       </Box>
       <Box m="0 0 1rem">
-        <Field name="issue" type="hidden" component={bodyField} />
+        <Field name="description" type="hidden" component={bodyField} />
         <Box className="articleBodyEditor">
           <RichTextarea height={editorHeight} onChange={handleTextareaChange} />
         </Box>

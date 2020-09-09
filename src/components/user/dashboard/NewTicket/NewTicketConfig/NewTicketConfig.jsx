@@ -19,11 +19,14 @@ import { LOCALE } from '../../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const typeList = ['type 1', 'type 2', 'type 3'];
-const priorityList = ['normal', 'high', 'low'];
+const typeList = ['INCIDENT'];
+const priorityList = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
 const departmentList = ['Information Technology'];
+const recipientEmail = {
+  'Information Technology': 'admin@offteck.com',
+};
 
-const NewTicketConfig = ({ onTagsChange }) => {
+const NewTicketConfig = ({ onTagsChange, onDepartmentChange }) => {
   const classes = useStyles();
   const locale = LOCALE.user.dashboard.newTicket.form;
   const [type, setType] = useState(typeList[0]);
@@ -38,6 +41,7 @@ const NewTicketConfig = ({ onTagsChange }) => {
   };
   const departmentChange = (event) => {
     setDepartment(event.target.value);
+    onDepartmentChange(recipientEmail[event.target.value]);
   };
   const tagsChange = (event, values) => {
     onTagsChange(values);

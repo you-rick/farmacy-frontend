@@ -7,7 +7,7 @@ const themeStyles = (theme) => ({
   },
   paper: {
     width: '22rem',
-    height: `${634 / 16}rem`,
+    height: `${570 / 16}rem`,
     padding: '1rem',
     [theme.breakpoints.down('sm')]: {
       height: 'auto',

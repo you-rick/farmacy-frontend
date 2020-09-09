@@ -16,16 +16,21 @@ const NewTicket = ({ dispatch, handleSubmit, initialize, user }) => {
   const locale = LOCALE.user.dashboard.newTicket;
 
   const onEditorChange = (data) => {
-    dispatch(change('new-ticket', 'issue', data.length ? data : null));
+    dispatch(change('new-ticket', 'description', data.length ? data : null));
   };
   const onTagsChange = (values) => {
     dispatch(change('new-ticket', 'tags', values.length ? values : []));
   };
+  const onDepartmentChange = (email) => {
+    dispatch(change('new-ticket', 'to', email.length ? email : null));
+  };
 
   useEffect(() => {
     initialize({
-      requester: `${user.firstName} ${user.lastName}`,
-      ticketId: uuid.v4(),
+      requester: `${user.email}`,
+      ticketId: uuid.v4()
+        .split('-')
+        .join(''),
     });
   }, [initialize, user]);
 
@@ -37,7 +42,7 @@ const NewTicket = ({ dispatch, handleSubmit, initialize, user }) => {
       <form onSubmit={handleSubmit}>
         <Box className={classes.ticketBox}>
           <Box className={classes.ticketConfig}>
-            <NewTicketConfig onTagsChange={onTagsChange} />
+            <NewTicketConfig onTagsChange={onTagsChange} onDepartmentChange={onDepartmentChange} />
           </Box>
           <Box className={classes.ticketForm}>
             <NewTicketForm onEditorChange={onEditorChange} />
