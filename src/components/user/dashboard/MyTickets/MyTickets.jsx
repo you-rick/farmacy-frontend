@@ -50,8 +50,6 @@ const MyTickets = ({ tickets, ticket, getUserTickets }) => {
       if (lastLocation.pathname !== '/' && isTicketsLastRoute) {
         getUserTickets();
       }
-    } else {
-      getUserTickets();
     }
   }, [getUserTickets, lastLocation, filter]);
 
@@ -104,7 +102,7 @@ const MyTickets = ({ tickets, ticket, getUserTickets }) => {
                   {item.ticketNumber}
                 </TableCell>
                 <TableCell>
-                  <Moment format="DD/MM/YYYY">{item.createdDate}</Moment>
+                  <Moment parse="DD/MM/YYYY" format="DD/MM/YYYY">{item.createdDate}</Moment>
                 </TableCell>
                 <TableCell className={classes.subjectCol}>{item.subject}</TableCell>
               </TableRow>

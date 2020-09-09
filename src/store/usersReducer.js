@@ -76,7 +76,7 @@ export const createUser = (data) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
   usersAPI.createUser(data)
-    .then((response) => {
+    .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(push(ADMIN_USERS_ROUTE));
       dispatch(setNote({
@@ -85,7 +85,6 @@ export const createUser = (data) => (dispatch) => {
         error: false,
         success: true,
       }));
-      console.log(response);
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
@@ -94,7 +93,7 @@ export const deleteUser = (userId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
   usersAPI.deleteUser(userId)
-    .then((response) => {
+    .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(removeDeletedUser(userId));
       dispatch(setNote({
@@ -103,7 +102,6 @@ export const deleteUser = (userId) => (dispatch) => {
         error: false,
         success: true,
       }));
-      console.log(response);
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };

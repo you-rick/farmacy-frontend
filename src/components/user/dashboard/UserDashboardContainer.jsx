@@ -12,7 +12,7 @@ import NewTicketContainer from './NewTicket/NewTicketContainer';
 import Profile from './Profile/Profile';
 
 const UserDashboardContainer = ({ isAuth, role }) => {
-  if (!isAuth || role !== 'user') {
+  if (!isAuth || role !== 'ROLE_USER') {
     return <Redirect to="/" />;
   }
 

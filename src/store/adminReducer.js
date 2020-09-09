@@ -45,11 +45,18 @@ const adminReducer = (state = initialState, action) => {
     }
     case UPDATE_NEW_TICKETS: {
       const { ticketId } = action;
-      const openTicketState = state.stats.OpenTickets;
-      openTicketState.new -= 1;
+      const openTicketNumber = state.stats.OpenTickets.new - 1;
+
       return {
         ...state,
         newTickets: state.newTickets.filter((item) => item.id !== ticketId),
+        stats: {
+          ...state.stats,
+          OpenTickets: {
+            ...state.stats.OpenTickets,
+            new: openTicketNumber,
+          },
+        },
       };
     }
     default:

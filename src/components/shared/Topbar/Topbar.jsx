@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => themeStyles(theme));
 const Topbar = ({ role }) => {
   const classes = useStyles();
   const locale = LOCALE.common.dashboard.topbar;
-  const profilePath = role === 'user' ? USER_PROFILE_ROUTE : ADMIN_PROFILE_ROUTE;
+  const profilePath = role === 'ROLE_USER' ? USER_PROFILE_ROUTE : ADMIN_PROFILE_ROUTE;
 
   return (
     <AppBar position="fixed" color="default">

@@ -1,6 +1,7 @@
 import { isLogged } from '../utils/helpers/token-handler';
 import { getProfile } from './authReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
+import { getRole } from '../utils/helpers/role-handler';
 
 // Actions
 const TOGGLE_IS_DATA_FETCHING = 'TOGGLE_IS_DATA_FETCHING';
@@ -40,7 +41,7 @@ export const initializedSuccess = () => ({ type: INITIALIZED_SUCCESS });
 // Thunks
 export const initializeApp = () => (dispatch) => {
   const promiseArray = [];
-  if (isLogged()) promiseArray.push(dispatch(getProfile()));
+  if (isLogged()) promiseArray.push(dispatch(getProfile(getRole())));
 
   dispatch(toggleIsDataFetching(true));
 

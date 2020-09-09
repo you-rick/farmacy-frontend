@@ -9,13 +9,13 @@ import LoginForm from '../../../shared/auth/LoginForm/LoginForm';
 const UserReduxForm = reduxForm({ form: 'user-login', validate })(LoginForm);
 
 const UserLoginContainer = ({ login, isAuth }) => {
-  const onSubmit = (data) => login(data, 'user');
+  const onSubmit = (data) => login(data, 'ROLE_USER');
 
   if (isAuth) {
     return <Redirect to="/" />;
   }
 
-  return <UserReduxForm onSubmit={onSubmit} userType="user" />;
+  return <UserReduxForm onSubmit={onSubmit} userType="ROLE_USER" />;
 };
 
 const mapStateToProps = (state) => ({

@@ -31,9 +31,9 @@ const useStyles = makeStyles({
 const LoginForm = ({ handleSubmit, userType }) => {
   const classes = useStyles();
   const locale = LOCALE.auth.login;
-  const forgotPassPath = userType === 'user' ? USER_FORGOT_PASS_ROUTE : ADMIN_FORGOT_PASS_ROUTE;
-  const loginPath = userType === 'user' ? ADMIN_LOGIN_ROUTE : USER_LOGIN_ROUTE;
-  const loginLabel = userType === 'user' ? locale.adminLogin : locale.userLogin;
+  const forgotPassPath = userType === 'ROLE_USER' ? USER_FORGOT_PASS_ROUTE : ADMIN_FORGOT_PASS_ROUTE;
+  const loginPath = userType === 'ROLE_USER' ? ADMIN_LOGIN_ROUTE : USER_LOGIN_ROUTE;
+  const loginLabel = userType === 'ROLE_USER' ? locale.adminLogin : locale.userLogin;
 
   return (
     <Box p="4rem 0">
@@ -45,7 +45,7 @@ const LoginForm = ({ handleSubmit, userType }) => {
                 {locale.headline}
               </Typography>
               {
-                userType === 'admin'
+                userType === 'ROLE_ADMIN'
                 && <Box m="0 0 0 0.5rem"><SupervisorAccountIcon color="primary" /></Box>
               }
             </Box>

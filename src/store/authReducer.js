@@ -4,6 +4,7 @@ import { authAPI } from '../api';
 import { toggleIsDataFetching } from './appReducer';
 import { hideNote, setNote } from './notificationReducer';
 import { setToken, removeToken } from '../utils/helpers/token-handler';
+import { setRole, removeRole } from '../utils/helpers/role-handler';
 import { setTicketsData } from './ticketsReducer';
 import { setAdminData } from './adminReducer';
 import { USER_LOGIN_ROUTE, ADMIN_LOGIN_ROUTE } from '../routes';
@@ -62,16 +63,20 @@ export const setRoleStatus = (role) => ({
 });
 
 // Thunks
-export const getProfile = () => (dispatch) => {
+export const getProfile = (role) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  return authAPI.getProfile()
+  return authAPI.getProfile(role)
     .then((response) => {
       const res = response.data;
+      const responseRole = res.user.role;
 
       dispatch(toggleIsDataFetching(false));
-      dispatch(setProfileData(res));
+      dispatch(setProfileData(res.user));
       dispatch(setAuthStatus(true));
+
+      if (responseRole === 'ROLE_USER') dispatch(setTicketsData(res));
+      if (responseRole === 'ROLE_ADMIN') dispatch(setAdminData(res));
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
@@ -80,7 +85,7 @@ export const updateProfile = (data) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
   authAPI.updateProfile(data)
-    .then((response) => {
+    .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(setNote({
         msg: successMsg.profileUpdated,
@@ -88,7 +93,6 @@ export const updateProfile = (data) => (dispatch) => {
         error: false,
         success: true,
       }));
-      console.log(response.data);
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
@@ -99,26 +103,26 @@ export const login = (data, role) => (dispatch) => {
   authAPI.login(data, role)
     .then((response) => {
       setToken(data);
+      setRole(role);
+      const res = response.data;
       dispatch(toggleIsDataFetching(false));
+      dispatch(setProfileData(res.user));
+      dispatch(setAuthStatus(true));
 
-      if (role === 'user') {
-        dispatch(setTicketsData(response.data));
-      } else {
-        dispatch(setAdminData(response.data));
-      }
+      if (role === 'ROLE_USER') dispatch(setTicketsData(res));
+      if (role === 'ROLE_ADMIN') dispatch(setAdminData(res));
 
-      dispatch(getProfile())
-        .then(() => {
-          dispatch(reset(role === 'user' ? 'user-login' : 'admin-login'));
-        });
+      dispatch(reset(role === 'ROLE_USER' ? 'user-login' : 'admin-login'));
+      console.log(res);
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
 
 export const logout = (role) => (dispatch) => {
   removeToken();
+  removeRole();
   dispatch(setProfileData(initialState));
-  dispatch(push(role === 'user' ? USER_LOGIN_ROUTE : ADMIN_LOGIN_ROUTE));
+  dispatch(push(role === 'ROLE_USER' ? USER_LOGIN_ROUTE : ADMIN_LOGIN_ROUTE));
 };
 
 export default authReducer;

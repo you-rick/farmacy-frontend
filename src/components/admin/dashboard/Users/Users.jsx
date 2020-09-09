@@ -80,7 +80,7 @@ const Users = ({ users, getUsers, deleteUser }) => {
                 <TableCell>{user.department}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
-                  <Moment format="DD/MM/YYYY">{user.employedSince}</Moment>
+                  <Moment parse="DD/MM/YYYY" format="DD/MM/YYYY">{user.employedSince}</Moment>
                 </TableCell>
                 <TableCell>
                   <IconButton

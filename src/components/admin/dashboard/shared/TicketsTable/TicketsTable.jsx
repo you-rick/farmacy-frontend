@@ -46,7 +46,7 @@ const TicketsTable = ({ tickets, onShowModal }) => {
                 {item.ticketNumber}
               </TableCell>
               <TableCell>
-                <Moment format="DD/MM/YYYY">{item.createdDate}</Moment>
+                <Moment parse="DD/MM/YYYY" format="DD/MM/YYYY">{item.createdDate}</Moment>
               </TableCell>
               <TableCell className={classes[item.priority]}>
                 {item.priority}

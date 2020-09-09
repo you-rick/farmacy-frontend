@@ -80,8 +80,8 @@ const LeftbarContainer = ({ logout, role, leftbarShown }) => {
           <Divider className={classes.divider} />
         </Hidden>
 
-        {role === 'user' && <UserLeftbar />}
-        {role === 'admin' && <AdminLeftbar />}
+        {role === 'ROLE_USER' && <UserLeftbar />}
+        {role === 'ROLE_ADMIN' && <AdminLeftbar />}
 
         <Box m="3rem 0 0">
           <List>

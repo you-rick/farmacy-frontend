@@ -11,8 +11,6 @@ const Dashboard = ({ getData, tickets, stats }) => {
   useEffect(() => {
     if (lastLocation) {
       if (lastLocation.pathname !== '/') getData();
-    } else {
-      getData();
     }
   }, [getData, lastLocation]);
 

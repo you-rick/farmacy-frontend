@@ -5,7 +5,6 @@ import { updateProfile } from '../../../../store/authReducer';
 
 const Profile = ({ updateProfile, user }) => {
   const onSubmit = (data) => {
-    console.log(data);
     updateProfile(data);
   };
 

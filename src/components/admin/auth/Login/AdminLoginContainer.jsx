@@ -9,13 +9,13 @@ import LoginForm from '../../../shared/auth/LoginForm/LoginForm';
 const AdminLoginForm = reduxForm({ form: 'admin-login', validate })(LoginForm);
 
 const AdminLoginContainer = ({ login, isAuth }) => {
-  const onSubmit = (data) => login(data, 'admin');
+  const onSubmit = (data) => login(data, 'ROLE_ADMIN');
 
   if (isAuth) {
     return <Redirect to="/" />;
   }
 
-  return <AdminLoginForm onSubmit={onSubmit} userType="admin" />;
+  return <AdminLoginForm onSubmit={onSubmit} userType="ROLE_ADMIN" />;
 };
 
 const mapStateToProps = (state) => ({

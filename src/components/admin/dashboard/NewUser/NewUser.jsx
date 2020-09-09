@@ -31,7 +31,7 @@ const NewUser = ({ handleSubmit, dispatch }) => {
   const [selectedDate, setSelectedDate] = React.useState(null);
 
   const handleDateChange = (date) => {
-    const formattedDate = moment(date).format('MM/DD/YYYY');
+    const formattedDate = moment(date, 'DD/MM/YYYY').format('MM/DD/YYYY');
     setSelectedDate(date);
     dispatch(change('new-user', 'employedSince', formattedDate));
   };

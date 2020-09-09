@@ -24,9 +24,9 @@ const Messages = ({ role, ticketId, userId, messages, getMessages }) => {
 };
 
 const mapStateToProps = (state) => ({
-  userId: state.tickets.userId,
-  messages: state.messages.list,
+  userId: state.auth.userId,
   role: state.auth.role,
+  messages: state.messages.list,
 });
 
 export default connect(mapStateToProps, { getMessages })(Messages);

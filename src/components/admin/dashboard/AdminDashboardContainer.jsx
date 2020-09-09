@@ -20,7 +20,7 @@ import Users from './Users/Users';
 import NewUserContainer from './NewUser/NewUserContainer';
 
 const AdminDashboardContainer = ({ isAuth, role }) => {
-  if (!isAuth || role !== 'admin') {
+  if (!isAuth || role !== 'ROLE_ADMIN') {
     return <Redirect to="/" />;
   }
 

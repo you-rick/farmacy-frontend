@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { USER_LOGIN_ROUTE, USER_TICKETS_ROUTE, ADMIN_DASHBOARD_ROUTE } from '../../../routes';
 
 const Home = ({ isAuth, role }) => {
-  const rolePath = role === 'user' ? USER_TICKETS_ROUTE : ADMIN_DASHBOARD_ROUTE;
+  const rolePath = role === 'ROLE_USER' ? USER_TICKETS_ROUTE : ADMIN_DASHBOARD_ROUTE;
   const redirectTo = (isAuth) => (isAuth ? rolePath : USER_LOGIN_ROUTE);
 
   return <Redirect to={redirectTo(isAuth)} />;
