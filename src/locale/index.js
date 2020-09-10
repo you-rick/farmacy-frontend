@@ -165,6 +165,16 @@ export const LOCALE = {
           submit: 'Create',
         },
       },
+      ticketSettings: {
+        headline: 'Ticket Settings',
+        tableHeaders: {
+          type: 'Ticket Type',
+          overdue: 'overdue in days',
+        },
+        form: {
+          submit: 'Update',
+        },
+      },
     },
   },
   public: {
@@ -183,6 +193,8 @@ export const LOCALE = {
       required: 'Required field',
       email: 'Invalid email address',
       confirmPassword: 'Passwords should match',
+      isNumber: 'Must be a number',
+      tooSmall: 'Must be at least 1',
     },
   },
   success: {
@@ -196,6 +208,9 @@ export const LOCALE = {
     profile: {
       profileUpdated: 'Profile successfully updated',
       passwordUpdated: 'Password successfully updated',
+    },
+    ticketSettings: {
+      settingsUpdated: 'Ticket settings successfully updated',
     },
   },
 };

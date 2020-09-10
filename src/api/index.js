@@ -13,6 +13,7 @@ import {
   API_ADMIN_DELETE_USER_ROUTE,
   API_ADMIN_CREATE_USER_ROUTE,
   API_RESET_PASSWORD_ROUTE,
+  API_ADMIN_TICKET_SETTINGS_ROUTE,
 } from '../routes';
 import { getTokenHeader, getEmail } from '../utils/helpers/token-handler';
 
@@ -54,6 +55,12 @@ export const adminAPI = {
   },
   getTickets() {
     return axiosInstance.get(API_ADMIN_TICKETS_ROUTE, tokenHeader());
+  },
+  getTicketSettings() {
+    return axiosInstance.get(API_ADMIN_TICKET_SETTINGS_ROUTE, tokenHeader());
+  },
+  updateTicketSettings(data) {
+    return axiosInstance.post(API_ADMIN_TICKET_SETTINGS_ROUTE, data, tokenHeader());
   },
 };
 
