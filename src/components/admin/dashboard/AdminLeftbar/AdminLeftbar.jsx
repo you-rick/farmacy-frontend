@@ -16,7 +16,12 @@ import { NavLink } from 'react-router-dom';
 import HomeIcon from '@material-ui/icons/Home';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from '../../../shared/dashboard/LeftbarContainer/LeftbarContainer.styles';
-import { ADMIN_DASHBOARD_ROUTE, ADMIN_TICKETS_ROUTE, ADMIN_USERS_ROUTE } from '../../../../routes';
+import {
+  ADMIN_DASHBOARD_ROUTE,
+  ADMIN_TICKETS_ROUTE,
+  ADMIN_USERS_ROUTE,
+  ADMIN_TICKET_SETTINGS_ROUTE,
+} from '../../../../routes';
 import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
@@ -83,27 +88,11 @@ const AdminLeftbar = () => {
           </List>
         </AccordionDetails>
       </Accordion>
-      <Accordion square className={classes.accordion}>
-        <AccordionSummary
-          classes={{
-            root: classes.accordionSummary,
-            content: classes.accordionSummaryContent,
-          }}
-          expandIcon={<ExpandMoreIcon className={classes.icon} />}
-        >
-          <Typography>{locale.links.settings.title}</Typography>
-        </AccordionSummary>
-        <AccordionDetails className={classes.accordionDetails}>
-          <List>
-            <ListItem button>
-              <ListItemText primary="Settings link 1" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Settings link 2" />
-            </ListItem>
-          </List>
-        </AccordionDetails>
-      </Accordion>
+      <List>
+        <ListItem button component={NavLink} to={ADMIN_TICKET_SETTINGS_ROUTE}>
+          <ListItemText primary={locale.links.settings.title} />
+        </ListItem>
+      </List>
     </>
   );
 };

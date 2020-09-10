@@ -16,6 +16,7 @@ export const API_ADMIN_TICKETS_ROUTE = 'admin/tickets';
 export const API_ADMIN_GET_USERS_ROUTE = 'admin/getAllUsers';
 export const API_ADMIN_DELETE_USER_ROUTE = (userId) => `admin/deleteUser/${userId}`;
 export const API_ADMIN_CREATE_USER_ROUTE = 'admin/create-user';
+export const API_ADMIN_TICKET_SETTINGS_ROUTE = '/admin/ticketSettings';
 
 // User routes
 export const USER_BASE_ROUTE = '/user';
@@ -36,6 +37,7 @@ export const ADMIN_TICKETS_ROUTE = '/admin/tickets';
 export const ADMIN_USERS_ROUTE = '/admin/users';
 export const ADMIN_CREATE_USER_ROUTE = '/admin/create-users';
 export const ADMIN_RESET_PASSWORD_ROUTE = '/admin/reset-password';
+export const ADMIN_TICKET_SETTINGS_ROUTE = '/admin/ticket-settings';
 
 // User route params
 export const USER_TICKETS_UNRESOLVED_PARAM = 'unresolved';
