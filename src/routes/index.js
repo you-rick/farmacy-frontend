@@ -1,6 +1,7 @@
 // API shared routes
 export const API_PROFILE_ROUTE = 'profile';
 export const API_RESET_PASSWORD_ROUTE = 'resetPassword';
+export const API_FIND_TICKET = 'ticket-system/search';
 
 // API USER routes
 export const API_USER_DASHBOARD_ROUTE = 'user/dashboard';

@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { push } from 'connected-react-router';
+import { reset } from 'redux-form';
 import { toggleIsDataFetching } from './appReducer';
 import { ticketsAPI, adminAPI } from '../api';
 import { hideNote, setNote } from './notificationReducer';
@@ -11,6 +12,8 @@ const successMsg = LOCALE.success.tickets;
 
 // Action
 const SET_TICKETS_DATA = 'SET_TICKETS_DATA';
+const SET_CURRENT_TICKET_DATA = 'SET_CURRENT_TICKET_DATA';
+const RESET_CURRENT_TICKET_DATA = 'RESET_CURRENT_TICKET_DATA';
 
 // Initial Data
 const initialState = {
@@ -45,6 +48,19 @@ const ticketsReducer = (state = initialState, action) => {
         messageCounts: _.get(data, 'messageCounts', initialState.messageCounts),
       };
     }
+    case SET_CURRENT_TICKET_DATA: {
+      const { data } = action;
+      return {
+        ...state,
+        ticket: { ...data },
+      };
+    }
+    case RESET_CURRENT_TICKET_DATA: {
+      return {
+        ...state,
+        ticket: initialState.ticket,
+      };
+    }
     default:
       return state;
   }
@@ -55,15 +71,20 @@ export const setTicketsData = (data) => ({
   type: SET_TICKETS_DATA,
   data,
 });
+export const setCurrentTicketData = (data) => ({
+  type: SET_CURRENT_TICKET_DATA,
+  data,
+});
+export const resetCurrentTicketData = () => ({
+  type: RESET_CURRENT_TICKET_DATA,
+});
 
 // Thunks
 export const createTicket = (data, userId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
   ticketsAPI.createTicket(data, userId)
-    .then((response) => {
-      const res = response.data;
-
+    .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(push(USER_TICKETS_ROUTE));
       dispatch(setNote({
@@ -72,7 +93,19 @@ export const createTicket = (data, userId) => (dispatch) => {
         error: false,
         success: true,
       }));
-      console.log(res);
+    })
+    .catch((error) => serverErrorHelper(dispatch, error));
+};
+
+export const findTicket = (userId, ticketId) => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  dispatch(resetCurrentTicketData());
+  ticketsAPI.findTicket(userId, ticketId)
+    .then((response) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setCurrentTicketData(response.data));
+      dispatch(reset('ticket-search'));
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };

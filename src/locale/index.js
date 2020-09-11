@@ -15,7 +15,7 @@ export const LOCALE = {
   common: {
     dashboard: {
       topbar: {
-        searchPlaceholder: 'Search...',
+        searchPlaceholder: 'Search by ticket number...',
         profile: 'Profile',
         logout: 'Log out',
       },

@@ -38,7 +38,7 @@ export const renderCheckbox = ({ input, label }) => (
           onChange={input.onChange}
           color="primary"
         />
-              )}
+      )}
       label={label}
     />
   </div>

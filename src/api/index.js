@@ -14,6 +14,7 @@ import {
   API_ADMIN_CREATE_USER_ROUTE,
   API_RESET_PASSWORD_ROUTE,
   API_ADMIN_TICKET_SETTINGS_ROUTE,
+  API_FIND_TICKET,
 } from '../routes';
 import { getTokenHeader, getEmail } from '../utils/helpers/token-handler';
 
@@ -82,6 +83,17 @@ export const ticketsAPI = {
   },
   createTicket(data, userId) {
     return axiosInstance.post(API_USER_POST_TICKET_ROUTE(userId), data, tokenHeader());
+  },
+  findTicket(userId, ticketId) {
+    return axiosInstance.get(API_FIND_TICKET, {
+      params: {
+        userId,
+        ticketId,
+      },
+      headers: {
+        'Authorization': getTokenHeader(),
+      },
+    });
   },
 };
 

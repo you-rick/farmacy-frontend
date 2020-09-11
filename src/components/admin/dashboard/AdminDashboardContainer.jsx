@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -12,7 +12,7 @@ import {
   ADMIN_RESET_PASSWORD_ROUTE,
   ADMIN_TICKET_SETTINGS_ROUTE,
 } from '../../../routes';
-
+import { resetCurrentTicketData } from '../../../store/ticketsReducer';
 import Dashboard from './Dashboard/Dashboard';
 import LeftbarContainer from '../../shared/dashboard/LeftbarContainer/LeftbarContainer';
 import Topbar from '../../shared/dashboard/Topbar/Topbar';
@@ -22,8 +22,19 @@ import Users from './Users/Users';
 import NewUserContainer from './NewUser/NewUserContainer';
 import ResetPassword from './Profile/ResetPassword/ResetPassword';
 import TicketSettingsContainer from './TicketSettings/TicketSettingsContainer';
+import TicketInfo from '../../shared/dashboard/TicketInfo/TicketInfo';
 
-const AdminDashboardContainer = ({ isAuth, role }) => {
+const AdminDashboardContainer = ({ isAuth, role, resetCurrentTicketData, currentTicket }) => {
+  const [activeTicket, setActiveTicket] = useState(currentTicket);
+
+  useEffect(() => {
+    setActiveTicket(currentTicket);
+  }, [currentTicket]);
+
+  const handleCloseModal = () => {
+    resetCurrentTicketData();
+  };
+
   if (!isAuth || role !== 'ROLE_ADMIN') {
     return <Redirect to="/" />;
   }
@@ -43,6 +54,8 @@ const AdminDashboardContainer = ({ isAuth, role }) => {
           <Route path={ADMIN_CREATE_USER_ROUTE} render={() => <NewUserContainer />} />
         </Switch>
       </Box>
+      {activeTicket.id
+      && <TicketInfo open onClose={handleCloseModal} ticket={activeTicket} />}
     </>
   );
 };
@@ -50,5 +63,9 @@ const AdminDashboardContainer = ({ isAuth, role }) => {
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   role: state.auth.role,
+  currentTicket: state.tickets.ticket,
 });
-export default compose(connect(mapStateToProps, {}), withRouter)(AdminDashboardContainer);
+export default compose(
+  connect(mapStateToProps, { resetCurrentTicketData }),
+  withRouter,
+)(AdminDashboardContainer);
