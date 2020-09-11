@@ -31,6 +31,12 @@ const themeStyles = (theme) => ({
     width: '8rem',
     paddingLeft: '2.5rem',
     transition: theme.transitions.create('width'),
+    [theme.breakpoints.up('sm')]: {
+      width: '8rem',
+      '&:focus': {
+        width: '12rem',
+      },
+    },
   },
   icon: {
     [theme.breakpoints.down('sm')]: {

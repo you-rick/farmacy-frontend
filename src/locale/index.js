@@ -16,6 +16,8 @@ export const LOCALE = {
     dashboard: {
       topbar: {
         searchPlaceholder: 'Search...',
+        profile: 'Profile',
+        logout: 'Log out',
       },
       tickets: {
         headline: 'Tickets',

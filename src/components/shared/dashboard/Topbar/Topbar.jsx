@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { AppBar, Grid, Toolbar, InputBase, IconButton } from '@material-ui/core';
+import { AppBar, Grid, Toolbar, InputBase, IconButton, Menu, MenuItem } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { makeStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../../../../store/authReducer';
 import themeStyles from './Topbar.styles';
 import { LOCALE } from '../../../../locale';
 import { USER_PROFILE_ROUTE, ADMIN_PROFILE_ROUTE } from '../../../../routes';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const Topbar = ({ role }) => {
+const Topbar = ({ role, logout }) => {
   const classes = useStyles();
   const locale = LOCALE.common.dashboard.topbar;
   const profilePath = role === 'ROLE_USER' ? USER_PROFILE_ROUTE : ADMIN_PROFILE_ROUTE;
+  const [anchorEl, setAnchorEl] = useState(null);
+  const dropdownOpen = Boolean(anchorEl);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    logout(role);
+  };
 
   return (
     <AppBar position="fixed" color="default">
@@ -24,15 +39,6 @@ const Topbar = ({ role }) => {
         <Grid container justify="flex-end" alignItems="center">
           <Grid item>
             <Grid container alignItems="center" className={classes.rightPanel}>
-              <IconButton
-                aria-label="account of current user"
-                color="inherit"
-                className={classes.icon}
-                component={NavLink}
-                to={profilePath}
-              >
-                <AccountCircle />
-              </IconButton>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />
@@ -46,6 +52,31 @@ const Topbar = ({ role }) => {
                   inputProps={{ 'aria-label': 'search' }}
                 />
               </div>
+              <>
+                <IconButton
+                  color="inherit"
+                  className={classes.icon}
+                  onClick={handleMenu}
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  open={dropdownOpen}
+                  onClose={handleClose}
+                >
+                  <MenuItem component={NavLink} to={profilePath}>{locale.profile}</MenuItem>
+                  <MenuItem onClick={handleLogout}>{locale.logout}</MenuItem>
+                </Menu>
+              </>
               <IconButton
                 aria-label="notifications"
                 color="primary"
@@ -71,4 +102,4 @@ const mapStateToProps = (state) => ({
   role: state.auth.role,
 });
 
-export default connect(mapStateToProps, {})(Topbar);
+export default connect(mapStateToProps, { logout })(Topbar);
