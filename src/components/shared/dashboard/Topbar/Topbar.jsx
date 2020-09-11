@@ -52,6 +52,13 @@ const Topbar = ({ role, logout }) => {
                   inputProps={{ 'aria-label': 'search' }}
                 />
               </div>
+              <IconButton
+                aria-label="notifications"
+                color="primary"
+                className={classes.icon}
+              >
+                <NotificationsIcon />
+              </IconButton>
               <>
                 <IconButton
                   color="inherit"
@@ -77,13 +84,6 @@ const Topbar = ({ role, logout }) => {
                   <MenuItem onClick={handleLogout}>{locale.logout}</MenuItem>
                 </Menu>
               </>
-              <IconButton
-                aria-label="notifications"
-                color="primary"
-                className={classes.icon}
-              >
-                <NotificationsIcon />
-              </IconButton>
               <IconButton
                 aria-label="help"
                 className={classes.helpBtn}
