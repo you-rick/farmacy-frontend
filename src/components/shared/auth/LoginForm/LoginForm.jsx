@@ -15,10 +15,9 @@ import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { renderTextField, renderCheckbox } from '../../common/FormControls/FormControls';
 import {
-  USER_FORGOT_PASS_ROUTE,
   USER_LOGIN_ROUTE,
-  ADMIN_FORGOT_PASS_ROUTE,
   ADMIN_LOGIN_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
 } from '../../../../routes';
 import { LOCALE } from '../../../../locale';
 
@@ -31,7 +30,6 @@ const useStyles = makeStyles({
 const LoginForm = ({ handleSubmit, userType }) => {
   const classes = useStyles();
   const locale = LOCALE.auth.login;
-  const forgotPassPath = userType === 'ROLE_USER' ? USER_FORGOT_PASS_ROUTE : ADMIN_FORGOT_PASS_ROUTE;
   const loginPath = userType === 'ROLE_USER' ? ADMIN_LOGIN_ROUTE : USER_LOGIN_ROUTE;
   const loginLabel = userType === 'ROLE_USER' ? locale.adminLogin : locale.userLogin;
 
@@ -95,7 +93,7 @@ const LoginForm = ({ handleSubmit, userType }) => {
                   <Grid item>
                     <Link
                       component={NavLink}
-                      to={forgotPassPath}
+                      to={FORGOT_PASSWORD_ROUTE}
                       variant="body2"
                     >
                       {locale.forgotPassword}

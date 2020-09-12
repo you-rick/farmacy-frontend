@@ -14,7 +14,8 @@ import {
   API_ADMIN_CREATE_USER_ROUTE,
   API_RESET_PASSWORD_ROUTE,
   API_ADMIN_TICKET_SETTINGS_ROUTE,
-  API_FIND_TICKET,
+  API_FIND_TICKET_ROUTE,
+  API_FORGOT_PASSWORD_ROUTE,
 } from '../routes';
 import { getTokenHeader, getEmail } from '../utils/helpers/token-handler';
 
@@ -34,6 +35,9 @@ export const authAPI = {
     return axiosInstance.post(url, { email: data.username }, {
       auth: authHeaders(data),
     });
+  },
+  forgotPassword(data) {
+    return axiosInstance.post(API_FORGOT_PASSWORD_ROUTE, data);
   },
   getProfile(role) {
     const url = role === 'ROLE_ADMIN' ? API_ADMIN_DASHBOARD_ROUTE : API_USER_DASHBOARD_ROUTE;
@@ -85,7 +89,7 @@ export const ticketsAPI = {
     return axiosInstance.post(API_USER_POST_TICKET_ROUTE(userId), data, tokenHeader());
   },
   findTicket(userId, ticketId) {
-    return axiosInstance.get(API_FIND_TICKET, {
+    return axiosInstance.get(API_FIND_TICKET_ROUTE, {
       params: {
         userId,
         ticketId,
