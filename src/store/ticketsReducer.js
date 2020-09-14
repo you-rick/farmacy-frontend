@@ -103,6 +103,7 @@ export const findTicket = (userId, ticketId) => (dispatch) => {
   dispatch(resetCurrentTicketData());
   ticketsAPI.findTicket(userId, ticketId)
     .then((response) => {
+      console.log(response);
       dispatch(toggleIsDataFetching(false));
       dispatch(setCurrentTicketData(response.data));
       dispatch(reset('ticket-search'));

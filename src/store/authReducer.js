@@ -142,11 +142,13 @@ export const forgotPassword = (data) => (dispatch) => {
     .then((response) => {
       dispatch(toggleIsDataFetching(false));
       dispatch(reset('forgot-password'));
+      dispatch(push(USER_LOGIN_ROUTE));
       dispatch(setNote({
         msg: response.data.message || requestReceivedMsg,
         type: 'success',
         error: false,
         success: true,
+        hideDuration: 6000,
       }));
     })
     .catch((error) => serverErrorHelper(dispatch, error));

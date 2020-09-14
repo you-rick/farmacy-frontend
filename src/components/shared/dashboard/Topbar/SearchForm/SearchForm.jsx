@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from '../Topbar.styles';
 import { LOCALE } from '../../../../../locale';
 import { renderTextField } from '../../../common/FormControls/FormControls';
+import validate from './validate';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
@@ -37,4 +38,4 @@ const SearchForm = ({ handleSubmit }) => {
   );
 };
 
-export default reduxForm({ form: 'ticket-search' })(SearchForm);
+export default reduxForm({ form: 'ticket-search', validate })(SearchForm);

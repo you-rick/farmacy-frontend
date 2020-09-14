@@ -1,11 +1,13 @@
 import { LOCALE } from '../../../../../locale';
+import { TICKET_NUMBER_VALIDATOR } from '../../../../../utils/validators';
 
 const validate = (values) => {
   const errors = {};
-  const { required } = LOCALE.errors.validation;
+  const { ticketId } = values;
+  const { topbarSearchNumber } = LOCALE.errors.validation;
 
-  if (!values.ticketId) {
-    errors.ticketId = required;
+  if (ticketId && !TICKET_NUMBER_VALIDATOR.test(ticketId)) {
+    errors.ticketId = topbarSearchNumber;
   }
   return errors;
 };

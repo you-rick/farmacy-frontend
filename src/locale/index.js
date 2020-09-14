@@ -204,6 +204,7 @@ export const LOCALE = {
       confirmPassword: 'Passwords should match',
       isNumber: 'Must be a number',
       tooSmall: 'Must be at least 1',
+      topbarSearchNumber: 'Invalid ticket number',
     },
   },
   success: {

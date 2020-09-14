@@ -27,7 +27,26 @@ const themeStyles = (theme) => ({
     },
   },
   subTitle: {
-    display: 'none',
+    position: 'absolute',
+    top: '38px',
+    background: theme.palette.common.white,
+    padding: '3px 6px',
+    fontSize: '0.85rem',
+    boxShadow: '0 0 3px 0 rgba(0,0,0,0.15)',
+    width: '100%',
+    borderRadius: '4px',
+    '&::before': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      top: '-6px',
+      left: '10px',
+      width: '0',
+      height: '0',
+      borderStyle: 'solid',
+      borderWidth: '0 8px 8px 8px',
+      borderColor: 'transparent transparent #fff transparent',
+    },
   },
   icon: {
     [theme.breakpoints.down('sm')]: {

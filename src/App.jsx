@@ -50,7 +50,12 @@ const AppContainer = (props) => {
         <Route path={FORGOT_PASSWORD_ROUTE} render={() => <ForgotPasswordContainer />} />
         <Redirect to={NOT_FOUND_ROUTE} />
       </Switch>
-      <Notification type={notification.type} msg={notification.msg} hideNote={hideNote} />
+      <Notification
+        type={notification.type}
+        msg={notification.msg}
+        hideNote={hideNote}
+        hideDuration={notification.hideDuration}
+      />
       {isDataFetching && <Preloader />}
     </div>
   );

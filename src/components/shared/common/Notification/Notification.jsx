@@ -6,7 +6,7 @@ import { hideNote } from '../../../../store/notificationReducer';
 
 const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
-const Notification = ({ type, msg, hideNote }) => {
+const Notification = ({ type, msg, hideDuration, hideNote }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Notification = ({ type, msg, hideNote }) => {
     <>
       {(msg && type)
       && (
-        <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
+        <Snackbar open={open} autoHideDuration={hideDuration || 4000} onClose={handleClose}>
           <Alert onClose={handleClose} severity={type}>
             {msg}
           </Alert>
