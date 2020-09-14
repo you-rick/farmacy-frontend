@@ -9,6 +9,7 @@ import {
   USER_BASE_ROUTE,
   ADMIN_BASE_ROUTE,
   ADMIN_LOGIN_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
 } from './routes';
 import { hideNote } from './store/notificationReducer';
 import { initializeApp } from './store/appReducer';
@@ -22,6 +23,8 @@ import UserLoginContainer from './components/user/auth/Login/UserLoginContainer'
 import UserDashboardContainer from './components/user/dashboard/UserDashboardContainer';
 import AdminLoginContainer from './components/admin/auth/Login/AdminLoginContainer';
 import AdminDashboardContainer from './components/admin/dashboard/AdminDashboardContainer';
+import ForgotPasswordContainer
+  from './components/shared/auth/ForgotPassword/ForgotPasswordContainer';
 
 const AppContainer = (props) => {
   const { isDataFetching, initialized, isAuth, notification, hideNote, initializeApp } = props;
@@ -44,9 +47,15 @@ const AppContainer = (props) => {
         <Route exact path={ADMIN_LOGIN_ROUTE} render={() => <AdminLoginContainer />} />
         <Route path={ADMIN_BASE_ROUTE} render={() => <AdminDashboardContainer />} />
         <Route path={NOT_FOUND_ROUTE} render={() => <NotFound />} />
+        <Route path={FORGOT_PASSWORD_ROUTE} render={() => <ForgotPasswordContainer />} />
         <Redirect to={NOT_FOUND_ROUTE} />
       </Switch>
-      <Notification type={notification.type} msg={notification.msg} hideNote={hideNote} />
+      <Notification
+        type={notification.type}
+        msg={notification.msg}
+        hideNote={hideNote}
+        hideDuration={notification.hideDuration}
+      />
       {isDataFetching && <Preloader />}
     </div>
   );

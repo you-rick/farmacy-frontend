@@ -15,7 +15,7 @@ export const LOCALE = {
   common: {
     dashboard: {
       topbar: {
-        searchPlaceholder: 'Search...',
+        searchPlaceholder: 'Search by ticket number...',
         profile: 'Profile',
         logout: 'Log out',
       },
@@ -185,6 +185,13 @@ export const LOCALE = {
       headline: 'Page not found',
       body: 'Maybe the page you are looking for has been removed, or you typed in the wrong URL',
     },
+    forgotPassword: {
+      headline: 'Recover Your Password',
+      form: {
+        email: 'Enter your email',
+        submit: 'Submit',
+      },
+    },
   },
   errors: {
     server: {
@@ -197,6 +204,7 @@ export const LOCALE = {
       confirmPassword: 'Passwords should match',
       isNumber: 'Must be a number',
       tooSmall: 'Must be at least 1',
+      topbarSearchNumber: 'Invalid ticket number',
     },
   },
   success: {
@@ -213,6 +221,9 @@ export const LOCALE = {
     },
     ticketSettings: {
       settingsUpdated: 'Ticket settings successfully updated',
+    },
+    forgotPassword: {
+      requestReceived: 'Your request has been received. You wll receive an email shortly with your new password details.',
     },
   },
 };

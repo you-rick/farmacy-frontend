@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { AppBar, Grid, Toolbar, InputBase, IconButton, Menu, MenuItem } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import { AppBar, Grid, Toolbar, IconButton, Menu, MenuItem } from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
@@ -11,6 +10,7 @@ import { logout } from '../../../../store/authReducer';
 import themeStyles from './Topbar.styles';
 import { LOCALE } from '../../../../locale';
 import { USER_PROFILE_ROUTE, ADMIN_PROFILE_ROUTE } from '../../../../routes';
+import SearchFormContainer from './SearchForm/SearchFormContainer';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
@@ -39,19 +39,7 @@ const Topbar = ({ role, logout }) => {
         <Grid container justify="flex-end" alignItems="center">
           <Grid item>
             <Grid container alignItems="center" className={classes.rightPanel}>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder={locale.searchPlaceholder}
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-              </div>
+              <SearchFormContainer />
               <IconButton
                 aria-label="notifications"
                 color="primary"
@@ -69,10 +57,6 @@ const Topbar = ({ role, logout }) => {
                 </IconButton>
                 <Menu
                   anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                  }}
                   transformOrigin={{
                     vertical: 'top',
                     horizontal: 'left',

@@ -12,6 +12,7 @@ import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
 
 const successMsg = LOCALE.success.profile;
+const requestReceivedMsg = LOCALE.success.forgotPassword.requestReceived;
 
 // Actions
 const SET_PROFILE_DATA = 'SET_PROFILE_DATA';
@@ -130,6 +131,25 @@ export const login = (data, role) => (dispatch) => {
 
       dispatch(reset(role === 'ROLE_USER' ? 'user-login' : 'admin-login'));
       console.log(res);
+    })
+    .catch((error) => serverErrorHelper(dispatch, error));
+};
+
+export const forgotPassword = (data) => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  authAPI.forgotPassword(data)
+    .then((response) => {
+      dispatch(toggleIsDataFetching(false));
+      dispatch(reset('forgot-password'));
+      dispatch(push(USER_LOGIN_ROUTE));
+      dispatch(setNote({
+        msg: response.data.message || requestReceivedMsg,
+        type: 'success',
+        error: false,
+        success: true,
+        hideDuration: 6000,
+      }));
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
