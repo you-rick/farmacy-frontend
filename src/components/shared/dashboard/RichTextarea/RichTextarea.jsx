@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import { Editor } from '@tinymce/tinymce-react';
 import { useWindowWidth } from '@react-hook/window-size/throttled';
 import { toggleIsDataFetching } from '../../../../store/appReducer';
+import { setEditorValue, clearEditorValue } from '../../../../store/richtextReducer';
 import style from './RichTextarea.scss';
 import { layoutBreakpoint } from '../../../../utils/helpers/layout-breakpoints';
 
-const RichTextarea = ({ body, height, onChange, onInit, toggleIsDataFetching }) => {
+const RichTextarea = ({ height, onChange, onInit, toggleIsDataFetching, editor, setEditorValue }) => {
   const windowWidth = useWindowWidth();
+  const { value } = editor;
   const [initHeight, setInitHeight] = useState(500);
   const bodyHeight = windowWidth < layoutBreakpoint.md ? 250 : height;
 
@@ -21,6 +23,7 @@ const RichTextarea = ({ body, height, onChange, onInit, toggleIsDataFetching }) 
 
   const handleEditorChange = (content) => {
     onChange(content);
+    setEditorValue(content);
   };
 
   const handleInit = () => {
@@ -38,8 +41,8 @@ const RichTextarea = ({ body, height, onChange, onInit, toggleIsDataFetching }) 
     },
     toolbar: 'undo redo | formatselect | bold italic underline | alignleft aligncenter'
       + ' alignright alignjustify | bullist numlist | removeformat',
-    setup: (ed) => {
-      ed.on('init', () => {
+    setup: (editor) => {
+      editor.on('init', () => {
         handleInit();
       });
     },
@@ -48,7 +51,8 @@ const RichTextarea = ({ body, height, onChange, onInit, toggleIsDataFetching }) 
   return (
     <Editor
       apiKey={process.env.REACT_APP_TINYMCE_KEY}
-      initialValue={body}
+      initialValue={value}
+      value={value}
       init={initData}
       onEditorChange={handleEditorChange}
     />
@@ -57,6 +61,11 @@ const RichTextarea = ({ body, height, onChange, onInit, toggleIsDataFetching }) 
 
 const mapStateToProps = (state) => ({
   isDataFetching: state.app.isDataFetching,
+  editor: state.richtext,
 });
 
-export default connect(mapStateToProps, { toggleIsDataFetching })(RichTextarea);
+export default connect(mapStateToProps, {
+  toggleIsDataFetching,
+  setEditorValue,
+  clearEditorValue,
+})(RichTextarea);

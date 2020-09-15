@@ -5,8 +5,8 @@ import { findTicket } from '../../../../../store/ticketsReducer';
 
 const SearchFormContainer = ({ userId, findTicket }) => {
   const onSubmit = (data) => {
-    if (data.ticketId) {
-      findTicket(userId, data.ticketId);
+    if (data.ticketNumber) {
+      findTicket(userId, data.ticketNumber);
     }
   };
   return (

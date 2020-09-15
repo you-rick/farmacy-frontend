@@ -19,7 +19,7 @@ const initialState = {
     date: null,
     type: null,
     detailMessage: null,
-    user: {
+    userDetails: {
       userId: null,
       firstName: null,
       lastName: null,
@@ -38,7 +38,7 @@ const messagesReducer = (state = initialState, action) => {
       return {
         ...state,
         ticketId: _.get(data, 'ticketId', initialState.ticketId),
-        ticketNumber: _.get(data, 'ticketNumber', initialState.ticketId),
+        ticketNumber: _.get(data, 'ticketNumber', initialState.ticketNumber),
         userId: _.get(data, 'userId', initialState.userId),
         list: _.get(data, 'messages', initialState.list),
         priority: _.get(data, 'priority', initialState.priority),
@@ -67,6 +67,7 @@ export const getMessages = (userId, ticketId, role) => (dispatch) => {
   dispatch(resetMessagesData());
   messagesAPI.getMessages(userId, ticketId, role)
     .then((response) => {
+      console.log(response.data);
       dispatch(toggleIsDataFetching(false));
       dispatch(setMessagesData(response.data));
     })

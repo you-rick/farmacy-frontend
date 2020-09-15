@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Box, Typography } from '@material-ui/core';
-import * as uuid from 'uuid';
 import TicketsTable from '../../shared/TicketsTable/TicketsTable';
 import TicketInfo from '../../../../shared/dashboard/TicketInfo/TicketInfo';
-import { updateTicketStatus } from '../../../../../store/adminReducer';
+import { updateNewTicketStatus } from '../../../../../store/adminReducer';
 import { ticketTypes } from '../../../../../core/ticketTypes';
 import { LOCALE } from '../../../../../locale';
 
-const NewTickets = ({ tickets, ticket, updateTicketStatus, requestor }) => {
+const NewTickets = ({ tickets, ticket, updateNewTicketStatus, requestor }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [activeTicket, setActiveTicket] = useState(ticket);
 
   const handleTicketStatus = (ticket) => {
-    updateTicketStatus({
-      'ticketId': uuid.v4(),
+    updateNewTicketStatus({
+      'ticketNumber': ticket.ticketNumber,
       'requestor': requestor,
-      'to': 'admin',
+      'to': 'ticket.admin@client.com',
       'department': 'placeholder',
       'ticketType': ticketTypes.incident,
       'priority': ticket.priority,
@@ -52,4 +51,4 @@ const mapStateToProps = (state) => ({
   requestor: state.auth.email,
 });
 
-export default connect(mapStateToProps, { updateTicketStatus })(NewTickets);
+export default connect(mapStateToProps, { updateNewTicketStatus })(NewTickets);

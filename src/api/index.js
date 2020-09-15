@@ -4,9 +4,10 @@ import {
   API_USER_DASHBOARD_ROUTE,
   API_USER_GET_MESSAGES_ROUTE,
   API_USER_POST_TICKET_ROUTE,
+  API_USER_TICKET_UPDATE_ROUTE,
   API_ADMIN_DASHBOARD_ROUTE,
   API_PROFILE_ROUTE,
-  API_ADMIN_NEW_TICKET_UPDATE_ROUTE,
+  API_ADMIN_TICKET_UPDATE_ROUTE,
   API_ADMIN_GET_MESSAGES_ROUTE,
   API_ADMIN_TICKETS_ROUTE,
   API_ADMIN_GET_USERS_ROUTE,
@@ -55,9 +56,6 @@ export const adminAPI = {
   getData() {
     return axiosInstance.post(API_ADMIN_DASHBOARD_ROUTE, { email: getEmail() }, tokenHeader());
   },
-  updateTicketStatus(data, ticketId) {
-    return axiosInstance.post(API_ADMIN_NEW_TICKET_UPDATE_ROUTE(ticketId), data, tokenHeader());
-  },
   getTickets() {
     return axiosInstance.get(API_ADMIN_TICKETS_ROUTE, tokenHeader());
   },
@@ -87,6 +85,13 @@ export const ticketsAPI = {
   },
   createTicket(data, userId) {
     return axiosInstance.post(API_USER_POST_TICKET_ROUTE(userId), data, tokenHeader());
+  },
+  updateTicket(data, ticketId, userId, role) {
+    const updateUrl = () => (role === 'ROLE_USER'
+      ? API_USER_TICKET_UPDATE_ROUTE(userId, ticketId)
+      : API_ADMIN_TICKET_UPDATE_ROUTE(ticketId));
+    console.log(updateUrl());
+    return axiosInstance.post(updateUrl(), data, tokenHeader());
   },
   findTicket(userId, ticketId) {
     return axiosInstance.get(API_FIND_TICKET_ROUTE, {

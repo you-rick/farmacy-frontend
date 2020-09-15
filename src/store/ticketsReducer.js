@@ -7,6 +7,7 @@ import { hideNote, setNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
 import { USER_TICKETS_ROUTE } from '../routes';
+import { setMessagesData } from './messagesReducer';
 
 const successMsg = LOCALE.success.tickets;
 
@@ -26,6 +27,11 @@ const initialState = {
     subject: null,
     status: null,
     priority: null,
+    requestor: null,
+    to: null,
+    department: null,
+    ticketType: null,
+    description: null,
   },
   messageCounts: {
     all: 0,
@@ -97,13 +103,24 @@ export const createTicket = (data, userId) => (dispatch) => {
     .catch((error) => serverErrorHelper(dispatch, error));
 };
 
+export const updateTicket = (data, ticketId, userId, role) => (dispatch) => {
+  dispatch(toggleIsDataFetching(true));
+  dispatch(hideNote());
+  ticketsAPI.updateTicket(data, ticketId, userId, role)
+    .then((response) => {
+      const { messages } = response.data;
+      dispatch(toggleIsDataFetching(false));
+      dispatch(setMessagesData({ messages }));
+    })
+    .catch((error) => serverErrorHelper(dispatch, error));
+};
+
 export const findTicket = (userId, ticketId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
   dispatch(resetCurrentTicketData());
   ticketsAPI.findTicket(userId, ticketId)
     .then((response) => {
-      console.log(response);
       dispatch(toggleIsDataFetching(false));
       dispatch(setCurrentTicketData(response.data));
       dispatch(reset('ticket-search'));

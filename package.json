@@ -18,6 +18,7 @@
     "connected-react-router": "^6.7.0",
     "date-fns": "^2.16.1",
     "history": "4.10.1",
+    "html-react-parser": "^0.14.0",
     "lodash": "^4.17.20",
     "lodash.get": "^4.4.2",
     "moment": "^2.27.0",
