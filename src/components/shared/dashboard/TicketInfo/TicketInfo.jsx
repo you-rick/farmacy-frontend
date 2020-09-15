@@ -7,11 +7,12 @@ import {
   IconButton,
   Grid,
   Box,
+  Typography,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './TicketInfo.styles';
-import MessageForm from './MessageForm/MessageForm';
+import MessageFormWrapper from './MessageForm/MessageFormWrapper';
 import Messages from './Messages/Messages';
 import SmallPreloader from '../../common/SmallPreloader/SmallPreloader';
 
@@ -40,8 +41,11 @@ const TicketInfo = ({ ticket, open, onClose }) => {
       }}
     >
       <DialogTitle>
-        <Grid container justify="space-between">
-          {ticket.subject}
+        <Grid container justify="space-between" alignItems="flex-start">
+          <Box className={classes.subjectWrap}>
+            <Typography variant="subtitle1" color="primary">Subject</Typography>
+            <Typography variant="h6" className={classes.subject}>{ticket.subject}</Typography>
+          </Box>
           <IconButton aria-label="close" size="small" onClick={handleClose}>
             <CloseIcon fontSize="small" />
           </IconButton>
@@ -50,13 +54,13 @@ const TicketInfo = ({ ticket, open, onClose }) => {
       <DialogContent dividers>
         {!msgFormReady && <SmallPreloader />}
         <Box style={{ visibility: msgFormReady ? 'visible' : 'hidden' }}>
-          <MessageForm onFormInit={handleFormInit} />
+          <MessageFormWrapper onFormInit={handleFormInit} ticket={ticket} />
         </Box>
 
         {msgFormReady && (
           <>
             <Divider />
-            <Messages ticketId={ticket.ticketNumber} />
+            <Messages ticketNumber={ticket.ticketNumber} />
           </>
         )}
       </DialogContent>

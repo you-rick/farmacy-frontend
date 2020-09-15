@@ -8,6 +8,7 @@ import notificationReducer from './notificationReducer';
 import messagesReducer from './messagesReducer';
 import adminReducer from './adminReducer';
 import usersReducer from './usersReducer';
+import richtextReducer from './richtextReducer';
 
 const reducersGroup = (history) => combineReducers({
   app: appReducer,
@@ -17,6 +18,7 @@ const reducersGroup = (history) => combineReducers({
   messages: messagesReducer,
   notification: notificationReducer,
   users: usersReducer,
+  richtext: richtextReducer,
   router: connectRouter(history),
   form: formReducer,
 });

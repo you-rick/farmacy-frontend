@@ -70,10 +70,9 @@ export const getProfile = (role) => (dispatch) => {
   return authAPI.getProfile(role)
     .then((response) => {
       const res = response.data;
-      const responseRole = res.user.role;
-
+      const responseRole = res.userDetails.role;
       dispatch(toggleIsDataFetching(false));
-      dispatch(setProfileData(res.user));
+      dispatch(setProfileData(res.userDetails));
       dispatch(setAuthStatus(true));
 
       if (responseRole === 'ROLE_USER') dispatch(setTicketsData(res));
@@ -119,18 +118,17 @@ export const login = (data, role) => (dispatch) => {
   dispatch(hideNote());
   authAPI.login(data, role)
     .then((response) => {
+      const res = response.data;
       setToken(data);
       setRole(role);
-      const res = response.data;
       dispatch(toggleIsDataFetching(false));
-      dispatch(setProfileData(res.user));
+      dispatch(setProfileData(res.userDetails));
       dispatch(setAuthStatus(true));
 
       if (role === 'ROLE_USER') dispatch(setTicketsData(res));
       if (role === 'ROLE_ADMIN') dispatch(setAdminData(res));
 
       dispatch(reset(role === 'ROLE_USER' ? 'user-login' : 'admin-login'));
-      console.log(res);
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };

@@ -28,9 +28,8 @@ const NewTicket = ({ dispatch, handleSubmit, initialize, user }) => {
   useEffect(() => {
     initialize({
       requester: `${user.email}`,
-      ticketId: uuid.v4()
-        .split('-')
-        .join(''),
+      ticketNumber: uuid.v4()
+        .replace(/-/g, ''),
     });
   }, [initialize, user]);
 

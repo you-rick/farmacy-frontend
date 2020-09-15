@@ -18,7 +18,7 @@ const SearchForm = ({ handleSubmit }) => {
     <form onSubmit={handleSubmit}>
       <div className={classes.search}>
         <Field
-          name="ticketId"
+          name="ticketNumber"
           placeholder={locale.searchPlaceholder}
 
           component={renderTextField}

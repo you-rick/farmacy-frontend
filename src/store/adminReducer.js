@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { toggleIsDataFetching } from './appReducer';
-import { adminAPI } from '../api';
+import { adminAPI, ticketsAPI } from '../api';
 import { hideNote, setNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
@@ -107,10 +107,10 @@ export const getData = () => (dispatch) => {
     .catch((error) => serverErrorHelper(dispatch, error));
 };
 
-export const updateTicketStatus = (data, ticketId) => (dispatch) => {
+export const updateNewTicketStatus = (data, ticketId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  adminAPI.updateTicketStatus(data, ticketId)
+  ticketsAPI.updateTicket(data, ticketId)
     .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(updateNewTickets(ticketId));
