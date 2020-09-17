@@ -6,12 +6,12 @@ import SmallPreloader from '../../../common/SmallPreloader/SmallPreloader';
 import { LOCALE } from '../../../../../locale';
 import { getMessages } from '../../../../../store/messagesReducer';
 
-const Messages = ({ role, ticketNumber, userId, messages, getMessages }) => {
+const Messages = ({ role, ticketId, userId, messages, getMessages }) => {
   const locale = LOCALE.user.dashboard.ticketInfo;
 
   useEffect(() => {
-    getMessages(userId, ticketNumber, role);
-  }, [ticketNumber, userId, getMessages, role]);
+    getMessages(userId, ticketId, role);
+  }, [ticketId, userId, getMessages, role]);
 
   if (!messages.length) return <SmallPreloader />;
 

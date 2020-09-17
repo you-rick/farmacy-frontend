@@ -1,22 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import Moment from 'react-moment';
-import {
-  TableContainer,
-  Table,
-  TableHead,
-  TableBody,
-  TableRow,
-  TableCell,
-  Paper,
-  Typography,
-  Box,
-  Badge,
-} from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 import { useLastLocation } from 'react-router-last-location';
-import { makeStyles } from '@material-ui/core/styles';
-import themeStyles from './MyTickets.styles';
 import { getUserTickets } from '../../../../store/ticketsReducer';
 import TicketInfo from '../../../shared/dashboard/TicketInfo/TicketInfo';
 import { LOCALE } from '../../../../locale';
@@ -26,9 +12,7 @@ import {
   USER_TICKETS_UPDATED_PARAM,
   USER_TICKETS_ROUTE,
 } from '../../../../routes';
-import { DATE_FORMAT } from '../../../../utils/validators';
-
-const useStyles = makeStyles((theme) => themeStyles(theme));
+import TicketsTable from './TicketsTable/TicketsTable';
 
 const aliases = {
   [USER_TICKETS_UNRESOLVED_PARAM]: 'unresolved',
@@ -37,10 +21,8 @@ const aliases = {
 };
 
 const MyTickets = ({ tickets, ticket, getUserTickets }) => {
-  const classes = useStyles();
   const { filter } = useParams();
   const lastLocation = useLastLocation();
-  const locale = LOCALE.common.dashboard.tickets;
   const [modalOpen, setModalOpen] = useState(false);
   const [activeTicket, setActiveTicket] = useState(ticket);
   const [ticketsList, setTicketsList] = useState(tickets);
@@ -77,40 +59,7 @@ const MyTickets = ({ tickets, ticket, getUserTickets }) => {
           {LOCALE.user.dashboard.myTickets.headline}
         </Typography>
       </Box>
-      <TableContainer component={Paper}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <TableCell>{locale.tableHeaders.ticketNumber}</TableCell>
-              <TableCell>{locale.tableHeaders.date}</TableCell>
-              <TableCell className={classes.subjectCol}>{locale.tableHeaders.subject}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {ticketsList.map((item) => (
-              <TableRow
-                hover
-                key={item.id}
-                className={classes.tableRow}
-                onClick={() => handleShowModal(item)}
-              >
-                <TableCell>
-                  <Badge
-                    variant="dot"
-                    className={classes.root}
-                    classes={{ badge: classes[item.status] }}
-                  />
-                  {item.ticketNumber}
-                </TableCell>
-                <TableCell>
-                  <Moment parse="DD/MM/YYYY" format={DATE_FORMAT}>{item.createdDate}</Moment>
-                </TableCell>
-                <TableCell className={classes.subjectCol}>{item.subject}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <TicketsTable tickets={ticketsList} onShowModal={handleShowModal} />
       <TicketInfo open={modalOpen} onClose={handleCloseModal} ticket={activeTicket} />
     </>
   );

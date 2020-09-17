@@ -1,8 +1,25 @@
 import createBreakpoints from '@material-ui/core/styles/createBreakpoints';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const breakpoints = createBreakpoints({});
+const defaultTheme = createMuiTheme();
 
 export const themeStyles = {
+  unresolved: {
+    backgroundColor: defaultTheme.palette.info.light,
+  },
+  in_progress: {
+    backgroundColor: defaultTheme.palette.warning.light,
+  },
+  done: {
+    backgroundColor: defaultTheme.palette.success.light,
+  },
+  badge: {
+    marginRight: '1rem',
+  },
+};
+
+export const customThemeStyles = {
   overrides: {
     MUIDataTable: {
       root: {
@@ -13,16 +30,6 @@ export const themeStyles = {
       root: {
         '&:hover': {
           cursor: 'pointer',
-        },
-        '&:first-child[data-colindex]': {
-          [breakpoints.up(960)]: {
-            width: '30%',
-          },
-        },
-        '&:last-child[data-colindex]': {
-          [breakpoints.up(960)]: {
-            width: '30%',
-          },
         },
         [breakpoints.down(575)]: {
           '& > [class*="stackedCommon"]': {

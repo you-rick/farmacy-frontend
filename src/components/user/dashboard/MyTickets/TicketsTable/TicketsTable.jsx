@@ -1,16 +1,20 @@
 import React from 'react';
 import _ from 'lodash';
 import MUIDataTable from 'mui-datatables';
-import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { Badge } from '@material-ui/core';
+import { createMuiTheme, MuiThemeProvider, makeStyles } from '@material-ui/core/styles';
 import moment from 'moment';
-import { themeStyles } from './TicketsTable.styles';
+import { themeStyles, customThemeStyles } from './TicketsTable.styles';
 import { LOCALE } from '../../../../../locale';
 import { DATE_FORMAT } from '../../../../../utils/validators';
 
-const useStyles = () => createMuiTheme(themeStyles);
+const useTheme = () => createMuiTheme(customThemeStyles);
+const useStyles = makeStyles(() => themeStyles);
 
 const TicketsTable = ({ tickets, onShowModal }) => {
+  const classes = useStyles();
   const locale = LOCALE.common.dashboard.tickets;
+
   const columns = [
     {
       name: 'ticketNumber',
@@ -18,6 +22,19 @@ const TicketsTable = ({ tickets, onShowModal }) => {
       options: {
         filter: false,
         sort: false,
+        customBodyRender: (number) => {
+          const ticket = tickets.filter((item) => item.ticketNumber === number)[0];
+          return (
+            <>
+              <Badge
+                variant="dot"
+                className={classes.badge}
+                classes={{ badge: classes[ticket.status] }}
+              />
+              {number}
+            </>
+          );
+        },
       },
     },
     {
@@ -25,14 +42,6 @@ const TicketsTable = ({ tickets, onShowModal }) => {
       label: locale.tableHeaders.date,
       options: {
         filter: false,
-        sort: true,
-      },
-    },
-    {
-      name: 'priority',
-      label: locale.tableHeaders.priority,
-      options: {
-        filter: true,
         sort: true,
       },
     },
@@ -66,13 +75,14 @@ const TicketsTable = ({ tickets, onShowModal }) => {
       },
     },
     onRowClick: (rowData) => {
-      const ticket = tickets.filter((item) => item.ticketNumber === rowData[0])[0];
+      const number = rowData[0].props.children[1];
+      const ticket = tickets.filter((item) => item.ticketNumber === number)[0];
       onShowModal(ticket);
     },
   };
 
   return (
-    <MuiThemeProvider theme={useStyles()}>
+    <MuiThemeProvider theme={useTheme()}>
       <MUIDataTable
         data={tableData}
         columns={columns}

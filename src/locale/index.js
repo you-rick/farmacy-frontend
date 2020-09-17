@@ -21,6 +21,7 @@ export const LOCALE = {
       },
       tickets: {
         headline: 'Tickets',
+        noData: 'No data',
         tableHeaders: {
           ticketNumber: 'Ticket Number',
           date: 'Date',

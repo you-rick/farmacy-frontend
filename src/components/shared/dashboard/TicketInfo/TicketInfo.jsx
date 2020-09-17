@@ -60,7 +60,7 @@ const TicketInfo = ({ ticket, open, onClose }) => {
         {msgFormReady && (
           <>
             <Divider />
-            <Messages ticketNumber={ticket.ticketNumber} />
+            <Messages ticketId={ticket.id} />
           </>
         )}
       </DialogContent>
