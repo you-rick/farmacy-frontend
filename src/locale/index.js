@@ -22,6 +22,7 @@ export const LOCALE = {
       tickets: {
         headline: 'Tickets',
         noData: 'No data',
+        dateFilter: 'Date',
         tableHeaders: {
           ticketNumber: 'Ticket Number',
           date: 'Date',
@@ -113,7 +114,9 @@ export const LOCALE = {
         conversions: 'Conversations',
         form: {
           to: 'To',
-          submitButton: 'Post',
+          status: 'Status',
+          priority: 'Priority',
+          submitButton: 'Save',
         },
       },
     },

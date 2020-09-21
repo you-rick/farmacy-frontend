@@ -9,7 +9,6 @@ const TicketSettingsContainer = ({ getTicketSettings, updateTicketSettings, tick
   }, [getTicketSettings]);
 
   const onSubmit = (data) => {
-    console.log(data);
     updateTicketSettings({ ticketDueConfig: data });
   };
 

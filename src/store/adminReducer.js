@@ -50,7 +50,8 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         stats: _.get(data, 'stats', initialState.stats),
-        newTickets: _.get(data, 'newTickets', initialState.newTickets),
+        newTickets: _.get(data, 'newTickets', initialState.newTickets)
+          .filter((item) => item.createdDate && item.priority),
       };
     }
     case SET_TICKET_SETTINGS: {

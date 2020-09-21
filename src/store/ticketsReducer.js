@@ -50,7 +50,7 @@ const ticketsReducer = (state = initialState, action) => {
         ...state,
         userId: _.get(data, 'userId', initialState.userId),
         list: _.get(data, 'tickets', initialState.list)
-          .filter((item) => item.createdDate),
+          .filter((item) => item.createdDate && item.priority),
         messageCounts: _.get(data, 'messageCounts', initialState.messageCounts),
       };
     }

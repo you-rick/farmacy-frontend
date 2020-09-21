@@ -20,6 +20,7 @@ import {
   FORGOT_PASSWORD_ROUTE,
 } from '../../../../routes';
 import { LOCALE } from '../../../../locale';
+import { roles } from '../../../../core';
 
 const useStyles = makeStyles({
   root: {
@@ -43,7 +44,7 @@ const LoginForm = ({ handleSubmit, userType }) => {
                 {locale.headline}
               </Typography>
               {
-                userType === 'ROLE_ADMIN'
+                userType === roles.admin
                 && <Box m="0 0 0 0.5rem"><SupervisorAccountIcon color="primary" /></Box>
               }
             </Box>

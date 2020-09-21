@@ -4,7 +4,6 @@ import { Box, Typography } from '@material-ui/core';
 import TicketsTable from '../../shared/TicketsTable/TicketsTable';
 import TicketInfo from '../../../../shared/dashboard/TicketInfo/TicketInfo';
 import { updateNewTicketStatus } from '../../../../../store/adminReducer';
-import { ticketTypes } from '../../../../../core/ticketTypes';
 import { LOCALE } from '../../../../../locale';
 
 const NewTickets = ({ tickets, ticket, updateNewTicketStatus, requestor }) => {
@@ -17,7 +16,7 @@ const NewTickets = ({ tickets, ticket, updateNewTicketStatus, requestor }) => {
       'requestor': requestor,
       'to': 'ticket.admin@client.com',
       'department': 'placeholder',
-      'ticketType': ticketTypes.incident,
+      'ticketType': ticket.ticketType,
       'priority': ticket.priority,
       'subject': ticket.subject,
       'status': 'open',

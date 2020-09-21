@@ -19,6 +19,7 @@ import {
   API_FORGOT_PASSWORD_ROUTE,
 } from '../routes';
 import { getTokenHeader, getEmail } from '../utils/helpers/token-handler';
+import { roles } from '../core';
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
@@ -32,7 +33,7 @@ const tokenHeader = () => ({
 
 export const authAPI = {
   login(data, role) {
-    const url = role === 'ROLE_ADMIN' ? API_ADMIN_DASHBOARD_ROUTE : API_USER_DASHBOARD_ROUTE;
+    const url = role === roles.admin ? API_ADMIN_DASHBOARD_ROUTE : API_USER_DASHBOARD_ROUTE;
     return axiosInstance.post(url, { email: data.username }, {
       auth: authHeaders(data),
     });
@@ -41,7 +42,7 @@ export const authAPI = {
     return axiosInstance.post(API_FORGOT_PASSWORD_ROUTE, data);
   },
   getProfile(role) {
-    const url = role === 'ROLE_ADMIN' ? API_ADMIN_DASHBOARD_ROUTE : API_USER_DASHBOARD_ROUTE;
+    const url = role === roles.admin ? API_ADMIN_DASHBOARD_ROUTE : API_USER_DASHBOARD_ROUTE;
     return axiosInstance.post(url, { email: getEmail() }, tokenHeader());
   },
   updateProfile(data) {
@@ -87,10 +88,9 @@ export const ticketsAPI = {
     return axiosInstance.post(API_USER_POST_TICKET_ROUTE(userId), data, tokenHeader());
   },
   updateTicket(data, ticketId, userId, role) {
-    const updateUrl = () => (role === 'ROLE_USER'
+    const updateUrl = () => (role === roles.user
       ? API_USER_TICKET_UPDATE_ROUTE(userId, ticketId)
       : API_ADMIN_TICKET_UPDATE_ROUTE(ticketId));
-    console.log(updateUrl());
     return axiosInstance.post(updateUrl(), data, tokenHeader());
   },
   findTicket(userId, ticketId) {
@@ -108,7 +108,7 @@ export const ticketsAPI = {
 
 export const messagesAPI = {
   getMessages(userId, ticketId, role) {
-    const url = role === 'ROLE_ADMIN' ? API_ADMIN_GET_MESSAGES_ROUTE : API_USER_GET_MESSAGES_ROUTE;
+    const url = role === roles.admin ? API_ADMIN_GET_MESSAGES_ROUTE : API_USER_GET_MESSAGES_ROUTE;
     return axiosInstance.get(url(userId, ticketId), tokenHeader());
   },
 };

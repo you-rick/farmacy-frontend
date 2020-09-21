@@ -23,6 +23,7 @@ import NewUserContainer from './NewUser/NewUserContainer';
 import ResetPassword from './Profile/ResetPassword/ResetPassword';
 import TicketSettingsContainer from './TicketSettings/TicketSettingsContainer';
 import TicketInfo from '../../shared/dashboard/TicketInfo/TicketInfo';
+import { roles } from '../../../core';
 
 const AdminDashboardContainer = ({ isAuth, role, resetCurrentTicketData, currentTicket }) => {
   const [activeTicket, setActiveTicket] = useState(currentTicket);
@@ -35,7 +36,7 @@ const AdminDashboardContainer = ({ isAuth, role, resetCurrentTicketData, current
     resetCurrentTicketData();
   };
 
-  if (!isAuth || role !== 'ROLE_ADMIN') {
+  if (!isAuth || role !== roles.admin) {
     return <Redirect to="/" />;
   }
 

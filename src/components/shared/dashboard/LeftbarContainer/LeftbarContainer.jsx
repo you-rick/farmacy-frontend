@@ -20,6 +20,7 @@ import { LOCALE } from '../../../../locale';
 import { layoutBreakpoint } from '../../../../utils/helpers/layout-breakpoints';
 import UserLeftbar from '../../../user/dashboard/UserLeftbar/UserLeftbar';
 import AdminLeftbar from '../../../admin/dashboard/AdminLeftbar/AdminLeftbar';
+import { roles } from '../../../../core';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
@@ -82,8 +83,8 @@ const LeftbarContainer = ({ role, leftbarShown }) => {
           <Divider className={classes.divider} />
         </Hidden>
 
-        {role === 'ROLE_USER' && <UserLeftbar />}
-        {role === 'ROLE_ADMIN' && <AdminLeftbar />}
+        {role === roles.user && <UserLeftbar />}
+        {role === roles.admin && <AdminLeftbar />}
       </Drawer>
     </>
   );

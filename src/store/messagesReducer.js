@@ -67,7 +67,6 @@ export const getMessages = (userId, ticketId, role) => (dispatch) => {
   dispatch(resetMessagesData());
   messagesAPI.getMessages(userId, ticketId, role)
     .then((response) => {
-      console.log(response.data);
       dispatch(toggleIsDataFetching(false));
       dispatch(setMessagesData(response.data));
     })

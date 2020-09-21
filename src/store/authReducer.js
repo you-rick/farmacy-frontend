@@ -10,6 +10,7 @@ import { setAdminData } from './adminReducer';
 import { USER_LOGIN_ROUTE, ADMIN_LOGIN_ROUTE } from '../routes';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
+import { roles } from '../core';
 
 const successMsg = LOCALE.success.profile;
 const requestReceivedMsg = LOCALE.success.forgotPassword.requestReceived;
@@ -75,8 +76,8 @@ export const getProfile = (role) => (dispatch) => {
       dispatch(setProfileData(res.userDetails));
       dispatch(setAuthStatus(true));
 
-      if (responseRole === 'ROLE_USER') dispatch(setTicketsData(res));
-      if (responseRole === 'ROLE_ADMIN') dispatch(setAdminData(res));
+      if (responseRole === roles.user) dispatch(setTicketsData(res));
+      if (responseRole === roles.admin) dispatch(setAdminData(res));
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
@@ -125,10 +126,10 @@ export const login = (data, role) => (dispatch) => {
       dispatch(setProfileData(res.userDetails));
       dispatch(setAuthStatus(true));
 
-      if (role === 'ROLE_USER') dispatch(setTicketsData(res));
-      if (role === 'ROLE_ADMIN') dispatch(setAdminData(res));
+      if (role === roles.user) dispatch(setTicketsData(res));
+      if (role === roles.admin) dispatch(setAdminData(res));
 
-      dispatch(reset(role === 'ROLE_USER' ? 'user-login' : 'admin-login'));
+      dispatch(reset(role === roles.user ? 'user-login' : 'admin-login'));
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
@@ -156,7 +157,7 @@ export const logout = (role) => (dispatch) => {
   removeToken();
   removeRole();
   dispatch(setProfileData(initialState));
-  dispatch(push(role === 'ROLE_USER' ? USER_LOGIN_ROUTE : ADMIN_LOGIN_ROUTE));
+  dispatch(push(role === roles.user ? USER_LOGIN_ROUTE : ADMIN_LOGIN_ROUTE));
 };
 
 export default authReducer;

@@ -9,6 +9,36 @@ export const themeStyles = {
         tableLayout: 'fixed',
       },
     },
+    MUIDataTableFilter: {
+      root: {
+        '& [class*="gridListTile"]': {
+          marginTop: '0',
+        },
+        '& [class*="MuiFormControl-marginNormal"]': {
+          margin: '0',
+        },
+      },
+    },
+    MUIDataTableHeadCell: {
+      root: {
+        [breakpoints.up(960)]: {
+          '& [class*="sortAction"]': {
+            '& [class*="MUIDataTableHeadCell-data"]:not([class*="sortActive"])': {
+              position: 'relative',
+              '&:after': {
+                content: '"↕"',
+                fontSize: '1.5rem',
+                fontFamily: 'Verdana',
+                opacity: '0.3',
+                position: 'absolute',
+                right: '-1.5rem',
+                top: '0',
+              },
+            },
+          },
+        },
+      },
+    },
     MUIDataTableBodyCell: {
       root: {
         '&:hover': {
@@ -42,6 +72,25 @@ export const themeStyles = {
         [breakpoints.down(575)]: {
           '& [class*="searchText"]': {
             flex: '1 0',
+          },
+        },
+      },
+    },
+    MUIDataTableFooter: {
+      root: {
+        [breakpoints.down(575)]: {
+          '& [class*="tableCellContainer"]': {
+            padding: '0',
+          },
+        },
+      },
+    },
+    MUIDataTablePagination: {
+      root: {
+        [breakpoints.down(575)]: {
+          '& [class*="MuiIconButton"]': {
+            padding: '6px',
+            width: '30px',
           },
         },
       },

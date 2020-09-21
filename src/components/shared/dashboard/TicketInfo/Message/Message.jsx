@@ -2,6 +2,7 @@ import React from 'react';
 import HTMLReactParser from 'html-react-parser';
 import { Grid, Box, Typography, Divider, Tooltip } from '@material-ui/core';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import { roles } from '../../../../../core';
 
 const AdminBadge = () => (
   <Tooltip title="Admin" placement="top" arrow>
@@ -19,7 +20,7 @@ const Message = ({ message }) => {
           <Typography variant="subtitle2">
             {`${userDetails.firstName} ${userDetails.lastName}`}
           </Typography>
-          <Box m="0 0 0 0.5rem">{userDetails.role === 'ROLE_ADMIN' && <AdminBadge />}</Box>
+          <Box m="0 0 0 0.5rem">{userDetails.role === roles.admin && <AdminBadge />}</Box>
         </Grid>
 
         <Typography

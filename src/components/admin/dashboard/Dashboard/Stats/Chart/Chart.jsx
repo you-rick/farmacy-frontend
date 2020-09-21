@@ -27,7 +27,8 @@ const Chart = ({ type, data, isDataFetching }) => {
   const stats = Object.entries(data)
     .map(([key, value]) => ({
       'title': key,
-      'value': value,
+      'value': value || 0.01,
+      'labelValue': value,
       'color': chartPalette[key],
     }));
   const locale = LOCALE.admin.dashboard.stats[type];
@@ -46,7 +47,7 @@ const Chart = ({ type, data, isDataFetching }) => {
                     animate
                     radius={PieChart.defaultProps.radius - chartShiftSize}
                     segmentsShift={chartShiftSize}
-                    label={({ dataEntry }) => dataEntry.value}
+                    label={({ dataEntry }) => dataEntry.labelValue || '0'}
                     labelStyle={() => ({
                       fontSize: '10px',
                       fontFamily: 'sans-serif',
@@ -66,7 +67,7 @@ const Chart = ({ type, data, isDataFetching }) => {
                     <ListItemIcon className={classes.listIcon}>
                       <AdjustIcon fontSize="small" style={{ color: chartPalette[item.title] }} />
                     </ListItemIcon>
-                    <ListItemText primary={`${locale[item.title]} (${item.value || 0})`} />
+                    <ListItemText primary={`${locale[item.title]} (${item.labelValue || 0})`} />
                   </ListItem>
                 ))}
               </List>
