@@ -8,6 +8,8 @@ import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
 import { USER_TICKETS_ROUTE } from '../routes';
 import { setMessagesData } from './messagesReducer';
+import { getRole } from '../utils/helpers/role-handler';
+import { roles } from '../core';
 
 const successMsg = LOCALE.success.tickets;
 
@@ -46,11 +48,14 @@ const ticketsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_TICKETS_DATA: {
       const { data } = action;
+      const role = getRole();
+      const filterItems = (item) => (role === roles.user ? item.createdDate : item.createdDate && item.priority);
+
       return {
         ...state,
         userId: _.get(data, 'userId', initialState.userId),
         list: _.get(data, 'tickets', initialState.list)
-          .filter((item) => item.createdDate && item.priority),
+          .filter(filterItems),
         messageCounts: _.get(data, 'messageCounts', initialState.messageCounts),
       };
     }
