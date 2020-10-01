@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Box, Typography } from '@material-ui/core';
 import TicketsTable from '../../shared/TicketsTable/TicketsTable';
 import TicketInfo from '../../../../shared/dashboard/TicketInfo/TicketInfo';
+import { ticketStatus } from '../../../../../core';
 import { updateNewTicketStatus } from '../../../../../store/adminReducer';
 import { LOCALE } from '../../../../../locale';
 
@@ -21,7 +22,7 @@ const NewTickets = ({ tickets, ticket, userId, updateNewTicketStatus, headlineTe
         'ticketType': ticket.ticketType,
         'priority': ticket.priority,
         'subject': ticket.subject,
-        'status': ticket.status,
+        'status': ticketStatus.open,
       }, userId, ticket.id);
     }
   }, [updateNewTicketStatus, userId, requestor, ticket, headlineText, newTicketsHeadline]);
