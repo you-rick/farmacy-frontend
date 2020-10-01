@@ -32,6 +32,20 @@ const initialState = {
       role: null,
     },
   },
+  userDetails: {
+    userId: null,
+    role: null,
+    email: null,
+    firstName: null,
+    lastName: null,
+    isAuth: false,
+    department: null,
+    employedSince: null,
+    phoneNumber: null,
+    extension: null,
+    mobileNumber: null,
+    tempPassword: false,
+  },
 };
 
 // Reducer
@@ -49,6 +63,7 @@ const ticketInfoReducer = (state = initialState, action) => {
         ticketNumber: _.get(data, 'ticketNumber', initialState.ticketNumber),
         userId: _.get(data, 'userId', initialState.userId),
         messages: _.get(data, 'messages', initialState.messages),
+        userDetails: _.get(data, 'userDetails', initialState.userDetails),
       };
     }
     case SET_MESSAGES_DATA: {
