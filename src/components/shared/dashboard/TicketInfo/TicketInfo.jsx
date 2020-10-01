@@ -1,33 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogTitle,
   DialogContent,
-  Divider,
   IconButton,
   Grid,
   Box,
   Typography,
 } from '@material-ui/core';
+import { connect } from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './TicketInfo.styles';
 import MessageFormWrapper from './MessageForm/MessageFormWrapper';
 import Messages from './Messages/Messages';
 import SmallPreloader from '../../common/SmallPreloader/SmallPreloader';
+import { getTicketInfo, resetTicketInfo } from '../../../../store/ticketInfoReducer';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const TicketInfo = ({ ticket, open, onClose }) => {
+const TicketInfo = ({ ticketId, getTicketInfo, resetTicketInfo, open, onClose, user, ticket, search }) => {
   const classes = useStyles();
   const [msgFormReady, setMsgFormReady] = useState(false);
 
   const handleClose = () => {
+    resetTicketInfo();
     onClose();
   };
   const handleFormInit = (status) => {
     setMsgFormReady(status);
   };
+
+  useEffect(() => {
+    if (open && !search) getTicketInfo(user.userId, ticketId, user.role);
+  }, [getTicketInfo, ticketId, user, open, search]);
 
   return (
     <Dialog
@@ -57,15 +63,18 @@ const TicketInfo = ({ ticket, open, onClose }) => {
           <MessageFormWrapper onFormInit={handleFormInit} ticket={ticket} />
         </Box>
 
-        {msgFormReady && (
-          <>
-            <Divider />
-            <Messages ticketId={ticket.id} />
-          </>
-        )}
+        {msgFormReady && <Messages />}
       </DialogContent>
     </Dialog>
   );
 };
 
-export default TicketInfo;
+const mapStateToProps = (state) => ({
+  ticket: state.ticketInfo,
+  user: state.auth,
+});
+
+export default connect(mapStateToProps, {
+  getTicketInfo,
+  resetTicketInfo,
+})(TicketInfo);

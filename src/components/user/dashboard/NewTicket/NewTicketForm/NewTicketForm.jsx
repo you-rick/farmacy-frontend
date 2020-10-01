@@ -40,7 +40,7 @@ const NewTicketForm = ({ onEditorChange }) => {
       </Box>
       <Box m="0 0 1rem">
         <Field name="description" type="hidden" component={bodyField} />
-        <Box className="articleBodyEditor">
+        <Box className="newTicketBodyEditor">
           <RichTextarea height={editorHeight} onChange={handleTextareaChange} />
         </Box>
       </Box>

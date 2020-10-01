@@ -33,7 +33,7 @@ const TicketsTable = ({ tickets, onShowModal }) => {
               <Badge
                 variant="dot"
                 className={classes.badge}
-                classes={{ badge: classes[ticket.status.toLowerCase()] }}
+                classes={{ badge: ticket.status ? classes[ticket.status.toLowerCase()] : classes.open }}
               />
               {number}
             </>
@@ -106,10 +106,8 @@ const TicketsTable = ({ tickets, onShowModal }) => {
 
   const tableData = _.cloneDeep(tickets)
     .map((item) => {
-      // eslint-disable-next-line no-param-reassign
-      item.createdDate = moment(item.createdDate, 'DD/MM/YYYY')
-        .toDate()
-        .getTime();
+      item.createdDate = moment(item.createdDate)
+        .valueOf();
       return item;
     });
 

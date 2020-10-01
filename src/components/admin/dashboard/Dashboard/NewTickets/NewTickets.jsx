@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Box, Typography } from '@material-ui/core';
 import TicketsTable from '../../shared/TicketsTable/TicketsTable';
@@ -6,27 +6,29 @@ import TicketInfo from '../../../../shared/dashboard/TicketInfo/TicketInfo';
 import { updateNewTicketStatus } from '../../../../../store/adminReducer';
 import { LOCALE } from '../../../../../locale';
 
-const NewTickets = ({ tickets, ticket, updateNewTicketStatus, requestor }) => {
+const NewTickets = ({ tickets, ticket, userId, updateNewTicketStatus, headlineText, requestor }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [activeTicket, setActiveTicket] = useState(ticket);
+  const newTicketsHeadline = LOCALE.admin.dashboard.stats.openTickets.newTickets;
 
-  const handleTicketStatus = (ticket) => {
-    updateNewTicketStatus({
-      'ticketNumber': ticket.ticketNumber,
-      'requestor': requestor,
-      'to': 'ticket.admin@client.com',
-      'department': 'placeholder',
-      'ticketType': ticket.ticketType,
-      'priority': ticket.priority,
-      'subject': ticket.subject,
-      'status': 'open',
-    }, ticket.id);
-  };
+  useEffect(() => {
+    if (ticket.id && newTicketsHeadline === headlineText) {
+      updateNewTicketStatus({
+        'ticketNumber': ticket.ticketNumber,
+        'requestor': requestor,
+        'to': 'ticket.admin@client.com',
+        'department': 'placeholder',
+        'ticketType': ticket.ticketType,
+        'priority': ticket.priority,
+        'subject': ticket.subject,
+        'status': ticket.status,
+      }, userId, ticket.id);
+    }
+  }, [updateNewTicketStatus, userId, requestor, ticket, headlineText, newTicketsHeadline]);
 
   const handleShowModal = (ticket) => {
     setModalOpen(true);
     setActiveTicket(ticket);
-    handleTicketStatus(ticket);
   };
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -36,18 +38,20 @@ const NewTickets = ({ tickets, ticket, updateNewTicketStatus, requestor }) => {
     <>
       <Box m="0 0 2rem">
         <Typography variant="h5" component="h1" align="center">
-          {LOCALE.admin.dashboard.newTickets.headline}
+          {`${headlineText} Tickets`}
         </Typography>
       </Box>
       <TicketsTable onShowModal={handleShowModal} tickets={tickets} />
-      <TicketInfo open={modalOpen} onClose={handleCloseModal} ticket={activeTicket} />
+      <TicketInfo open={modalOpen} onClose={handleCloseModal} ticketId={activeTicket.id} />
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  ticket: state.admin.ticket,
+  ticket: state.ticketInfo,
   requestor: state.auth.email,
+  userId: state.auth.userId,
+  headlineText: state.admin.activeListHeadline,
 });
 
 export default connect(mapStateToProps, { updateNewTicketStatus })(NewTickets);

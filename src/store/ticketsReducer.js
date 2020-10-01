@@ -7,7 +7,8 @@ import { hideNote, setNote } from './notificationReducer';
 import { serverErrorHelper } from '../utils/helpers/server-error-helper';
 import { LOCALE } from '../locale';
 import { USER_TICKETS_ROUTE } from '../routes';
-import { setMessagesData } from './messagesReducer';
+import { setTicketInfoData } from './ticketInfoReducer';
+import { clearEditorValue } from './richtextReducer';
 import { getRole } from '../utils/helpers/role-handler';
 import { roles } from '../core';
 
@@ -98,6 +99,8 @@ export const createTicket = (data, userId) => (dispatch) => {
     .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(push(USER_TICKETS_ROUTE));
+      dispatch(reset('new-ticket'));
+      dispatch(clearEditorValue());
       dispatch(setNote({
         msg: successMsg.ticketCreated,
         type: 'success',
@@ -108,14 +111,15 @@ export const createTicket = (data, userId) => (dispatch) => {
     .catch((error) => serverErrorHelper(dispatch, error));
 };
 
-export const updateTicket = (data, ticketId, userId, role) => (dispatch) => {
+export const updateTicket = (data, userId, ticketId, role) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  ticketsAPI.updateTicket(data, ticketId, userId, role)
+  ticketsAPI.updateTicket(data, userId, ticketId, role)
     .then((response) => {
-      const { messages } = response.data;
+      console.log(response);
       dispatch(toggleIsDataFetching(false));
-      dispatch(setMessagesData({ messages }));
+      dispatch(clearEditorValue());
+      dispatch(setTicketInfoData(response.data));
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
@@ -128,9 +132,13 @@ export const findTicket = (userId, ticketId) => (dispatch) => {
     .then((response) => {
       dispatch(toggleIsDataFetching(false));
       dispatch(setCurrentTicketData(response.data));
+      dispatch(setTicketInfoData(response.data));
       dispatch(reset('ticket-search'));
     })
-    .catch((error) => serverErrorHelper(dispatch, error));
+    .catch((error) => {
+      dispatch(reset('ticket-search'));
+      serverErrorHelper(dispatch, error);
+    });
 };
 
 const handleGetTickets = (dispatch, apiMethod) => {
@@ -138,6 +146,7 @@ const handleGetTickets = (dispatch, apiMethod) => {
   dispatch(hideNote());
   apiMethod()
     .then((response) => {
+      console.log(response.data);
       dispatch(toggleIsDataFetching(false));
       dispatch(setTicketsData(response.data));
     })

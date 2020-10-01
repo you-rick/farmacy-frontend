@@ -110,9 +110,8 @@ const TicketsTable = ({ tickets, onShowModal }) => {
 
   const tableData = _.cloneDeep(tickets)
     .map((item) => {
-      item.createdDate = moment(item.createdDate, 'DD/MM/YYYY')
-        .toDate()
-        .getTime();
+      item.createdDate = moment(item.createdDate)
+        .valueOf();
       if (item.priority) {
         const priority = item.priority.toUpperCase();
         item.priority = priorityList.indexOf(priority);

@@ -7,13 +7,24 @@ export const ticketType = {
   incident: 'INCIDENT',
 };
 
+export const department = {
+  INFORMATION_TECHNOLOGY: 'Information Technology',
+  BIOLOGY: 'Biology',
+  DMPK: 'DMPK',
+  CHEMISTRY: 'Chemistry',
+  HUMAN_RESOURCES: 'Human Resources',
+  ADMINISTRATION: 'Administration',
+  FINANCE: 'Finance',
+};
+
 export const ticketStatus = {
+  new: 'NEW',
   open: 'OPEN',
-  resolved: 'RESOLVED',
   in_progress: 'IN_PROGRESS',
-  closed: 'CLOSED',
-  re_open: 'RE_OPEN',
   hold: 'HOLD',
+  re_open: 'RE_OPEN',
+  resolved: 'RESOLVED',
+  closed: 'CLOSED',
 };
 
 export const ticketPriority = {
@@ -21,4 +32,9 @@ export const ticketPriority = {
   medium: 'MEDIUM',
   high: 'HIGH',
   critical: 'CRITICAL',
+};
+
+export const userTicketFilter = {
+  solved: [ticketStatus.resolved, ticketStatus.closed],
+  unresolved: [ticketStatus.new, ticketStatus.open, ticketStatus.in_progress, ticketStatus.hold, ticketStatus.re_open],
 };

@@ -3,11 +3,15 @@ import { LOCALE } from '../../../../locale';
 
 const validate = (values) => {
   const errors = {};
-  const { required, email } = LOCALE.errors.validation;
+  const { required, email, maxChar } = LOCALE.errors.validation;
+  const subjectLengthMax = 75;
 
   if (!values.subject) {
     errors.subject = required;
+  } else if (values.subject.length > subjectLengthMax) {
+    errors.subject = maxChar(subjectLengthMax);
   }
+
   if (!values.to) {
     errors.to = required;
   } else if (!EMAIL_VALIDATOR.test(values.to)) {
@@ -27,6 +31,9 @@ const validate = (values) => {
   }
   if (!values.priority) {
     errors.priority = required;
+  }
+  if (!values.description) {
+    errors.description = required;
   }
 
   return errors;

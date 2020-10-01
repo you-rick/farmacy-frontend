@@ -7,17 +7,17 @@ import Chart from './Chart/Chart';
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
 const Stats = ({ stats }) => {
-  const { OpenTickets, TicketsDue } = stats;
+  const { openTickets, dueTickets } = stats;
   const classes = useStyles();
 
   return (
     <Box m="0 0 3rem">
       <Grid container spacing={2} className={classes.chartContainer}>
         <Grid item xs={12} sm>
-          <Chart type="OpenTickets" data={OpenTickets} />
+          <Chart type="openTickets" data={openTickets} />
         </Grid>
         <Grid item xs={12} sm>
-          <Chart type="TicketsDue" data={TicketsDue} />
+          <Chart type="dueTickets" data={dueTickets} />
         </Grid>
       </Grid>
     </Box>

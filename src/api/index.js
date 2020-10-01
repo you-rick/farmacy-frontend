@@ -2,13 +2,13 @@ import * as axios from 'axios';
 import { authHeaders } from '../utils/helpers/auth-headers';
 import {
   API_USER_DASHBOARD_ROUTE,
-  API_USER_GET_MESSAGES_ROUTE,
+  API_USER_GET_TICKET_INFO_ROUTE,
   API_USER_POST_TICKET_ROUTE,
   API_USER_TICKET_UPDATE_ROUTE,
   API_ADMIN_DASHBOARD_ROUTE,
   API_PROFILE_ROUTE,
   API_ADMIN_TICKET_UPDATE_ROUTE,
-  API_ADMIN_GET_MESSAGES_ROUTE,
+  API_ADMIN_GET_TICKET_INFO_ROUTE,
   API_ADMIN_TICKETS_ROUTE,
   API_ADMIN_GET_USERS_ROUTE,
   API_ADMIN_DELETE_USER_ROUTE,
@@ -48,8 +48,8 @@ export const authAPI = {
   updateProfile(data) {
     return axiosInstance.post(API_PROFILE_ROUTE, data, tokenHeader());
   },
-  resetPassword(data) {
-    return axiosInstance.post(API_RESET_PASSWORD_ROUTE, data, tokenHeader());
+  resetPassword(userId, data) {
+    return axiosInstance.post(API_RESET_PASSWORD_ROUTE(userId), data, tokenHeader());
   },
 };
 
@@ -75,8 +75,8 @@ export const usersAPI = {
   createUser(data) {
     return axiosInstance.post(API_ADMIN_CREATE_USER_ROUTE, data, tokenHeader());
   },
-  deleteUser(id) {
-    return axiosInstance.delete(API_ADMIN_DELETE_USER_ROUTE(id), tokenHeader());
+  deleteUser(adminId, id) {
+    return axiosInstance.delete(API_ADMIN_DELETE_USER_ROUTE(adminId, id), tokenHeader());
   },
 };
 
@@ -84,31 +84,30 @@ export const ticketsAPI = {
   getTickets() {
     return axiosInstance.post(API_USER_DASHBOARD_ROUTE, { email: getEmail() }, tokenHeader());
   },
+
   createTicket(data, userId) {
     return axiosInstance.post(API_USER_POST_TICKET_ROUTE(userId), data, tokenHeader());
   },
-  updateTicket(data, ticketId, userId, role) {
-    const updateUrl = () => (role === roles.user
-      ? API_USER_TICKET_UPDATE_ROUTE(userId, ticketId)
-      : API_ADMIN_TICKET_UPDATE_ROUTE(ticketId));
-    return axiosInstance.post(updateUrl(), data, tokenHeader());
+
+  getTicketInfo(userId, ticketId, role) {
+    const url = role === roles.admin ? API_ADMIN_GET_TICKET_INFO_ROUTE : API_USER_GET_TICKET_INFO_ROUTE;
+    return axiosInstance.get(url(userId, ticketId), tokenHeader());
   },
-  findTicket(userId, ticketId) {
+
+  updateTicket(data, userId, ticketId, role) {
+    const url = role === roles.user ? API_USER_TICKET_UPDATE_ROUTE : API_ADMIN_TICKET_UPDATE_ROUTE;
+    return axiosInstance.post(url(userId, ticketId), data, tokenHeader());
+  },
+
+  findTicket(userId, ticketNumber) {
     return axiosInstance.get(API_FIND_TICKET_ROUTE, {
       params: {
         userId,
-        ticketId,
+        ticketNumber,
       },
       headers: {
         'Authorization': getTokenHeader(),
       },
     });
-  },
-};
-
-export const messagesAPI = {
-  getMessages(userId, ticketId, role) {
-    const url = role === roles.admin ? API_ADMIN_GET_MESSAGES_ROUTE : API_USER_GET_MESSAGES_ROUTE;
-    return axiosInstance.get(url(userId, ticketId), tokenHeader());
   },
 };

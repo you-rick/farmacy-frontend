@@ -11,29 +11,21 @@ const successMsg = LOCALE.success.ticketSettings;
 const SET_ADMIN_DATA = 'SET_ADMIN_DATA';
 const UPDATE_NEW_TICKETS = 'UPDATE_NEW_TICKETS';
 const SET_TICKET_SETTINGS = 'SET_TICKET_SETTINGS';
+const SET_ACTIVE_LIST = 'SET_ACTIVE_LIST';
 
 // Initial Data
 const initialState = {
-  stats: {
-    OpenTickets: {
-      new: null,
-      overdue: null,
-    },
-    TicketsDue: {
-      dueToday: null,
-      dueTomorrow: null,
-      dueNextWeek: null,
-    },
+  openTickets: {
+    newTickets: [],
+    overdueTickets: [],
   },
-  newTickets: [],
-  ticket: {
-    id: null,
-    createdDate: null,
-    ticketNumber: null,
-    subject: null,
-    status: null,
-    priority: null,
+  dueTickets: {
+    dueToday: [],
+    dueTomorrow: [],
+    dueNextWeek: [],
   },
+  activeList: [],
+  activeListHeadline: null,
   ticketDueConfig: {
     low: null,
     medium: null,
@@ -49,9 +41,18 @@ const adminReducer = (state = initialState, action) => {
       const { data } = action;
       return {
         ...state,
-        stats: _.get(data, 'stats', initialState.stats),
-        newTickets: _.get(data, 'newTickets', initialState.newTickets)
-          .filter((item) => item.createdDate && item.priority),
+        openTickets: _.get(data, 'openTickets', initialState.openTickets),
+        dueTickets: _.get(data, 'dueTickets', initialState.dueTickets),
+        activeList: _.get(data, 'openTickets.newTickets', initialState.openTickets.newTickets),
+        activeListHeadline: LOCALE.admin.dashboard.stats.openTickets.newTickets,
+      };
+    }
+    case SET_ACTIVE_LIST: {
+      const { data } = action;
+      return {
+        ...state,
+        activeList: data.list,
+        activeListHeadline: data.headline,
       };
     }
     case SET_TICKET_SETTINGS: {
@@ -63,17 +64,12 @@ const adminReducer = (state = initialState, action) => {
     }
     case UPDATE_NEW_TICKETS: {
       const { ticketId } = action;
-      const openTicketNumber = state.stats.OpenTickets.new - 1;
 
       return {
         ...state,
-        newTickets: state.newTickets.filter((item) => item.id !== ticketId),
-        stats: {
-          ...state.stats,
-          OpenTickets: {
-            ...state.stats.OpenTickets,
-            new: openTicketNumber,
-          },
+        openTickets: {
+          ...state.openTickets,
+          newTickets: state.openTickets.newTickets.filter((item) => item.id !== ticketId),
         },
       };
     }
@@ -95,6 +91,10 @@ export const setTicketSettings = (data) => ({
   type: SET_TICKET_SETTINGS,
   data,
 });
+export const setActiveList = (data) => ({
+  type: SET_ACTIVE_LIST,
+  data,
+});
 
 // Thunks
 export const getData = () => (dispatch) => {
@@ -102,16 +102,17 @@ export const getData = () => (dispatch) => {
   dispatch(hideNote());
   adminAPI.getData()
     .then((response) => {
+      const { adminDashboardStat } = response.data;
       dispatch(toggleIsDataFetching(false));
-      dispatch(setAdminData(response.data));
+      dispatch(setAdminData(adminDashboardStat));
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
 
-export const updateNewTicketStatus = (data, ticketId) => (dispatch) => {
+export const updateNewTicketStatus = (data, userId, ticketId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  ticketsAPI.updateTicket(data, ticketId)
+  ticketsAPI.updateTicket(data, userId, ticketId)
     .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(updateNewTickets(ticketId));

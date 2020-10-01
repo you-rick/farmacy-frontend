@@ -1,6 +1,6 @@
 export const chartTheme = (theme) => ({
-  'new': theme.palette.info.main,
-  'overdue': theme.palette.primary.main,
+  'newTickets': theme.palette.info.main,
+  'overdueTickets': theme.palette.primary.main,
   'dueNextWeek': theme.palette.warning.main,
   'dueTomorrow': theme.palette.error.light,
   'dueToday': theme.palette.error.dark,

@@ -25,7 +25,7 @@ import TicketSettingsContainer from './TicketSettings/TicketSettingsContainer';
 import TicketInfo from '../../shared/dashboard/TicketInfo/TicketInfo';
 import { roles } from '../../../core';
 
-const AdminDashboardContainer = ({ isAuth, role, resetCurrentTicketData, currentTicket }) => {
+const AdminDashboardContainer = ({ isAuth, role, isNew, resetCurrentTicketData, currentTicket }) => {
   const [activeTicket, setActiveTicket] = useState(currentTicket);
 
   useEffect(() => {
@@ -55,8 +55,9 @@ const AdminDashboardContainer = ({ isAuth, role, resetCurrentTicketData, current
           <Route path={ADMIN_CREATE_USER_ROUTE} render={() => <NewUserContainer />} />
         </Switch>
       </Box>
+      {isNew && <Redirect to={ADMIN_RESET_PASSWORD_ROUTE} />}
       {activeTicket.id
-      && <TicketInfo open onClose={handleCloseModal} ticket={activeTicket} />}
+      && <TicketInfo open search onClose={handleCloseModal} ticketId={activeTicket.id} />}
     </>
   );
 };
@@ -64,6 +65,7 @@ const AdminDashboardContainer = ({ isAuth, role, resetCurrentTicketData, current
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   role: state.auth.role,
+  isNew: state.auth.tempPassword,
   currentTicket: state.tickets.ticket,
 });
 export default compose(

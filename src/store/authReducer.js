@@ -14,11 +14,13 @@ import { roles } from '../core';
 
 const successMsg = LOCALE.success.profile;
 const requestReceivedMsg = LOCALE.success.forgotPassword.requestReceived;
+const errorAuthMsg = LOCALE.errors.server.auth;
 
 // Actions
 const SET_PROFILE_DATA = 'SET_PROFILE_DATA';
 const SET_AUTH_STATUS = 'SET_AUTH_STATUS';
 const SET_ROLE_STATUS = 'SET_ROLE_STATUS';
+const SET_TEMP_PASSWORD = 'SET_TEMP_PASSWORD';
 
 // Initial Data
 const initialState = {
@@ -28,13 +30,23 @@ const initialState = {
   firstName: null,
   lastName: null,
   isAuth: false,
+  department: null,
+  employedSince: null,
+  phoneNumber: null,
+  extension: null,
+  mobileNumber: null,
+  tempPassword: false,
 };
 
 // Reducer
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_PROFILE_DATA:
-      return { ...state, ...action.data };
+
+      return {
+        ...state,
+        ...action.data,
+      };
     case SET_AUTH_STATUS:
       return {
         ...state,
@@ -44,6 +56,11 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         role: action.role,
+      };
+    case SET_TEMP_PASSWORD:
+      return {
+        ...state,
+        tempPassword: action.data,
       };
     default:
       return state;
@@ -63,6 +80,10 @@ export const setRoleStatus = (role) => ({
   type: SET_ROLE_STATUS,
   role,
 });
+export const setTempPassword = (data) => ({
+  type: SET_TEMP_PASSWORD,
+  data,
+});
 
 // Thunks
 export const getProfile = (role) => (dispatch) => {
@@ -71,13 +92,14 @@ export const getProfile = (role) => (dispatch) => {
   return authAPI.getProfile(role)
     .then((response) => {
       const res = response.data;
+      console.log(response.data);
       const responseRole = res.userDetails.role;
       dispatch(toggleIsDataFetching(false));
       dispatch(setProfileData(res.userDetails));
       dispatch(setAuthStatus(true));
 
       if (responseRole === roles.user) dispatch(setTicketsData(res));
-      if (responseRole === roles.admin) dispatch(setAdminData(res));
+      if (responseRole === roles.admin) dispatch(setAdminData(res.adminDashboardStat));
     })
     .catch((error) => serverErrorHelper(dispatch, error));
 };
@@ -98,12 +120,18 @@ export const updateProfile = (data) => (dispatch) => {
     .catch((error) => serverErrorHelper(dispatch, error));
 };
 
-export const resetPassword = (data) => (dispatch) => {
+export const resetPassword = (userId, data) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  authAPI.resetPassword(data)
+  authAPI.resetPassword(userId, data)
     .then((response) => {
       dispatch(toggleIsDataFetching(false));
+      dispatch(setTempPassword(false));
+      dispatch(reset('reset-password'));
+      setToken({
+        username: data.email,
+        password: data.newPassword,
+      });
       dispatch(setNote({
         msg: response.data.message || successMsg.passwordUpdated,
         type: 'success',
@@ -120,6 +148,7 @@ export const login = (data, role) => (dispatch) => {
   authAPI.login(data, role)
     .then((response) => {
       const res = response.data;
+      console.log(res);
       setToken(data);
       setRole(role);
       dispatch(toggleIsDataFetching(false));
@@ -127,11 +156,19 @@ export const login = (data, role) => (dispatch) => {
       dispatch(setAuthStatus(true));
 
       if (role === roles.user) dispatch(setTicketsData(res));
-      if (role === roles.admin) dispatch(setAdminData(res));
+      if (role === roles.admin) dispatch(setAdminData(res.adminDashboardStat));
 
       dispatch(reset(role === roles.user ? 'user-login' : 'admin-login'));
     })
-    .catch((error) => serverErrorHelper(dispatch, error));
+    .catch((error) => {
+      if (error.response) {
+        if (error.response.status === 401) {
+          serverErrorHelper(dispatch, error, errorAuthMsg);
+        }
+      } else {
+        serverErrorHelper(dispatch, error);
+      }
+    });
 };
 
 export const forgotPassword = (data) => (dispatch) => {

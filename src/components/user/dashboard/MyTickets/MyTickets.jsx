@@ -13,6 +13,7 @@ import {
   USER_TICKETS_ROUTE,
 } from '../../../../routes';
 import TicketsTable from './TicketsTable/TicketsTable';
+import { userTicketFilter } from '../../../../core';
 
 const aliases = {
   [USER_TICKETS_UNRESOLVED_PARAM]: 'unresolved',
@@ -39,7 +40,7 @@ const MyTickets = ({ tickets, ticket, getUserTickets }) => {
   useEffect(() => {
     setTicketsList(
       !!filter && !!aliases[filter]
-        ? tickets.filter((item) => item.status === aliases[filter])
+        ? tickets.filter((item) => userTicketFilter[filter].indexOf(item.status) !== -1)
         : tickets,
     );
   }, [filter, tickets]);
@@ -60,7 +61,7 @@ const MyTickets = ({ tickets, ticket, getUserTickets }) => {
         </Typography>
       </Box>
       <TicketsTable tickets={ticketsList} onShowModal={handleShowModal} />
-      <TicketInfo open={modalOpen} onClose={handleCloseModal} ticket={activeTicket} />
+      <TicketInfo open={modalOpen} onClose={handleCloseModal} ticketId={activeTicket.id} />
     </>
   );
 };

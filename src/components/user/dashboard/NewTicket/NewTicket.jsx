@@ -10,6 +10,7 @@ import validate from './validate';
 import themeStyles from './NewTicket.styles';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
+const recipientEmail = 'admin@offteck.com';
 
 const NewTicket = ({ dispatch, handleSubmit, initialize, user }) => {
   const classes = useStyles();
@@ -21,13 +22,11 @@ const NewTicket = ({ dispatch, handleSubmit, initialize, user }) => {
   const onTagsChange = (values) => {
     dispatch(change('new-ticket', 'tags', values.length ? values : []));
   };
-  const onDepartmentChange = (email) => {
-    dispatch(change('new-ticket', 'to', email.length ? email : null));
-  };
 
   useEffect(() => {
     initialize({
       requester: `${user.email}`,
+      to: recipientEmail,
       ticketNumber: uuid.v4()
         .replace(/-/g, ''),
     });
@@ -41,7 +40,7 @@ const NewTicket = ({ dispatch, handleSubmit, initialize, user }) => {
       <form onSubmit={handleSubmit}>
         <Box className={classes.ticketBox}>
           <Box className={classes.ticketConfig}>
-            <NewTicketConfig onTagsChange={onTagsChange} onDepartmentChange={onDepartmentChange} />
+            <NewTicketConfig onTagsChange={onTagsChange} />
           </Box>
           <Box className={classes.ticketForm}>
             <NewTicketForm onEditorChange={onEditorChange} />

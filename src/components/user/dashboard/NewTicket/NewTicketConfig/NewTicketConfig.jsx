@@ -13,25 +13,26 @@ import {
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
-import { renderSelectField, renderTextField } from '../../../../shared/common/FormControls/FormControls';
+import {
+  renderSelectField,
+  renderTextField,
+} from '../../../../shared/common/FormControls/FormControls';
 import themeStyles from './NewTicketConfig.styles';
 import { LOCALE } from '../../../../../locale';
+import { ticketType, ticketPriority, department } from '../../../../../core';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const typeList = ['INCIDENT'];
-const priorityList = ['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'];
-const departmentList = ['Information Technology'];
-const recipientEmail = {
-  'Information Technology': 'admin@offteck.com',
-};
+const typeList = Object.entries(ticketType);
+const priorityList = Object.entries(ticketPriority);
+const departmentList = Object.entries(department);
 
-const NewTicketConfig = ({ onTagsChange, onDepartmentChange }) => {
+const NewTicketConfig = ({ onTagsChange }) => {
   const classes = useStyles();
   const locale = LOCALE.user.dashboard.newTicket.form;
-  const [type, setType] = useState(typeList[0]);
-  const [priority, setPriority] = useState(priorityList[0]);
-  const [department, setDepartment] = useState(departmentList[0]);
+  const [type, setType] = useState(typeList[0][1]);
+  const [priority, setPriority] = useState(priorityList[0][1]);
+  const [department, setDepartment] = useState(departmentList[0][0]);
 
   const priorityChange = (event) => {
     setPriority(event.target.value);
@@ -41,7 +42,6 @@ const NewTicketConfig = ({ onTagsChange, onDepartmentChange }) => {
   };
   const departmentChange = (event) => {
     setDepartment(event.target.value);
-    onDepartmentChange(recipientEmail[event.target.value]);
   };
   const tagsChange = (event, values) => {
     onTagsChange(values);
@@ -57,10 +57,12 @@ const NewTicketConfig = ({ onTagsChange, onDepartmentChange }) => {
           size="small"
           value="John Doe"
           fullWidth
+          className={classes.readonly}
           InputLabelProps={{
             shrink: true,
           }}
           InputProps={{
+            readOnly: true,
             startAdornment: (
               <InputAdornment position="start">
                 <AccountCircle />
@@ -83,8 +85,8 @@ const NewTicketConfig = ({ onTagsChange, onDepartmentChange }) => {
             component={renderSelectField}
           >
             {departmentList.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
+              <MenuItem key={option[0]} value={option[0]}>
+                {option[1]}
               </MenuItem>
             ))}
           </Field>
@@ -146,8 +148,8 @@ const NewTicketConfig = ({ onTagsChange, onDepartmentChange }) => {
               component={renderSelectField}
             >
               {typeList.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
+                <MenuItem key={option[0]} value={option[1]}>
+                  {option[1]}
                 </MenuItem>
               ))}
             </Field>
@@ -165,8 +167,8 @@ const NewTicketConfig = ({ onTagsChange, onDepartmentChange }) => {
               component={renderSelectField}
             >
               {priorityList.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
+                <MenuItem key={option[0]} value={option[1]}>
+                  {option[1]}
                 </MenuItem>
               ))}
             </Field>

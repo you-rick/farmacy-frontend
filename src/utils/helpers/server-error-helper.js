@@ -2,12 +2,17 @@ import { LOCALE } from '../../locale';
 import { toggleIsDataFetching } from '../../store/appReducer';
 import { setNote } from '../../store/notificationReducer';
 
-export const serverErrorHelper = (dispatch, error) => {
-  let errorMsg = LOCALE.errors.server.unknown;
-  if (error.response) {
-    errorMsg = error.response.data.message;
+export const serverErrorHelper = (dispatch, error, msg) => {
+  const { baseMsg, unknown, request } = LOCALE.errors.server;
+
+  let errorMsg = unknown;
+  if (msg) {
+    errorMsg = msg;
+  } else if (error.response) {
+    const { message, detailMessage } = error.response.data;
+    errorMsg = detailMessage || message || baseMsg;
   } else if (error.request) {
-    errorMsg = LOCALE.errors.server.request;
+    errorMsg = request;
   }
 
   dispatch(toggleIsDataFetching(false));

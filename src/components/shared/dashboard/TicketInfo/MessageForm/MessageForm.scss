@@ -1,0 +1,21 @@
+@import "src/assets/styles/variables";
+@import "src/assets/styles/mixins";
+@import "src/assets/styles/functions";
+
+@include till-sm-screen {
+  .submitWrap {
+    margin-top: 1rem;
+  }
+}
+
+.bodyFieldError + .messageBodyEditor {
+  border: 1px solid map-deep-get($materialUiPalette, 'error', 'main');
+  border-radius: 4px;
+}
+
+.popupBodyFieldErrorMsg {
+  color: map-deep-get($materialUiPalette, 'error', 'main');
+  font-size: 0.75rem;
+  letter-spacing: 0.03333em;
+  margin-left: 0;
+}

@@ -49,7 +49,7 @@ const TicketSettingsForm = ({ handleSubmit, initialize, ticketConfig }) => {
               {configList.map((item) => (
                 <TableRow key={item[0]}>
                   <TableCell align="center">
-                    <Typography>{item[0]}</Typography>
+                    <Typography style={{ textTransform: 'capitalize' }}>{item[0]}</Typography>
                   </TableCell>
                   <TableCell>
                     <Field

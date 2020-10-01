@@ -5,7 +5,7 @@ import { getData } from '../../../../store/adminReducer';
 import NewTickets from './NewTickets/NewTickets';
 import Stats from './Stats/Stats';
 
-const Dashboard = ({ getData, tickets, stats }) => {
+const Dashboard = ({ getData, newTickets, stats }) => {
   const lastLocation = useLastLocation();
 
   useEffect(() => {
@@ -17,14 +17,17 @@ const Dashboard = ({ getData, tickets, stats }) => {
   return (
     <>
       <Stats stats={stats} />
-      <NewTickets tickets={tickets} />
+      <NewTickets tickets={newTickets} />
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  tickets: state.admin.newTickets,
-  stats: state.admin.stats,
+  newTickets: state.admin.activeList,
+  stats: {
+    openTickets: state.admin.openTickets,
+    dueTickets: state.admin.dueTickets,
+  },
 });
 
 export default connect(mapStateToProps, { getData })(Dashboard);

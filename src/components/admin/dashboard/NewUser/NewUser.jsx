@@ -1,14 +1,6 @@
 import React, { useState } from 'react';
 import moment from 'moment';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  MenuItem,
-  Typography,
-} from '@material-ui/core';
+import { Box, Button, Card, CardContent, Container, MenuItem, Typography } from '@material-ui/core';
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { makeStyles } from '@material-ui/core/styles';
@@ -17,8 +9,19 @@ import { renderSelectField, renderTextField } from '../../../shared/common/FormC
 import { DATE_FORMAT } from '../../../../utils/validators';
 import { LOCALE } from '../../../../locale';
 import validate from './validate';
+import { roles, department } from '../../../../core';
 
-const departmentList = ['Information Technology'];
+const departmentList = Object.entries(department);
+const roleTypes = [
+  {
+    type: roles.user,
+    title: LOCALE.roles.user,
+  },
+  {
+    type: roles.admin,
+    title: LOCALE.roles.admin,
+  },
+];
 const useStyles = makeStyles({
   root: {
     padding: '0 0.5rem 0.5rem',
@@ -28,17 +31,21 @@ const useStyles = makeStyles({
 const NewUser = ({ handleSubmit, dispatch }) => {
   const classes = useStyles();
   const locale = LOCALE.admin.dashboard.createUser;
-  const [department, setDepartment] = useState(departmentList[0]);
+  const [department, setDepartment] = useState(departmentList[0][0]);
+  const [role, setRole] = useState(roleTypes[0].type);
   const [selectedDate, setSelectedDate] = React.useState(null);
 
   const handleDateChange = (date) => {
     const formattedDate = moment(date, 'DD/MM/YYYY').format(DATE_FORMAT);
-    setSelectedDate(date);
     dispatch(change('new-user', 'employedSince', formattedDate));
+    setSelectedDate(date);
   };
 
   const departmentChange = (event) => {
     setDepartment(event.target.value);
+  };
+  const roleChange = (event) => {
+    setRole(event.target.value);
   };
 
   return (
@@ -88,19 +95,28 @@ const NewUser = ({ handleSubmit, dispatch }) => {
               component={renderSelectField}
             >
               {departmentList.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
+                <MenuItem key={option[0]} value={option[0]}>
+                  {option[1]}
                 </MenuItem>
               ))}
             </Field>
             <Field
+              select
               name="role"
               label={locale.form.role}
               variant="outlined"
-              margin="normal"
               fullWidth
-              component={renderTextField}
-            />
+              margin="normal"
+              value={role}
+              onChange={roleChange}
+              component={renderSelectField}
+            >
+              {roleTypes.map((option) => (
+                <MenuItem key={option.type} value={option.type}>
+                  {option.title}
+                </MenuItem>
+              ))}
+            </Field>
             <Box>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker

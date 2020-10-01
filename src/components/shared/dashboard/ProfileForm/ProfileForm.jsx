@@ -32,10 +32,14 @@ const ProfileForm = ({ handleSubmit, initialize, user }) => {
   const resetPassPath = user.role === 'ROLE_USER' ? USER_RESET_PASSWORD_ROUTE : ADMIN_RESET_PASSWORD_ROUTE;
 
   useEffect(() => {
+    const { firstName, lastName, email, phoneNumber, extension, mobileNumber } = user;
     initialize({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      extension,
+      mobileNumber,
     });
   }, [initialize, user]);
 

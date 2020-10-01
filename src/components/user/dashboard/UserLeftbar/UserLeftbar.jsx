@@ -13,7 +13,6 @@ import {
   USER_TICKETS_ROUTE,
   USER_TICKETS_SOLVED_PARAM,
   USER_TICKETS_UNRESOLVED_PARAM,
-  USER_TICKETS_UPDATED_PARAM,
 } from '../../../../routes';
 import { LOCALE } from '../../../../locale';
 import { getUserTickets } from '../../../../store/ticketsReducer';
@@ -50,63 +49,53 @@ const UserLeftbar = ({ getUserTickets, messageCounts }) => {
               </ListItem>
             </List>
             <Divider className={classes.divider} />
-            <Box m="1rem 0 0">
-              <List>
-                <ListItem>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    component={NavLink}
-                    to={USER_NEW_TICKET_ROUTE}
-                  >
-                    {locale.createButton}
-                  </Button>
-                </ListItem>
-                <ListItem
-                  button
-                  exact
-                  component={NavLink}
-                  to={USER_TICKETS_ROUTE}
-                  className={classes.link}
-                >
-                  <ListItemText primary={`${locale.ticketsFilter.all} (${messageCounts.all})`} />
-                </ListItem>
-                <ListItem
-                  button
-                  component={NavLink}
-                  to={`${USER_TICKETS_ROUTE}/${USER_TICKETS_UNRESOLVED_PARAM}`}
-                  className={classes.link}
-                >
-                  <ListItemText
-                    primary={`${locale.ticketsFilter.unresolved} (${messageCounts.unresolved})`}
-                  />
-                </ListItem>
-                <ListItem
-                  button
-                  component={NavLink}
-                  to={`${USER_TICKETS_ROUTE}/${USER_TICKETS_UPDATED_PARAM}`}
-                  className={classes.link}
-                >
-                  <ListItemText
-                    primary={`${locale.ticketsFilter.recentlyUpdated} (${messageCounts.recentlyUpdated})`}
-                  />
-                </ListItem>
-                <ListItem
-                  button
-                  component={NavLink}
-                  to={`${USER_TICKETS_ROUTE}/${USER_TICKETS_SOLVED_PARAM}`}
-                  className={classes.link}
-                >
-                  <ListItemText
-                    primary={`${locale.ticketsFilter.solved} (${messageCounts.solved})`}
-                  />
-                </ListItem>
-              </List>
-            </Box>
           </>
         )
 
       }
+      <Box m="1rem 0 0">
+        <List>
+          <ListItem>
+            <Button
+              variant="contained"
+              fullWidth
+              component={NavLink}
+              to={USER_NEW_TICKET_ROUTE}
+            >
+              {locale.createButton}
+            </Button>
+          </ListItem>
+          <ListItem
+            button
+            exact
+            component={NavLink}
+            to={USER_TICKETS_ROUTE}
+            className={classes.link}
+          >
+            <ListItemText primary={`${locale.ticketsFilter.all} (${messageCounts.all})`} />
+          </ListItem>
+          <ListItem
+            button
+            component={NavLink}
+            to={`${USER_TICKETS_ROUTE}/${USER_TICKETS_UNRESOLVED_PARAM}`}
+            className={classes.link}
+          >
+            <ListItemText
+              primary={`${locale.ticketsFilter.unresolved} (${messageCounts.unresolved})`}
+            />
+          </ListItem>
+          <ListItem
+            button
+            component={NavLink}
+            to={`${USER_TICKETS_ROUTE}/${USER_TICKETS_SOLVED_PARAM}`}
+            className={classes.link}
+          >
+            <ListItemText
+              primary={`${locale.ticketsFilter.solved} (${messageCounts.solved})`}
+            />
+          </ListItem>
+        </List>
+      </Box>
     </>
   );
 };

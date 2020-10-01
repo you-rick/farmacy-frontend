@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Editor } from '@tinymce/tinymce-react';
 import { useWindowWidth } from '@react-hook/window-size/throttled';
 import { toggleIsDataFetching } from '../../../../store/appReducer';
-import { setEditorValue, clearEditorValue } from '../../../../store/richtextReducer';
+import { setEditorValue } from '../../../../store/richtextReducer';
 import style from './RichTextarea.scss';
 import { layoutBreakpoint } from '../../../../utils/helpers/layout-breakpoints';
 
@@ -67,5 +67,4 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   toggleIsDataFetching,
   setEditorValue,
-  clearEditorValue,
 })(RichTextarea);

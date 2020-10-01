@@ -5,6 +5,9 @@ const breakpoints = createBreakpoints({});
 const defaultTheme = createMuiTheme();
 
 export const themeStyles = {
+  new: {
+    backgroundColor: defaultTheme.palette.info.light,
+  },
   open: {
     backgroundColor: defaultTheme.palette.info.light,
   },
@@ -16,9 +19,6 @@ export const themeStyles = {
   },
   re_open: {
     backgroundColor: defaultTheme.palette.warning.light,
-  },
-  done: {
-    backgroundColor: defaultTheme.palette.success.light,
   },
   resolved: {
     backgroundColor: defaultTheme.palette.success.light,

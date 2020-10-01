@@ -67,27 +67,6 @@ const AdminLeftbar = () => {
           </Box>
         </AccordionDetails>
       </Accordion>
-      <Accordion square className={classes.accordion}>
-        <AccordionSummary
-          classes={{
-            root: classes.accordionSummary,
-            content: classes.accordionSummaryContent,
-          }}
-          expandIcon={<ExpandMoreIcon className={classes.icon} />}
-        >
-          <Typography>{locale.links.teams.title}</Typography>
-        </AccordionSummary>
-        <AccordionDetails className={classes.accordionDetails}>
-          <List>
-            <ListItem button>
-              <ListItemText primary="Team link 1" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Team link 2" />
-            </ListItem>
-          </List>
-        </AccordionDetails>
-      </Accordion>
       <List>
         <ListItem button component={NavLink} to={ADMIN_TICKET_SETTINGS_ROUTE}>
           <ListItemText primary={locale.links.settings.title} />

@@ -27,7 +27,7 @@ import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const Users = ({ users, getUsers, deleteUser }) => {
+const Users = ({ users, getUsers, deleteUser, adminId }) => {
   const classes = useStyles();
   const [modalOpen, setModalOpen] = useState(false);
   const [activeUserId, setActiveUserId] = useState(null);
@@ -48,7 +48,7 @@ const Users = ({ users, getUsers, deleteUser }) => {
   };
   const handleDeleteUser = () => {
     if (activeUserId) {
-      deleteUser(activeUserId);
+      deleteUser(adminId, activeUserId);
     }
     setModalOpen(false);
     setActiveUserId(null);
@@ -56,10 +56,20 @@ const Users = ({ users, getUsers, deleteUser }) => {
 
   return (
     <>
-      <Box m="0 0 2rem">
+      <Box m="0 0 2rem" className={classes.headlineWrap}>
         <Typography variant="h5" component="h1" align="center">
           {locale.headline}
         </Typography>
+        <Box display="flex" justifyContent="flex-end">
+          <Button
+            variant="contained"
+            color="primary"
+            component={NavLink}
+            to={ADMIN_CREATE_USER_ROUTE}
+          >
+            Create User
+          </Button>
+        </Box>
       </Box>
       <TableContainer component={Paper}>
         <Table className={classes.table}>
@@ -81,7 +91,7 @@ const Users = ({ users, getUsers, deleteUser }) => {
                 <TableCell>{user.department}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
-                  <Moment parse="DD/MM/YYYY" format={DATE_FORMAT}>{user.employedSince}</Moment>
+                  <Moment format={DATE_FORMAT}>{user.employedSince}</Moment>
                 </TableCell>
                 <TableCell>
                   <IconButton
@@ -122,6 +132,7 @@ const Users = ({ users, getUsers, deleteUser }) => {
 
 const mapStateToProps = (state) => ({
   users: state.users.list,
+  adminId: state.auth.userId,
 });
 export default connect(mapStateToProps, {
   getUsers,

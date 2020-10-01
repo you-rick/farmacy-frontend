@@ -5,11 +5,12 @@ import RichTextarea from '../../RichTextarea/RichTextarea';
 import { LOCALE } from '../../../../../locale';
 import { ticketPriority, ticketStatus } from '../../../../../core';
 import { renderSelectField } from '../../../common/FormControls/FormControls';
-import styles from './MessageForm.module.scss';
+import './MessageForm.scss';
+import validate from './validate';
 
 const bodyField = ({ input, meta: { touched, error } }) => (
   <div className={touched && error ? 'bodyFieldError' : ''}>
-    <div className="bodyFieldErrorMsg">{touched && error && <span>{error}</span>}</div>
+    <div className="popupBodyFieldErrorMsg">{touched && error && <span>{error}</span>}</div>
     <input {...input} type="hidden" />
   </div>
 );
@@ -57,11 +58,13 @@ const MessageForm = ({ onFormInit, handleSubmit, initialize, dispatch, ticket, r
       <form onSubmit={handleSubmit}>
         <Box m="1rem 0">
           <Field name="message" type="hidden" component={bodyField} />
-          <RichTextarea
-            height={editorHeight}
-            onChange={onEditorChange}
-            onInit={handleTextareaInit}
-          />
+          <Box className="messageBodyEditor">
+            <RichTextarea
+              height={editorHeight}
+              onChange={onEditorChange}
+              onInit={handleTextareaInit}
+            />
+          </Box>
         </Box>
         <Grid container justify="space-between">
           <Grid item xs={12} sm={6}>
@@ -108,7 +111,7 @@ const MessageForm = ({ onFormInit, handleSubmit, initialize, dispatch, ticket, r
 
           </Grid>
           <Grid item xs={12} sm={6}>
-            <Grid container justify="flex-end" className={styles.submitWrap}>
+            <Grid container justify="flex-end" className="submitWrap">
               <Button color="primary" type="submit" variant="contained">
                 {locale.form.submitButton}
               </Button>
@@ -120,4 +123,7 @@ const MessageForm = ({ onFormInit, handleSubmit, initialize, dispatch, ticket, r
   );
 };
 
-export default reduxForm({ form: 'ticket-message' })(MessageForm);
+export default reduxForm({
+  form: 'ticket-message',
+  validate,
+})(MessageForm);

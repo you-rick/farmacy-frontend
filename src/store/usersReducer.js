@@ -66,6 +66,7 @@ export const getUsers = () => (dispatch) => {
   dispatch(hideNote());
   usersAPI.getUsers()
     .then((response) => {
+      console.log(response);
       dispatch(toggleIsDataFetching(false));
       dispatch(setUsersData(response.data));
     })
@@ -89,10 +90,10 @@ export const createUser = (data) => (dispatch) => {
     .catch((error) => serverErrorHelper(dispatch, error));
 };
 
-export const deleteUser = (userId) => (dispatch) => {
+export const deleteUser = (adminId, userId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  usersAPI.deleteUser(userId)
+  usersAPI.deleteUser(adminId, userId)
     .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(removeDeletedUser(userId));

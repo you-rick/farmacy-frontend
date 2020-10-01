@@ -1,8 +1,0 @@
-@import "src/assets/styles/variables";
-@import "src/assets/styles/mixins";
-
-@include till-sm-screen {
-  .submitWrap {
-    margin-top: 1rem;
-  }
-}

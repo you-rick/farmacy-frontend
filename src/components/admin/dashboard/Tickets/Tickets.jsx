@@ -31,7 +31,7 @@ const Tickets = ({ tickets, ticket, getAdminTickets }) => {
         </Typography>
       </Box>
       <TicketsTable tickets={tickets} onShowModal={handleShowModal} />
-      <TicketInfo open={modalOpen} onClose={handleCloseModal} ticket={activeTicket} />
+      <TicketInfo open={modalOpen} onClose={handleCloseModal} ticketId={activeTicket.id} />
     </>
   );
 };

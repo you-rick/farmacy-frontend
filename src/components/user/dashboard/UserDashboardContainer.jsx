@@ -18,7 +18,7 @@ import Profile from './Profile/Profile';
 import ResetPassword from './Profile/ResetPassword/ResetPassword';
 import TicketInfo from '../../shared/dashboard/TicketInfo/TicketInfo';
 
-const UserDashboardContainer = ({ isAuth, role, currentTicket, resetCurrentTicketData }) => {
+const UserDashboardContainer = ({ isAuth, role, isNew, currentTicket, resetCurrentTicketData }) => {
   const [activeTicket, setActiveTicket] = useState(currentTicket);
 
   useEffect(() => {
@@ -45,8 +45,9 @@ const UserDashboardContainer = ({ isAuth, role, currentTicket, resetCurrentTicke
           <Route path={USER_RESET_PASSWORD_ROUTE} render={() => <ResetPassword />} />
         </Switch>
       </Box>
+      {isNew && <Redirect to={USER_RESET_PASSWORD_ROUTE} />}
       {activeTicket.id
-      && <TicketInfo open onClose={handleCloseModal} ticket={activeTicket} />}
+      && <TicketInfo open search onClose={handleCloseModal} ticketId={activeTicket.id} />}
     </>
   );
 };
@@ -55,6 +56,7 @@ const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   role: state.auth.role,
   currentTicket: state.tickets.ticket,
+  isNew: state.auth.tempPassword,
 });
 
 export default compose(

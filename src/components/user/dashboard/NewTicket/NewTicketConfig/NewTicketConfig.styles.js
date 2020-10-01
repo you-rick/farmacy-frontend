@@ -5,6 +5,11 @@ const themeStyles = (theme) => ({
       marginRight: '0',
     },
   },
+  readonly: {
+    '& input': {
+      cursor: 'not-allowed',
+    },
+  },
   paper: {
     width: '22rem',
     height: `${570 / 16}rem`,

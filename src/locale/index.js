@@ -1,4 +1,8 @@
 export const LOCALE = {
+  roles: {
+    user: 'User',
+    admin: 'Admin',
+  },
   auth: {
     login: {
       headline: 'Sign in to Office Aid',
@@ -144,15 +148,21 @@ export const LOCALE = {
         headline: 'Admin Profile',
       },
       newTickets: {
-        headline: 'New Tickets',
+        headlines: {
+          newTickets: 'New Tickets',
+          overdueTickets: 'Overdue Tickets',
+          dueToday: 'Due Today Tickets',
+          dueTomorrow: 'Due Tomorrow Tickets',
+          dueNextWeek: 'Due Next Week',
+        },
       },
       stats: {
-        OpenTickets: {
+        openTickets: {
           title: 'Open Tickets',
-          new: 'New',
-          overdue: 'Overdue',
+          newTickets: 'New',
+          overdueTickets: 'Overdue',
         },
-        TicketsDue: {
+        dueTickets: {
           title: 'Tickets Coming Due',
           dueNextWeek: 'Due Next Week',
           dueToday: 'Due Today',
@@ -174,8 +184,8 @@ export const LOCALE = {
       ticketSettings: {
         headline: 'Ticket Settings',
         tableHeaders: {
-          type: 'Ticket Type',
-          overdue: 'overdue in days',
+          type: 'Ticket type',
+          overdue: 'Overdue in days',
         },
         form: {
           submit: 'Update',
@@ -201,14 +211,21 @@ export const LOCALE = {
     server: {
       request: 'Request Error',
       unknown: 'Unknown Error. Please try later',
+      baseMsg: 'Server Error',
+      auth: 'Incorrect email address or password provided',
     },
     validation: {
       required: 'Required field',
+      loginEmailRequired: 'Login email is required',
+      passwordRequired: 'Password is required',
       email: 'Invalid email address',
       confirmPassword: 'Passwords should match',
       isNumber: 'Must be a number',
       tooSmall: 'Must be at least 1',
       topbarSearchNumber: 'Invalid ticket number',
+      firstName: 'Your first name can only contain alphabet, numbers and spaces.',
+      lastName: 'Your last name can only contain alphabet, numbers and spaces.',
+      maxChar: (number) => `You can enter a maximum of ${number} characters`,
     },
   },
   success: {
