@@ -133,6 +133,7 @@ export const resetPassword = (userId, data) => (dispatch) => {
         username: data.email,
         password: data.newPassword,
       });
+      dispatch(push('/'));
       dispatch(setNote({
         msg: response.data.message || successMsg.passwordUpdated,
         type: 'success',
