@@ -1,9 +1,9 @@
 import { LOCALE } from '../../../../locale';
-import { NAME_VALIDATOR } from '../../../../utils/validators';
+import { NAME_VALIDATOR, ONLY_NUMBERS_VALIDATOR } from '../../../../utils/validators';
 
 const validate = (values) => {
   const errors = {};
-  const { required, firstName, lastName } = LOCALE.errors.validation;
+  const { required, firstName, lastName, isNumber } = LOCALE.errors.validation;
 
   if (!values.firstName) {
     errors.firstName = required;
@@ -15,6 +15,10 @@ const validate = (values) => {
     errors.lastName = required;
   } else if (!NAME_VALIDATOR.test(values.lastName)) {
     errors.lastName = lastName;
+  }
+
+  if (!ONLY_NUMBERS_VALIDATOR.test(values.extension)) {
+    errors.extension = isNumber;
   }
 
   return errors;

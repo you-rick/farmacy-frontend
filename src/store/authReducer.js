@@ -108,8 +108,9 @@ export const updateProfile = (data) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
   authAPI.updateProfile(data)
-    .then(() => {
+    .then((response) => {
       dispatch(toggleIsDataFetching(false));
+      dispatch(setProfileData(response.data));
       dispatch(setNote({
         msg: successMsg.profileUpdated,
         type: 'success',
