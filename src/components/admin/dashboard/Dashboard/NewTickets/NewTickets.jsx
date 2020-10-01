@@ -17,7 +17,7 @@ const NewTickets = ({ tickets, ticket, userId, updateNewTicketStatus, headlineTe
       updateNewTicketStatus({
         'ticketNumber': ticket.ticketNumber,
         'requestor': requestor,
-        'to': 'ticket.admin@client.com',
+        'to': ticket.userDetails.email,
         'department': 'placeholder',
         'ticketType': ticket.ticketType,
         'priority': ticket.priority,

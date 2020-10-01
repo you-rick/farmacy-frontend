@@ -41,7 +41,7 @@ const MessageForm = ({ onFormInit, handleSubmit, initialize, dispatch, ticket, r
     initialize({
       ticketNumber: ticket.ticketNumber,
       requestor,
-      to: 'ticket.admin@client.com',
+      to: ticket.userDetails.email,
       component: 'placeholder',
       department: 'placeholder',
       subject: ticket.subject,
