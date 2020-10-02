@@ -92,7 +92,6 @@ export const getProfile = (role) => (dispatch) => {
   return authAPI.getProfile(role)
     .then((response) => {
       const res = response.data;
-      console.log(response.data);
       const responseRole = res.userDetails.role;
       dispatch(toggleIsDataFetching(false));
       dispatch(setProfileData(res.userDetails));
@@ -150,7 +149,6 @@ export const login = (data, role) => (dispatch) => {
   authAPI.login(data, role)
     .then((response) => {
       const res = response.data;
-      console.log(res);
       setToken(data);
       setRole(role);
       dispatch(toggleIsDataFetching(false));

@@ -116,7 +116,6 @@ export const updateTicket = (data, userId, ticketId, role) => (dispatch) => {
   dispatch(hideNote());
   ticketsAPI.updateTicket(data, userId, ticketId, role)
     .then((response) => {
-      console.log(response);
       dispatch(toggleIsDataFetching(false));
       dispatch(clearEditorValue());
       dispatch(setTicketInfoData(response.data));
@@ -146,7 +145,6 @@ const handleGetTickets = (dispatch, apiMethod) => {
   dispatch(hideNote());
   apiMethod()
     .then((response) => {
-      console.log(response.data);
       dispatch(toggleIsDataFetching(false));
       dispatch(setTicketsData(response.data));
     })

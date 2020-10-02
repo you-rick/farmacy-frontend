@@ -102,7 +102,6 @@ export const getTicketInfo = (userId, ticketId, role) => (dispatch) => {
   dispatch(resetTicketInfo());
   ticketsAPI.getTicketInfo(userId, ticketId, role)
     .then((response) => {
-      console.log(response.data);
       dispatch(toggleIsDataFetching(false));
       dispatch(setTicketInfoData(response.data));
     })

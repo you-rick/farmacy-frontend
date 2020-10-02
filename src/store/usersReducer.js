@@ -66,7 +66,6 @@ export const getUsers = () => (dispatch) => {
   dispatch(hideNote());
   usersAPI.getUsers()
     .then((response) => {
-      console.log(response);
       dispatch(toggleIsDataFetching(false));
       dispatch(setUsersData(response.data));
     })

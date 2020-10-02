@@ -5,7 +5,6 @@ import NewUser from './NewUser';
 
 const NewUserContainer = ({ createUser }) => {
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data);
   };
 

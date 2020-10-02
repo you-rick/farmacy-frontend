@@ -11,9 +11,8 @@ const Header = () => (
         <Grid container justify="space-between" alignItems="center">
           <Grid item>
             <Typography variant="h6" className={styles.logo} component={NavLink} to="/">
-              <img src="/logo.png" alt={LOCALE.public.companyName} 
-                onClick={()=> window.open("http://www.parazapharma.com", "_blank")}
-                onKeyDown={()=> window.open("http://www.parazapharma.com", "_blank")}/>
+              {/* eslint-disable-next-line */}
+              <img src="/logo.png" alt={LOCALE.public.companyName} onClick={() => window.open('http://www.parazapharma.com', '_blank')}/>
             </Typography>
           </Grid>
           <Grid item />
