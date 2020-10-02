@@ -27,7 +27,15 @@ const Notification = ({ type, msg, hideDuration, hideNote }) => {
     <>
       {(msg && type)
       && (
-        <Snackbar open={open} autoHideDuration={hideDuration || 4000} onClose={handleClose}>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          open={open}
+          autoHideDuration={hideDuration || 4000}
+          onClose={handleClose}
+        >
           <Alert onClose={handleClose} severity={type}>
             {msg}
           </Alert>
