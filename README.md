@@ -1,2 +1,1 @@
-# office-aid-frontend
-Front End react application
+Clinic Ticket System - React FE
