@@ -67,6 +67,7 @@ const mapStateToProps = (state) => ({
   isDataFetching: state.app.isDataFetching,
   isAuth: state.auth.isAuth,
 });
+
 const App = compose(withRouter, connect(mapStateToProps, {
   hideNote,
   initializeApp,

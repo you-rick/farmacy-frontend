@@ -17,7 +17,6 @@ ReactDOM.render(
           <CssBaseline />
           <App />
         </ThemeProvider>
-
       </LastLocationProvider>
     </ConnectedRouter>
   </Provider>,
