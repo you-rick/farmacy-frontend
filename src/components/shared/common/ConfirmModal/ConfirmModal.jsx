@@ -20,18 +20,18 @@ const ConfirmModal = ({ headline, body, open, onClose, onSubmit }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>{headline}</DialogTitle>
+    <Dialog open={open} onClose={handleClose} data-test-id="ConfirmModalComponent">
+      <DialogTitle data-test-id="ModalHeadline">{headline}</DialogTitle>
       <DialogContent>
-        <DialogContentText>
+        <DialogContentText data-test-id="ModalHeadline">
           {body}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleSubmit} color="primary">
+        <Button onClick={handleSubmit} color="primary" data-test-id="SubmitButton">
           {locale.submit}
         </Button>
-        <Button onClick={handleClose} color="primary">
+        <Button onClick={handleClose} color="primary" data-test-id="CancelButton">
           {locale.cancel}
         </Button>
       </DialogActions>

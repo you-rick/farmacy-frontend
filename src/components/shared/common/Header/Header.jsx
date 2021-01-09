@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { AppBar, Container, Grid, Toolbar, Typography } from '@material-ui/core';
 import { LOCALE } from '../../../../locale';
 import styles from './Header.module.scss';
 
-const Header = () => (
-  <AppBar position="static" color="default">
+const Header = memo(() => (
+  <AppBar position="static" color="default" data-test-id="HeaderComponent">
     <Toolbar>
       <Container maxWidth="lg">
         <Grid container justify="flex-start" alignItems="center">
@@ -13,7 +13,7 @@ const Header = () => (
               <a
                 href="http://www.parazapharma.com"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className={styles.logo}
               >
                 <img src="/logo.png" alt={LOCALE.public.companyName} />
@@ -24,6 +24,6 @@ const Header = () => (
       </Container>
     </Toolbar>
   </AppBar>
-);
+));
 
 export default Header;
