@@ -23,7 +23,7 @@ const ConfirmModal = ({ headline, body, open, onClose, onSubmit }) => {
     <Dialog open={open} onClose={handleClose} data-test-id="ConfirmModalComponent">
       <DialogTitle data-test-id="ModalHeadline">{headline}</DialogTitle>
       <DialogContent>
-        <DialogContentText data-test-id="ModalHeadline">
+        <DialogContentText data-test-id="ModalBody">
           {body}
         </DialogContentText>
       </DialogContent>
