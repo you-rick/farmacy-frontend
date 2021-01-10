@@ -10,11 +10,11 @@ import { ADMIN_USERS_ROUTE } from '../routes';
 const successMsg = LOCALE.success.users;
 
 // Actions
-const SET_USERS_DATA = 'SET_USERS_DATA';
-const REMOVE_DELETED_USER = 'REMOVE_DELETED_USER';
+export const SET_USERS_DATA = 'SET_USERS_DATA';
+export const REMOVE_DELETED_USER = 'REMOVE_DELETED_USER';
 
 // Initial Data
-const initialState = {
+export const initialState = {
   list: [],
   user: {
     userId: null,
@@ -64,7 +64,7 @@ export const removeDeletedUser = (userId) => ({
 export const getUsers = () => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  usersAPI.getUsers()
+  return usersAPI.getUsers()
     .then((response) => {
       dispatch(toggleIsDataFetching(false));
       dispatch(setUsersData(response.data));

@@ -21,7 +21,7 @@ import {
 import { getTokenHeader, getEmail } from '../utils/helpers/token-handler';
 import { roles } from '../core';
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_SERVER_URL,
   timeout: 10000,
 });

@@ -10,12 +10,7 @@
   "rules": {
     "max-len": 0,
     "import/prefer-default-export": "off",
-    "import/no-cycle": [
-      "error",
-      {
-        "maxDepth": "∞"
-      }
-    ],
+    "import/no-cycle": "off",
     "react/jsx-filename-extension": [
       1,
       {
