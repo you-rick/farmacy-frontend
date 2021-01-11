@@ -75,7 +75,7 @@ export const getUsers = () => (dispatch) => {
 export const createUser = (data) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  usersAPI.createUser(data)
+  return usersAPI.createUser(data)
     .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(push(ADMIN_USERS_ROUTE));
@@ -92,7 +92,7 @@ export const createUser = (data) => (dispatch) => {
 export const deleteUser = (adminId, userId) => (dispatch) => {
   dispatch(toggleIsDataFetching(true));
   dispatch(hideNote());
-  usersAPI.deleteUser(adminId, userId)
+  return usersAPI.deleteUser(adminId, userId)
     .then(() => {
       dispatch(toggleIsDataFetching(false));
       dispatch(removeDeletedUser(userId));

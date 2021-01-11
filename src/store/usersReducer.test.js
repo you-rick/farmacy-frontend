@@ -6,10 +6,18 @@ import usersReducer, {
   setUsersData,
   removeDeletedUser,
   getUsers,
+  createUser,
+  deleteUser,
+  REMOVE_DELETED_USER,
   SET_USERS_DATA,
   initialState,
 } from './usersReducer';
-import { API_ADMIN_GET_USERS_ROUTE } from '../routes';
+import { SET_NOTE } from './notificationReducer';
+import {
+  API_ADMIN_GET_USERS_ROUTE,
+  API_ADMIN_CREATE_USER_ROUTE,
+  API_ADMIN_DELETE_USER_ROUTE,
+} from '../routes';
 
 const mockStore = configureStore([thunk]);
 
@@ -83,9 +91,9 @@ describe('Users Reducer', () => {
       mock.restore();
     });
 
-    test('Should dispatch SET_USERS_DATA after users fetch', () => {
+    it('Should dispatch SET_USERS_DATA after users fetch', () => {
       const expectedData = users;
-      const store = mockStore(initialState);
+      const store = mockStore({});
 
       mock.onGet(API_ADMIN_GET_USERS_ROUTE).reply(200, expectedData);
 
@@ -94,6 +102,28 @@ describe('Users Reducer', () => {
           type: SET_USERS_DATA,
           data: expectedData,
         });
+      });
+    });
+
+    it('Should dispatch successful SET_NOTE after user creating', () => {
+      const store = mockStore({});
+
+      mock.onPost(API_ADMIN_CREATE_USER_ROUTE).reply(200, {});
+      return store.dispatch(createUser()).then(() => {
+        const setNoteAction = store.getActions().filter((action) => action.type === SET_NOTE)[0];
+        expect(setNoteAction).not.toBeUndefined();
+        expect(setNoteAction.body.type).toEqual('success');
+      });
+    });
+
+    it('Should dispatch REMOVE_DELETED_USER after API user delete', () => {
+      const store = mockStore({});
+
+      mock.onDelete(API_ADMIN_DELETE_USER_ROUTE(1, 1)).reply(200, {});
+      return store.dispatch(deleteUser(1, 1)).then(() => {
+        const removeUserAction = store.getActions()
+          .filter((action) => action.type === REMOVE_DELETED_USER)[0];
+        expect(removeUserAction).not.toBeUndefined();
       });
     });
   });

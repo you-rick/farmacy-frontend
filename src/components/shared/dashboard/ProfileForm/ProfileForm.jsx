@@ -26,7 +26,7 @@ const phoneMask = createTextMask({
   pattern: PHONE_NUMBER_PATTERN,
 });
 
-const ProfileForm = ({ handleSubmit, initialize, user }) => {
+export const ProfileFormInner = ({ handleSubmit, initialize, user }) => {
   const classes = useStyles();
   const locale = LOCALE.common.dashboard.profile;
   const resetPassPath = user.role === 'ROLE_USER' ? USER_RESET_PASSWORD_ROUTE : ADMIN_RESET_PASSWORD_ROUTE;
@@ -126,6 +126,7 @@ const ProfileForm = ({ handleSubmit, initialize, user }) => {
                     component={NavLink}
                     to={resetPassPath}
                     variant="body2"
+                    data-test-id="resetPasswordLink"
                   >
                     {locale.resetPassword}
                   </Link>
@@ -143,4 +144,4 @@ const ProfileForm = ({ handleSubmit, initialize, user }) => {
 export default reduxForm({
   form: 'profile',
   validate,
-})(ProfileForm);
+})(ProfileFormInner);
