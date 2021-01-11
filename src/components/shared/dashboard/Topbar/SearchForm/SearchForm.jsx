@@ -20,7 +20,6 @@ const SearchForm = ({ handleSubmit }) => {
         <Field
           name="ticketNumber"
           placeholder={locale.searchPlaceholder}
-
           component={renderTextField}
           InputProps={{
             endAdornment: <IconButton type="submit" size="small"><SearchIcon /></IconButton>,
@@ -38,4 +37,7 @@ const SearchForm = ({ handleSubmit }) => {
   );
 };
 
-export default reduxForm({ form: 'ticket-search', validate })(SearchForm);
+export default reduxForm({
+  form: 'ticket-search',
+  validate,
+})(SearchForm);

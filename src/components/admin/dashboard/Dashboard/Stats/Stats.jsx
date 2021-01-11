@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Grid, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import themeStyles from './Stats.styles';
@@ -6,7 +6,7 @@ import Chart from './Chart/Chart';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const Stats = ({ stats }) => {
+const Stats = memo(({ stats }) => {
   const { openTickets, dueTickets } = stats;
   const classes = useStyles();
 
@@ -22,6 +22,6 @@ const Stats = ({ stats }) => {
       </Grid>
     </Box>
   );
-};
+});
 
 export default Stats;

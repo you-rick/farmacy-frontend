@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   Divider,
   List,
@@ -26,7 +26,7 @@ import { LOCALE } from '../../../../locale';
 
 const useStyles = makeStyles((theme) => themeStyles(theme));
 
-const AdminLeftbar = () => {
+const AdminLeftbar = memo(() => {
   const classes = useStyles();
   const locale = LOCALE.admin.dashboard.leftbar;
 
@@ -74,6 +74,6 @@ const AdminLeftbar = () => {
       </List>
     </>
   );
-};
+});
 
 export default AdminLeftbar;
