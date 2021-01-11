@@ -1,14 +1,12 @@
-import React from 'react';
-import {
-  Container, Grid, Typography, Box,
-} from '@material-ui/core';
+import React, { memo } from 'react';
+import { Container, Grid, Typography, Box } from '@material-ui/core';
 import { LOCALE } from '../../../locale';
 
-const NotFound = () => {
+const NotFound = memo(() => {
   const locale = LOCALE.public.notFound;
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" data-test-id="NotFoundComponent">
       <Box p="4rem 0 0">
         <Grid container direction="column" justify="center" alignItems="center">
           <Typography variant="h4" component="h1" gutterBottom>
@@ -22,6 +20,6 @@ const NotFound = () => {
 
     </Container>
   );
-};
+});
 
 export default NotFound;

@@ -26,7 +26,7 @@ import AdminDashboardContainer from './components/admin/dashboard/AdminDashboard
 import ForgotPasswordContainer
   from './components/shared/auth/ForgotPassword/ForgotPasswordContainer';
 
-const AppContainer = (props) => {
+export const AppContainer = (props) => {
   const { isDataFetching, initialized, isAuth, notification, hideNote, initializeApp } = props;
 
   useEffect(() => {

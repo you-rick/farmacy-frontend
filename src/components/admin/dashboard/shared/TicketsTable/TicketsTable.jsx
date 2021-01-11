@@ -123,7 +123,7 @@ const TicketsTable = ({ tickets, onShowModal }) => {
   const options = {
     download: false,
     print: false,
-    selectableRows: false,
+    selectableRows: 'none',
     rowsPerPage: 10,
     rowsPerPageOptions: [5, 10, 25, 50],
     sortOrder: {
